@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Write_Btn from "../Write_btn/Write_btn"
 import axios from 'axios';
 
 function Board() {
   const [data, setData] = useState(null); // data라는 상태를 만듭니다.
+  const location = useLocation(); // 현재 path 위치를 가져옵니다.
+  let boardName = '';
 
   useEffect(() => {
       async function fetchData() {
@@ -20,14 +22,27 @@ function Board() {
 
       getData();
   }, []); 
-
+  switch (location.pathname) {
+    case "/Hotboard":
+      boardName = "인기글";
+      break;
+    case "/VSboard": 
+      boardName = "찬반글";
+      break;
+    case "/Participationboard":
+      boardName = "참여글";
+      break;
+    default:
+      boardName = "최신글";
+      break;
+  }
   if (!data) return <div>Loading...</div>; 
 
     return (
         <div>
         <div style={{ display: 'flex', justifyContent: 'center', width: '100%', height: '100vh' , textAlign:'left'}}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width:'90%', height:'auto'}}>
-            <h2 style={{borderBottom:'1px solid black'}}>최신글</h2>
+            <h2 style={{borderBottom:'1px solid black'}}>{boardName}</h2>
             {/* 각각의 게시글을 순회합니다. */}
             {data.map((post) => (
               <div className='Main_Content' key={post.id} style={{width:'100%'}}>
@@ -50,9 +65,8 @@ function Board() {
               </div>
               </Link>
             </div>
-          ))};
+          ))}
           </div>
-            
           <Write_Btn /> {/* 글쓰기 버튼 */}
           </div>
           
