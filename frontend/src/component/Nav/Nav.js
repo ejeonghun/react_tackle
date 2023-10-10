@@ -3,15 +3,14 @@ import React, {useState, useContext, useEffect} from 'react';
 import './Nav.css';
 // import LottieAnimation from '../Lottie/Lottie';
 import AuthContext from '../AuthContext/AuthContext';
-
 import Hamburger from '../Hambuger/Hamburger';  // 햄버거 메뉴 추가
 
 
 function Boardlist() {
     const location = useLocation();
     
-    const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
-    return (
+    const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인 
+    return ( 
     <div className='boardlist'>
     <div className='search'>
     <input type='text' placeholder='검색어를 입력하세요' />
@@ -54,6 +53,7 @@ function Nav() {
         setKey(prevKey => prevKey + 1); // 메뉴가 토글될 때마다 key 값 증가
     } 
 
+    const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
     return (
         <div>
         <div className="nav_bar">
@@ -70,10 +70,11 @@ function Nav() {
                     <Hamburger isOpen={isOpen} toggle={toggleMenu} />
                     { isOpen && ( // isOpen이 true이면 메뉴를 보여줌
                         <ul>
-                            <li><Link to="/login">로그인</Link></li>
                             <li><Link to="/support">고객센터</Link></li>
                             <li><Link to="/mypage">마이페이지</Link></li>
                             <li><Link to="/register">회원가입</Link></li>
+                            {isLoggedIn && <li><Link to="/logout">로그아웃</Link></li>}
+                            {!isLoggedIn && <li><Link to="/login">로그인</Link></li>}
                         </ul>    
                     )}
                 </div>  

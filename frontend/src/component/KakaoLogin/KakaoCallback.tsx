@@ -36,8 +36,11 @@ const KakaoCallback = () => {
                 const id = res.data.id; // 카카오 OAuth ID 값 해당 값은 DB에 저장해두고 사용자를 구분하는 용도로 사용
                 // 백앤드에 id값을 보내서 DB에 저장하고, 로그인 처리를 해준다.
                 setIsLoggedIn(true); // 로그인이 완료되면 AuthContext의 isLoggedIn 상태를 true로 변경합니다.
+                sessionStorage.setItem('id', id); // 세션에 id값 저장
                 alert(`로그인 성공! ${id}`); // 배포시 주석처리
                 navigate('/');  // 모든 작업이 완료되면 '/' 경로로 이동합니다.
+                // id값 세션에 저장하기
+                
             })
         })
         .catch((Error: any) => {

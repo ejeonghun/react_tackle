@@ -69,7 +69,7 @@
     top: 23%;
     right: 8%;
     background-color: #7a7979; /* 배경색은 원하는 색상으로 변경하세요 */
-    animation: fadeInRight 3s;
+    animation: fadeInRight 1.5s;
     z-index: 9999;
   }
   
