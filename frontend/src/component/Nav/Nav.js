@@ -72,8 +72,8 @@ function Nav() {
                         <ul>
                             <li><Link to="/support">고객센터</Link></li>
                             <li><Link to="/mypage">마이페이지</Link></li>
-                            <li><Link to="/register">회원가입</Link></li>
-                            {isLoggedIn && <li><Link to="/logout">로그아웃</Link></li>}
+                            <li><Link to="/Category">카테고리</Link></li>
+                            {isLoggedIn && <li><Link to="/logout">로그아웃</Link></li>} {/* 로그인 상태일 때만 로그아웃 버튼 보여줌 */}
                             {!isLoggedIn && <li><Link to="/login">로그인</Link></li>}
                         </ul>    
                     )}
