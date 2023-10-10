@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee, faBook, faMusic, faFilm, faCameraRetro, faPaintBrush } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faGamepad } from '@fortawesome/free-solid-svg-icons';
 import { faSoccerBall } from '@fortawesome/free-solid-svg-icons';
@@ -16,6 +15,7 @@ const CategoryContainer = styled.div`
     justify-content: space-between;
     flex-wrap: wrap; // 필요시 줄바꿈 처리
     padding-top:100px;
+    justify-items: center;
 `;
 
 const CategoryCard = styled.div`
