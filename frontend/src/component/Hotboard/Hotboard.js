@@ -9,7 +9,7 @@ import Board from '../Board/Board.js';
 const Hotboard = () => {
     return (
       <div>
-        <Board />
+        <Board BoardName="인기글"/>
       </div>
     );
   };

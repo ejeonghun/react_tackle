@@ -13,6 +13,7 @@ import { AuthProvider } from './component/AuthContext/AuthContext.js';
 import Write from './component/Write/Write.js';
 import Logout from './component/Logout/Logout.js';
 import Category from './component/Category/Category.js';
+import CategoryBoard from './component/Category/CategoryBoard.js';
 
     // 메인 페이지 구성
     // 네비바와 푸터를 작성해주고 나머지는 컴포넌트로 구성한다.
@@ -50,13 +51,14 @@ function MainLayout() {
         <Route path="/" element={<Main />} /> {/* 메인 페이지 변경 */}
         <Route path="/Hotboard" element={<Hotboard />} />
         <Route path="/VSboard" element={<VSBoard />} />
-        <Route path="/Participationboard" element={<Participationboard />} />
+        <Route path="/participationboard" element={<Participationboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/oauth_kakao" element={<KakaoCallback />} />
         <Route path="/write" element={<Write />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/Category" element={<Category />} />
+        <Route path="/category" element={<Category />} />
+        <Route path="/category/:categoryKey" element={<CategoryBoard />} />
       </Routes>
       
 

@@ -7,6 +7,7 @@ import { faSoccerBall } from '@fortawesome/free-solid-svg-icons';
 import { faPeopleArrows } from '@fortawesome/free-solid-svg-icons';
 import { faLandmark } from '@fortawesome/free-solid-svg-icons';
 import { faMasksTheater } from '@fortawesome/free-solid-svg-icons';
+import {Link} from 'react-router-dom';
 
 const CategoryContainer = styled.div`
     display: grid;
@@ -37,12 +38,12 @@ const CategoryName = styled.h2`
 
 function Categories() {
     const categories = [
-        { name: '일상/연애', icon: faHeart, color:'red' },
-        { name: '게임', icon: faGamepad, color:'cyan' },
-        { name: '스포츠', icon :faSoccerBall, color:'green' },
-        { name : '사회/과학', icon :faPeopleArrows, color:'orange'},
-        { name : '정치/경제', icon :faLandmark, color:'purple'},
-        { name :'문화/예술',icon :faMasksTheater, color:'brown'}
+        { key: 'daily-love', name: '일상/연애', icon: faHeart, color:'red' },
+        { key: 'game', name: '게임', icon: faGamepad, color:'cyan' },
+        { key: 'sports', name: '스포츠', icon :faSoccerBall, color:'green' },
+        { key : 'society-science', name : '사회/과학', icon :faPeopleArrows, color:'orange'},
+        { key : 'politics-economy', name : '정치/경제', icon :faLandmark, color:'purple'},
+        { key :'culture-art',name :'문화/예술',icon :faMasksTheater, color:'brown'}
         
       ];
 
@@ -51,10 +52,12 @@ function Categories() {
               {
                   categories.map((category,index) => (
                       <CategoryCard key={index}>
+                        <Link to={`/category/${category.key}`}>
                           <IconContainer>
                               <FontAwesomeIcon icon={category.icon} style={{color: category.color}}/>
                           </IconContainer>
                           <CategoryName>{category.name}</CategoryName>
+                          </Link>
                       </CategoryCard>
                   ))
               }

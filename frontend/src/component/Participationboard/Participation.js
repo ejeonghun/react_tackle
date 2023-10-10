@@ -5,7 +5,7 @@ import Board from '../Board/Board.js';
 // 컴포넌트의 첫글자는 무조건 대문자로 작성해야함!
 const Freeboard = () => {
     return (
-      <Board/>
+      <Board BoardName="참여글"/>
     );
   };
   // 만든 컴포넌트 모듈로 사용하기 위해 내보내기

@@ -6,7 +6,7 @@ import Board from '../Board/Board.js';
 // 컴포넌트의 첫글자는 무조건 대문자로 작성해야함!
 const VSBoard = () => {
     return (
-      <Board/>
+      <Board BoardName="찬반글"/>
     );
   };
   // 만든 컴포넌트 모듈로 사용하기 위해 내보내기

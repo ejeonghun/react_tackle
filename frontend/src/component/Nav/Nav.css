@@ -99,3 +99,9 @@
 
 /* 햄버거 메뉴 끝 */
 
+.nav_user {
+    top: 70vh;
+    position: fixed;
+    font-size: 14px;
+}
+/* nav바 유저 닉네임*/
