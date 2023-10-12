@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components'
+import React, {useState} from 'react';
 
 const Container = styled.div`
     display: flex;
@@ -86,8 +86,25 @@ const TextareaSmall = styled.textarea` // 선택자
     border:solid 1px #dcdcdc;
 
 `;
+const AddButton = styled.button`
+    width: 100px;
+    height: 30px;
+    margin-top: 1px;
+    background-color: black; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+`;
 
 function Write() {
+    const [selectCount, setSelectCount] = useState(2); // 초기 선택지는 2개
+
+    const addSelectOption = () => {
+        setSelectCount(selectCount + 1);
+    }
 	return (
 		<Container>
 			    <Form>
@@ -130,13 +147,15 @@ function Write() {
 				</Label>
 
                 <SelectContainer>
-                <Label>
-					<TextareaSmall name="select1" placeholder="선택지1"/>
-				</Label>
-                <Label>
-					<TextareaSmall name="select2" placeholder="선택지2"/>
-				</Label>
+                    {[...Array(selectCount)].map((_, index) => (
+                        <Label key={index}>
+                            <TextareaSmall name={`select${index + 1}`} placeholder={`선택지${index + 1}`}/>
+                        </Label>
+                    ))}
                 </SelectContainer>
+
+                <AddButton type="button" onClick={addSelectOption}>선택지 추가</AddButton>
+
 
                 <Input type="submit" value="작성" />
 
