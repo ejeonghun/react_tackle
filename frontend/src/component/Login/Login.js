@@ -6,6 +6,11 @@ import './Login.css';
 import SocialKakao from '../KakaoLogin/KakaoLogin.jsx';
 
 function Login() {
+  const [isAgreed, setIsAgreed] = useState(false);
+
+  const handleAgreementChange = (e) => {
+    setIsAgreed(e.target.checked);
+  }
   // const [id, setId] = useState('');
   // const [password, setPassword] = useState('');
   // const [loginStatus, setLoginStatus] = useState(0);
@@ -60,6 +65,12 @@ function Login() {
         이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.
         </textarea>
       </ul>
+      {/*약관 동의 체크박스*/}
+     <div className="agreement">
+       <input type="checkbox" id="agree" checked={isAgreed} onChange={handleAgreementChange} />
+       <label htmlFor="agree">서비스 약관에 동의하십니까?</label>
+     </div>
+
       </div>
      {/* <form className="login_form" onSubmit={handleSubmit}>
       <h2>Sign in</h2>
