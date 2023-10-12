@@ -38,7 +38,7 @@ const CategoryName = styled.h2`
 
 function Categories() {
     const categories = [
-        { key: 'daily-love', name: '일상/연애123', icon: faHeart, color:'red' },
+        { key: 'daily-love', name: '일상/연애', icon: faHeart, color:'red' },
         { key: 'game', name: '게임', icon: faGamepad, color:'cyan' },
         { key: 'sports', name: '스포츠', icon :faSoccerBall, color:'green' },
         { key : 'society-science', name : '사회/과학', icon :faPeopleArrows, color:'orange'},
