@@ -31,25 +31,25 @@ function Mypage() {
             </Link>
         </div>
         <div style={{display: 'flex', alignItems: 'center'}}>
-            <Link to="/charge" style={{display: 'flex', alignItems: 'center'}}>
+            <Link to="/pointshop" style={{display: 'flex', alignItems: 'center'}}>
                 <img src="./img/shopping.png" style={{width:'32px', height:'auto', margin:'10px'}}></img>
                 <h2>포인트 샵</h2>
             </Link>
         </div>
         <div style={{display: 'flex', alignItems: 'center'}}>
-        <Link to="/charge" style={{display: 'flex', alignItems: 'center'}}>
+        <Link to="/myposts" style={{display: 'flex', alignItems: 'center'}}>
             <img src="./img/pencil.png" style={{width:'32px', height:'auto', margin:'10px'}}></img>
             <h2>작성한 글</h2>
         </Link>
     </div>
         <div style={{display: 'flex', alignItems: 'center'}}>
-            <Link to="/charge" style={{display: 'flex', alignItems: 'center'}}>
+            <Link to="/mycomments" style={{display: 'flex', alignItems: 'center'}}>
                 <img src="./img/comment.png" style={{width:'32px', height:'auto', margin:'10px'}}></img>
                 <h2>작성한 댓글</h2>
             </Link>
         </div>
         <div style={{display: 'flex', alignItems: 'center', borderBottom:'1px solid black'}}>
-            <Link to="/charge" style={{display: 'flex', alignItems: 'center'}}>
+            <Link to="/myvotes" style={{display: 'flex', alignItems: 'center'}}>
                 <img src="./img/check-box.png" style={{width:'32px', height:'auto', margin:'10px'}}></img>
                 <h2>참여한 투표</h2>
             </Link>
