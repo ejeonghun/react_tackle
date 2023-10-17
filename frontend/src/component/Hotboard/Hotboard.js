@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Write_btn from '../Write_btn/Write_btn';
 import Board from '../Board/Board.js';
 
 // Login.js

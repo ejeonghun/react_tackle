@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 import AuthContext from "../AuthContext/AuthContext";
 
 function Mypage() {
+    const { isLoggedIn } = useContext(AuthContext); // isLogin 상태 추가
     const { nickname, profileImage } = useContext(AuthContext); // nickname, profileImage 상태 추가
-    
+    if (!isLoggedIn) {
+        alert("로그인이 필요한 서비스입니다.");
+        window.location.href = "/login";
+    } else {
     return (
         <div>
         <div className="Mypage" style={{width:'100%', display:'flex', justifyContent:'center', textAlign:'left', marginTop:'2vh'}}>
@@ -61,6 +65,6 @@ function Mypage() {
 
     </div>
     );
-};
+};}
 
 export default Mypage;            

@@ -1,6 +1,7 @@
-import React, { useContext} from 'react';
+import React, { useContext, useState} from 'react';
 import styled from 'styled-components'
 import AuthContext from '../AuthContext/AuthContext';
+
 
 const Container = styled.div`
     display: flex;
@@ -16,7 +17,7 @@ const Container = styled.div`
 const Form = styled.form`
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 75%;
 `;
 
 const Label = styled.label`
@@ -38,7 +39,7 @@ const Input = styled.input`
    &[type="submit"] {
        width: 100px;
        align-self: flex-end;
-       margin-top: auto;
+       margin-top: 5px;
        background-color : cyan; 
        color : black; 
        padding : .375rem .75rem; 
@@ -87,8 +88,49 @@ const TextareaSmall = styled.textarea` // 선택자
     border:solid 1px #dcdcdc;
 
 `;
+const AddButton = styled.button`
+    width: 100px;
+    height: 30px;
+    margin-top: 1px;
+    background-color: black; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+`;
+
+const DelButton = styled.button`
+    width: 100px;
+    height: 30px;
+    margin-top: 1px;
+    background-color: black; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+`;
 
 function Write() {
+    const [selectCount, setSelectCount] = useState(2); // 초기 선택지는 2개
+
+    const addSelectOption = () => {
+        if (selectCount < 3) { 
+        setSelectCount(selectCount + 1);
+        } else {
+            alert("최대 3개까지 선택지를 추가할 수 있습니다.");
+        }
+    }
+
+    const delSelectOption = () => {
+        if (selectCount > 2) {
+            setSelectCount(selectCount - 1);
+        } else {
+            alert("최소 2개의 선택지가 필요합니다.");
+        };}
     const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
 
     if (isLoggedIn === false) {
@@ -139,16 +181,17 @@ function Write() {
 				</Label>
 
                 <SelectContainer>
-                <Label>
-					<TextareaSmall name="select1" placeholder="선택지1"/>
-				</Label>
-                <Label>
-					<TextareaSmall name="select2" placeholder="선택지2"/>
-				</Label>
+                    {[...Array(selectCount)].map((_, index) => (
+                        <Label key={index}>
+                            <TextareaSmall name={`select${index + 1}`} placeholder={`선택지${index + 1}`}/>
+                        </Label>
+                    ))}
                 </SelectContainer>
-
+                <SelectContainer>
+                <AddButton type="button" onClick={addSelectOption}>선택지 추가</AddButton>
+                <DelButton type="button" onClick={delSelectOption}>선택지 삭제</DelButton>
+                </SelectContainer>
                 <Input type="submit" value="작성" />
-
 			</Form>
 	    </Container>	
      );
