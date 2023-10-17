@@ -73,7 +73,7 @@ function Board({BoardName}) {
             </div>
           ))}
           </div>
-          <Write_Btn /> {/* 글쓰기 버튼 */}
+          <Write_Btn/> {/* 글쓰기 버튼 */}
           </div>
           
         </div>
