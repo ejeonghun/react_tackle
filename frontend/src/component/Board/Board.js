@@ -19,7 +19,8 @@ function Board({BoardName}) {
           const data = await response.json();
           return data.posts; // posts 키에 접근합니다.
       }
-
+      // response API키에 server/board/게시판명 으로 들어가게끔 수정
+      // 게시판 마다 다른 게시글을 가져올 수 있도록 수정 
       async function getData() {
           const fetchedData = await fetchData();
           setData(fetchedData); // 데이터가 로드되면 상태를 업데이트합니다.
