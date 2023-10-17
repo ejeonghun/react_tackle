@@ -1,4 +1,4 @@
-import React, { useState,BrowserRouter,Routes } from 'react';
+import React, { useState } from 'react';
 
 
 
@@ -11,30 +11,12 @@ function Login() {
   const handleAgreementChange = (e) => {
     setIsAgreed(e.target.checked);
   }
-  // const [id, setId] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [loginStatus, setLoginStatus] = useState(0);
 
-  // const handleIdChange = (e) => {
-  //   setId(e.target.value);
-  // }
-
-  // const handlePasswordChange = (e) => {
-  //   setPassword(e.target.value);
-  // }
-
-  // 이 함수는 실제 서버에 요청을 보내는 코드로 대체해야 합니다.
-  // 현재는 단순히 아이디와 비밀번호가 일치하는지 확인합니다.
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-    
-  //   if(id === "admin" && password === "admin") { 
-  //     setLoginStatus(1);
-  //     alert("로그인 성공!");
-  //   } else {
-  //     alert("아이디 또는 비밀번호가 잘못되었습니다.");
-  //   }
-  // }
+  const handleLogin = () => {
+    if (!isAgreed) {
+      alert("서비스 약관에 동의해주세요.");
+    }
+  }
 
  return (
    <div>
@@ -42,7 +24,7 @@ function Login() {
     <div className="service">
       <ul style={{listStyle:"none", padding:"0"}}>
         <li>이용약관</li>
-        <textarea name="service" id="service" cols="50" rows="10">
+        <textarea disabled name="service" id="service" cols="50" rows="10" style={{width:'400px', height:'328px' , resize:'none', borderRadius:'6px'}}>
         개인정보보호법에 따라 "태클" 에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 
  
@@ -70,16 +52,9 @@ function Login() {
        <input type="checkbox" id="agree" checked={isAgreed} onChange={handleAgreementChange} />
        <label htmlFor="agree">서비스 약관에 동의하십니까?</label>
      </div>
-
       </div>
-     {/* <form className="login_form" onSubmit={handleSubmit}>
-      <h2>Sign in</h2>
-       <input type="text" placeholder="ID" value={id} onChange={handleIdChange} />
-       <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-       <button type="submit">로그인</button>
-     </form>  */}
-    <SocialKakao/>
-    {/* 카카오 로그인 */}
+      {isAgreed && <SocialKakao/>}
+      {/* 카카오 로그인 */}
    </div>
  )
 }

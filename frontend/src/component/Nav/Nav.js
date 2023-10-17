@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect, useRef} from 'react';
 import './Nav.css';
 // import LottieAnimation from '../Lottie/Lottie';
 import AuthContext from '../AuthContext/AuthContext';
@@ -45,11 +45,33 @@ function Boardlist() {
 function Nav() {
     const [isOpen, setIsOpen] = useState(false);
     const [key, setKey] = useState(0); // key state 추가
+    const node = useRef(); // ref 생성
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
         setKey(prevKey => prevKey + 1); // 메뉴가 토글될 때마다 key 값 증가
     } 
+
+    const handleClickOutside = e => {
+        if (node.current.contains(e.target)) {
+            // inside click
+            return;
+        }
+        // outside click 
+        setIsOpen(false);
+    };
+
+    useEffect(() => {
+        if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen]);
 
     const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
     return (
@@ -61,7 +83,7 @@ function Nav() {
                 <img src="/img/Main.png" alt="메인 아이콘" className='Main_text' />
             </Link>
                 {/* 햄버거 메뉴 추가 */}        
-                <div className="hamburger_menu" style={{ right: isOpen ? '0%' : '8%', top: isOpen ? '0%' : '23%',
+                <div ref={node} className="hamburger_menu" style={{ right: isOpen ? '0%' : '8%', top: isOpen ? '0%' : '23%',
                                                          width: isOpen ? '200px' : '', height: isOpen ? '100vh' : ''}}
                                                         key={key}>
                      {/* isOpen이 true이면 오른쪽으로 3% 이동, false이면 8% 이동 레이아웃 이동*/}
