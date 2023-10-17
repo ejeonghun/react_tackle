@@ -46,12 +46,18 @@ function Support() {
         </div>
     ));
 
+    const handleContactClick = () => {
+        // 고객센터 모달창을 띄워줍니다.
+    };
+
+
+
     return (
         <div style={styles.supportContainer}>
             <h2>자주 묻는 질문</h2>
             {renderedSupports}
             <div style={styles.contactButton}>
-                <FaHeadset style={styles.headsetIcon} size={40} />
+                <FaHeadset style={styles.headsetIcon} size={40} onClick={handleContactClick} />
             </div>
         </div>
     );
@@ -78,7 +84,7 @@ const styles = {
        cursor:'pointer'
    },
    arrow:{
-      transitionDuration:'0.3s' /* 화살표 회전 속도 */
+      transitionDuration:'0.5s' /* 화살표 회전 속도 */
    }, 
    answer:{
       fontSize:'17px',
