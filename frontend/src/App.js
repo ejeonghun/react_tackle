@@ -14,6 +14,7 @@ import Write from './component/Write/Write.js';
 import Logout from './component/Logout/Logout.js';
 import Category from './component/Category/Category.js';
 import CategoryBoard from './component/CategoryBoard/CategoryBoard.js';
+import Support from './component/Support/Support';
 
     // 메인 페이지 구성
     // 네비바와 푸터를 작성해주고 나머지는 컴포넌트로 구성한다.
@@ -59,6 +60,8 @@ function MainLayout() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/category" element={<Category />} />
         <Route path="/category/:categoryKey" element={<CategoryBoard />} />
+        <Route path="/support" element={<Support />} />
+
       </Routes>
       
 
