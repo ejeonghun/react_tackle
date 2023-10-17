@@ -1,5 +1,7 @@
+import React, { useContext} from 'react';
 import styled from 'styled-components'
-import React, {useState} from 'react';
+import AuthContext from '../AuthContext/AuthContext';
+
 
 const Container = styled.div`
     display: flex;
@@ -105,6 +107,14 @@ function Write() {
     const addSelectOption = () => {
         setSelectCount(selectCount + 1);
     }
+    const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
+
+    if (isLoggedIn === false) {
+        alert("로그인이 필요한 서비스입니다.");
+        window.location.href = "/login";
+    } else {
+        // 로그인 상태일 때만 작성 페이지 보여줌
+        // if문 else 시 /write 렌더링 시작
 	return (
 		<Container>
 			    <Form>
@@ -162,6 +172,6 @@ function Write() {
 			</Form>
 	    </Container>	
      );
-}
+}}
 
 export default Write;

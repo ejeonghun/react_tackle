@@ -13,7 +13,7 @@ import { AuthProvider } from './component/AuthContext/AuthContext.js';
 import Write from './component/Write/Write.js';
 import Logout from './component/Logout/Logout.js';
 import Category from './component/Category/Category.js';
-import CategoryBoard from './component/Category/CategoryBoard.js';
+import CategoryBoard from './component/CategoryBoard/CategoryBoard.js';
 
     // 메인 페이지 구성
     // 네비바와 푸터를 작성해주고 나머지는 컴포넌트로 구성한다.

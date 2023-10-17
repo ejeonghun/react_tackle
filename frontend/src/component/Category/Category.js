@@ -44,7 +44,6 @@ function Categories() {
         { key : 'society-science', name : '사회/과학', icon :faPeopleArrows, color:'orange'},
         { key : 'politics-economy', name : '정치/경제', icon :faLandmark, color:'purple'},
         { key :'culture-art',name :'문화/예술',icon :faMasksTheater, color:'brown'}
-        
       ];
 
       return (
@@ -52,6 +51,7 @@ function Categories() {
               {
                   categories.map((category,index) => (
                       <CategoryCard key={index}>
+                        {/* 카테고리의 key값과 맞는 name을 전달한다. */}
                         <Link to={`/category/${category.key}`}>
                           <IconContainer>
                               <FontAwesomeIcon icon={category.icon} style={{color: category.color}}/>
