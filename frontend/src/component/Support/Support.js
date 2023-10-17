@@ -67,7 +67,9 @@ const styles = {
        borderBottom: '1px solid #ddd',
        padding: '10px',
        marginBottom: '10px',
-       textAlign: 'left'
+       textAlign: 'left',
+       paddingTop: '15px'
+
    },
    question:{
        fontSize:'20px',
@@ -97,6 +99,7 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         cursor: 'pointer',
+        boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.9)'
     },
     headsetIcon:{
         marginRight:'1px',
