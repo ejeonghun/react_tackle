@@ -1,0 +1,49 @@
+.title {
+    text-align:center; 
+    font-size:24px; 
+    font-weight:bold; 
+    color:#333; 
+    margin-bottom:10px;
+    border-bottom:1px solid #333 ;
+    display: inline-block;
+  }
+  
+  .content {
+    text-align:center; 
+    font-size:18px; 
+    color:#666;
+    margin-bottom:20px;
+  }
+  
+  .option-container {
+     background-color:#f9f9f9;
+     border-radius:5px;
+     padding:10px;
+     margin-bottom:10px;
+  
+     display:flex;
+     align-items:center;
+  }
+  button{
+    flex-grow :1 ;
+    background-color :#4CAF50 ;
+    color : white ;
+    border-radius :5 px ;
+    border : none ;
+    padding :10 px ;
+    transition: background-color .3s ease; /* 배경색 변경 시 애니메이션 추가 */
+  }
+  
+  .bar{
+    height: 20px;
+    background-color: #ddd; /* bar의 배경색 */
+    width: 100%; /* bar의 너비 */
+  }
+
+  .bar-fill{
+      height: 20px; /* bar의 높이 */
+      background-color:#4CAF50 ; /* 투표 수에 따른 채워지는 색상 */
+      width: 0; /* 초기 상태에서는 비어있다고 가정 */
+      transition: width .3s ease; /* 너비 변경 시 애니메이션 추가 */
+  }
+  

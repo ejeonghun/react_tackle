@@ -90,17 +90,17 @@ function Nav() {
                     <Hamburger isOpen={isOpen} toggle={toggleMenu} />
                     { isOpen && ( // isOpen이 true이면 메뉴를 보여줌
                         <ul>
-                            <li><Link to="/support">고객센터</Link></li>
-                            <li><Link to="/mypage">마이페이지</Link></li>
-                            <li><Link to="/category">카테고리</Link></li>
-                            {isLoggedIn && <li><Link to="/logout">로그아웃</Link></li>} {/* 로그인 상태일 때만 로그아웃 버튼 보여줌 */}
-                            {!isLoggedIn && <li><Link to="/login">로그인</Link></li>}
+                            <li><Link to="/support" onClick={() => setIsOpen(false)}>고객센터</Link></li>
+                            <li><Link to="/mypage" onClick={() => setIsOpen(false)}>마이페이지</Link></li>
+                            <li><Link to="/category" onClick={() => setIsOpen(false)}>카테고리</Link></li>
+                            {isLoggedIn && <li><Link to="/logout" onClick={() => setIsOpen(false)}>로그아웃</Link></li>} {/* 로그인 상태일 때만 로그아웃 버튼 보여줌 */}
+                            {!isLoggedIn && <li><Link to="/login" onClick={() => setIsOpen(false)}>로그인</Link></li>}
                             <br/><br/><br/><br/>
                             {isLoggedIn ? <li className='nav_user'>로그인 상태입니다.</li> : <li className='nav_user'>로그아웃 상태입니다.</li>} 
                             {/* 로그인 여부에 따라 다른 문구 출력 */}
-                        </ul>    
+                    </ul>      
                     )}
-                </div>  
+                </div>
         </div>
 
 

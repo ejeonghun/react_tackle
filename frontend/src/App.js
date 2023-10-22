@@ -9,12 +9,15 @@ import Hotboard from './component/Hotboard/Hotboard.js';
 import KakaoCallback from './component/KakaoLogin/KakaoCallback.tsx';
 import Main from './component/Main/Main.js';
 import Mypage from './component/Mypage/Mypage.js';
+import Point from './component/Mypage/Function/Point.js';
 import { AuthProvider } from './component/AuthContext/AuthContext.js';
 import Write from './component/Write/Write.js';
 import Logout from './component/Logout/Logout.js';
 import Category from './component/Category/Category.js';
 import CategoryBoard from './component/CategoryBoard/CategoryBoard.js';
 import Support from './component/Support/Support';
+import Vote from './component/Vote/Vote';
+
 
     // 메인 페이지 구성
     // 네비바와 푸터를 작성해주고 나머지는 컴포넌트로 구성한다.
@@ -61,7 +64,9 @@ function MainLayout() {
         <Route path="/category" element={<Category />} />
         <Route path="/category/:categoryKey" element={<CategoryBoard />} />
         <Route path="/support" element={<Support />} />
-
+        <Route path="/mypage/point" element={<Point />} />
+        <Route path="/vote/:id" element={<Vote title="ssssss" content="asdasdsad" options={["선택지1", "선택지2","adsfasdfas"]} />} />
+        {/* 여기에서 vote/? 의 값에 따라서 API로 부터 JSON형식으로 데이터를 받아 데이터를 처리하는 로직을 작성해야함. */}
       </Routes>
       
 
