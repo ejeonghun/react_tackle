@@ -3,7 +3,9 @@ import './Vote.css';
 
 function VotePage({ title, content, options }) {
   const [votes, setVotes] = useState(Array(options.length).fill(0));
-  const colors = ['red', 'blue', 'green', 'purple']; // 선택지에 따른 색상 배열
+  const [comment, setComment] = useState("");
+  const [commentsList, setCommentsList] = useState([]);
+  const colors = ['red', 'blue', 'green', 'purple'];
 
   const handleVote = (index) => {
     const newVotes = [...votes];
@@ -12,6 +14,20 @@ function VotePage({ title, content, options }) {
   };
 
   const totalVotes = votes.reduce((a,b) => a + b);
+
+  // 댓글 입력 핸들러
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
+  };
+
+  // 댓글 제출 핸들러
+  const handleCommentSubmit = (event) => {
+    event.preventDefault();
+    if(comment.trim() !== "") {
+      setCommentsList([...commentsList, comment]);
+      setComment("");
+    }
+  };
 
   return (
     <div className="vote-container">
@@ -37,6 +53,25 @@ function VotePage({ title, content, options }) {
           <span>{votes[index]} votes ({totalVotes > 0 ? Math.round((votes[index] / totalVotes) * 100) : 0}%)</span>
         </div>
       ))}
+
+      {/* 댓글 작성 폼 */}
+      <div className='commentwrite'>
+      <form onSubmit={handleCommentSubmit}>
+        <textarea value={comment} onChange={handleCommentChange} placeholder="댓글을 입력하세요..." />
+        <button type="submit">작성</button>
+      </form>
+      </div>
+
+      {/* 댓글 목록 */}
+      {commentsList.length > 0 && (
+        <>
+          <h4>댓글 목록</h4>
+          {commentsList.map((commentText,index)=>(
+            <p key={index}>{commentText}</p>
+          ))}
+        </>
+       )}
+      
     </div>
 );
 }
