@@ -17,6 +17,8 @@ function VotePage({ title, content, options }) {
     <div className="vote-container">
       <h1 className="title">{title}</h1>
       <p className="content">{content}</p>
+      <h4 className='hr'>투표</h4>
+      <div className='hr_bottom'></div>
       {options.map((option, index) => (
         <div key={index} className="option-container">
           {/* 버튼과 bar-fill의 배경색을 동적으로 설정 */}

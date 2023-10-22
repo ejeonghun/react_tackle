@@ -47,3 +47,13 @@
       transition: width .3s ease; /* 너비 변경 시 애니메이션 추가 */
   }
   
+  .hr{
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+    margin-left: 10px;
+  }
+
+  .hr_bottom {
+    border-bottom: #333 1px solid;
+  }
