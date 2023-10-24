@@ -56,14 +56,20 @@ function VotePage({ title, content, options }) {
 
       {/* 댓글 작성 폼 */}
       <div className='commentwrite'>
-      <form onSubmit={handleCommentSubmit}>
-        <textarea value={comment} onChange={handleCommentChange} placeholder="댓글을 입력하세요..." />
-        <button type="submit">작성</button>
-      </form>
+        <form onSubmit={handleCommentSubmit} style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <textarea 
+            value={comment} 
+            onChange={handleCommentChange} 
+            placeholder="댓글을 입력하세요..." 
+            style={{ width: '80%', minHeight: '6px', resize: 'none', borderRadius: '4px', padding: '10px' }}
+          />
+          <button type="submit" style={{ border:'none', color:'white', background:'#007BFF', padding:'10px', cursor:'pointer', width:'15%' }}>작성</button>
+        </form>
       </div>
 
+
       {/* 댓글 목록 */}
-      {commentsList.length > 0 && (
+      {commentsList.length > 0 && (
         <>
           <h4>댓글 목록</h4>
           {commentsList.map((commentText,index)=>(

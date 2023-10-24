@@ -58,13 +58,6 @@
     border-bottom: #333 1px solid;
   }
   
-  .commentwrite{
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
   .vote-container form {
     display: block;
     width: 100%;
@@ -86,8 +79,6 @@
      cursor:pointer;  
      margin: 0 auto;
   }
-  
- 
   
   
  
