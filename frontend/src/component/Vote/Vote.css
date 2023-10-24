@@ -80,5 +80,22 @@
      margin: 0 auto;
   }
   
-  
+/* Vote.css */
+
+.comment-list {
+  margin-top: 20px;
+}
+
+.comment-list h4 {
+  margin-bottom: 10px;
+  text-align: left; /* 추가된 스타일 */
+
+}
+
+.comment-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
  

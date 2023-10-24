@@ -73,7 +73,7 @@ function VotePage({ title, content, options }) {
         <>
           <h4>댓글 목록</h4>
           {commentsList.map((commentText,index)=>(
-            <p key={index}>{commentText}</p>
+            <p key={index} className='comment-item'>{commentText}</p>
           ))}
         </>
        )}
