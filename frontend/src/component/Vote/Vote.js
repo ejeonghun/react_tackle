@@ -3,7 +3,9 @@ import './Vote.css';
 
 function VotePage({ title, content, options }) {
   const [votes, setVotes] = useState(Array(options.length).fill(0));
-  const colors = ['red', 'blue', 'green', 'purple']; // 선택지에 따른 색상 배열
+  const [comment, setComment] = useState("");
+  const [commentsList, setCommentsList] = useState([]);
+  const colors = ['red', 'blue', 'green', 'purple'];
 
   const handleVote = (index) => {
     const newVotes = [...votes];
@@ -13,10 +15,26 @@ function VotePage({ title, content, options }) {
 
   const totalVotes = votes.reduce((a,b) => a + b);
 
+  // 댓글 입력 핸들러
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
+  };
+
+  // 댓글 제출 핸들러
+  const handleCommentSubmit = (event) => {
+    event.preventDefault();
+    if(comment.trim() !== "") {
+      setCommentsList([...commentsList, comment]);
+      setComment("");
+    }
+  };
+
   return (
     <div className="vote-container">
       <h1 className="title">{title}</h1>
       <p className="content">{content}</p>
+      <h4 className='hr'>투표</h4>
+      <div className='hr_bottom'></div>
       {options.map((option, index) => (
         <div key={index} className="option-container">
           {/* 버튼과 bar-fill의 배경색을 동적으로 설정 */}
@@ -35,6 +53,31 @@ function VotePage({ title, content, options }) {
           <span>{votes[index]} votes ({totalVotes > 0 ? Math.round((votes[index] / totalVotes) * 100) : 0}%)</span>
         </div>
       ))}
+
+      {/* 댓글 작성 폼 */}
+      <div className='commentwrite'>
+        <form onSubmit={handleCommentSubmit} style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <textarea 
+            value={comment} 
+            onChange={handleCommentChange} 
+            placeholder="댓글을 입력하세요..." 
+            style={{ width: '80%', minHeight: '6px', resize: 'none', borderRadius: '4px', padding: '10px' }}
+          />
+          <button type="submit" style={{ border:'none', color:'white', background:'#007BFF', padding:'10px', cursor:'pointer', width:'15%' }}>작성</button>
+        </form>
+      </div>
+
+
+      {/* 댓글 목록 */}
+      {commentsList.length > 0 && (
+        <>
+          <h4>댓글 목록</h4>
+          {commentsList.map((commentText,index)=>(
+            <p key={index}>{commentText}</p>
+          ))}
+        </>
+       )}
+      
     </div>
 );
 }
