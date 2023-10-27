@@ -17,6 +17,7 @@ import Category from './component/Category/Category.js';
 import CategoryBoard from './component/CategoryBoard/CategoryBoard.js';
 import Support from './component/Support/Support';
 import Vote from './component/Vote/Vote';
+import PointHistory from './component/PointHistory/PointHistory.js';
 
 
     // 메인 페이지 구성
@@ -65,6 +66,7 @@ function MainLayout() {
         <Route path="/category/:categoryKey" element={<CategoryBoard />} />
         <Route path="/support" element={<Support />} />
         <Route path="/mypage/point" element={<Point />} />
+        <Route path="/PointHistory" element={<PointHistory />} />
         <Route path="/vote/:id" element={<Vote title="플레티넘 1 VS 다이아4 누가 이기겠노" content="누가 이기겠음?" options={["플레1", "다야4","ㅁㄹ?"]} />} />
         {/* 여기에서 vote/? 의 값에 따라서 API로 부터 JSON형식으로 데이터를 받아 데이터를 처리하는 로직을 작성해야함. */}
       </Routes>

@@ -3,6 +3,8 @@ import './Mypage.css';
 import { Link } from "react-router-dom";
 import AuthContext from "../AuthContext/AuthContext";
 
+
+
 function Mypage() {
     const { isLoggedIn } = useContext(AuthContext); // isLogin 상태 추가
     const { nickname, profileImage } = useContext(AuthContext); // nickname, profileImage 상태 추가
@@ -21,7 +23,10 @@ function Mypage() {
                 <h2 style={{display:'flex', margin:'0', alignItems:'center', marginBlock:'0', marginInline:'0'}}>{nickname}</h2>
                 <div className="Mypage_title_point" style={{flexDirection:'column', display:'flex', justifyContent:'center'}}>
                     <h3>내 포인트</h3>
-                    <h4>100,000P</h4>
+                    <Link to="/PointHistory">
+                        <h4>100,000P ►</h4>
+                    </Link>
+
                 </div>
                 </div>
                 <div>
