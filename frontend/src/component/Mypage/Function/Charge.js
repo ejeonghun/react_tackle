@@ -4,7 +4,7 @@ import './Charge.css';
 
 function ChargesPage() {
     const { isLoggedIn, nickname } = useContext(AuthContext);
-    const [chargeAmount, setChargeAmount] = useState(''); // 초기값을 빈 문자열로 설정
+    const [chargeAmount, setChargeAmount] = useState(0); // 초기값을 0으로 설정
 
     if (!isLoggedIn) {
         alert("이 서비스는 로그인이 필요합니다.");
@@ -12,11 +12,11 @@ function ChargesPage() {
     }
 
     const handleChargeClick = (amount) => {
-        setChargeAmount(amount); // 충전 버튼을 누를 때 입력값을 설정
+        setChargeAmount(chargeAmount + amount); // 입력된 금액을 현재 누적된 금액에 추가
     };
 
     const clearInput = () => {
-        setChargeAmount(''); // X 버튼을 누를 때 입력값을 초기화
+        setChargeAmount(0); // X 버튼을 누를 때 누적된 금액 초기화
     };
 
     return (
@@ -27,11 +27,11 @@ function ChargesPage() {
                 <input
                     type="number"
                     value={chargeAmount}
-                    onChange={(e) => setChargeAmount(e.target.value)}
+                    onChange={(e) => setChargeAmount(parseInt(e.target.value, 10))}
                     placeholder="충전할 금액을 입력해주세요"
-                    className={`custom-input ${chargeAmount ? 'input-filled' : ''}`} // input-filled 클래스 추가
+                    className={`custom-input ${chargeAmount ? 'input-filled' : ''}`}
                 />
-                {chargeAmount && ( // 금액이 입력되면 X 버튼 표시
+                {chargeAmount && (
                     <button className="clear-button" onClick={clearInput}>
                         X
                     </button>
