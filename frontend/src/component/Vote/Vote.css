@@ -24,7 +24,7 @@
      display:flex;
      align-items:center;
   }
-  button{
+  .vote_button{
     flex-grow :1 ;
     background-color :#4CAF50 ;
     color : white ;

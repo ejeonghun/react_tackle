@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './PointHistory.css';
 
 function PointHistory() {
   const [currentPoint, setCurrentPoint] = useState(1000); // 현재 포인트 상태
@@ -9,15 +10,21 @@ function PointHistory() {
   ];
 
   return (
-    <div className="container">
-      <h2 className="my-3">포인트 입출금 내역</h2>
-      <p className="mb-4">현재 포인트: <strong>{currentPoint}P</strong></p> {/* 현재 포인트 출력 */}
-      <table className="table table-striped">
+    <div className="container" style={{width:'100%'}}>
+      <h2 className="info">포인트 입출금 내역</h2>
+      <p className="now_point">현재 포인트: <strong>{currentPoint}P</strong></p> {/* 현재 포인트 출력 */}
+      <div className='btn_div'> {/* btn div */}
+        <button className='point_btn'>포인트 충전</button> {/* 포인트 충전 버튼 */}
+        <button className='point_btn'>포인트 환전</button> {/* 포인트 환전 버튼 */}
+      </div> 
+      
+
+      <table className="point_table">
         <thead>
           <tr>
-            <th>날짜</th>
-            <th>설명</th>
-            <th>금액</th>
+            <th className='point_th'>날짜</th>
+            <th className='point_th'>설명</th>
+            <th className='point_th'>금액</th>
           </tr>
         </thead>
         <tbody>

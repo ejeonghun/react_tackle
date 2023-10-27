@@ -38,7 +38,7 @@ function VotePage({ title, content, options }) {
       {options.map((option, index) => (
         <div key={index} className="option-container">
           {/* 버튼과 bar-fill의 배경색을 동적으로 설정 */}
-          <button style={{ backgroundColor: colors[index % colors.length] }} onClick={() => handleVote(index)}>{option}</button>
+          <button style={{ backgroundColor: colors[index % colors.length] }} onClick={() => handleVote(index)} className='vote_button'>{option}</button>
           <div className="bar">
             {/* votes[index] / totalVotes 비율에 따라 .bar-fill 의 넓이 조절 */}
             <div 
