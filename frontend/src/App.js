@@ -9,6 +9,7 @@ import Hotboard from './component/Hotboard/Hotboard.js';
 import KakaoCallback from './component/KakaoLogin/KakaoCallback.tsx';
 import Main from './component/Main/Main.js';
 import Mypage from './component/Mypage/Mypage.js';
+import Charge from './component/Mypage/Function/Charge.js'
 import Point from './component/Mypage/Function/Point.js';
 import { AuthProvider } from './component/AuthContext/AuthContext.js';
 import Write from './component/Write/Write.js';
@@ -65,6 +66,7 @@ function MainLayout() {
         <Route path="/category" element={<Category />} />
         <Route path="/category/:categoryKey" element={<CategoryBoard />} />
         <Route path="/support" element={<Support />} />
+        <Route path="/mypage/charge" element={<Charge />} />
         <Route path="/mypage/point" element={<Point />} />
         <Route path="/PointHistory" element={<PointHistory />} />
         <Route path="/vote/:id" element={<Vote title="플레티넘 1 VS 다이아4 누가 이기겠노" content="누가 이기겠음?" options={["플레1", "다야4","ㅁㄹ?"]} />} />
