@@ -1,0 +1,101 @@
+.title {
+    text-align:center; 
+    font-size:24px; 
+    font-weight:bold; 
+    color:#333; 
+    margin-bottom:10px;
+    border-bottom:1px solid #333 ;
+    display: inline-block;
+  }
+  
+  .content {
+    text-align:center; 
+    font-size:18px; 
+    color:#666;
+    margin-bottom:20px;
+  }
+  
+  .option-container {
+     background-color:#f9f9f9;
+     border-radius:5px;
+     padding:10px;
+     margin-bottom:10px;
+  
+     display:flex;
+     align-items:center;
+  }
+  button{
+    flex-grow :1 ;
+    background-color :#4CAF50 ;
+    color : white ;
+    border-radius :5 px ;
+    border : none ;
+    padding :10 px ;
+    transition: background-color .3s ease; /* 배경색 변경 시 애니메이션 추가 */
+  }
+  
+  .bar{
+    height: 20px;
+    background-color: #ddd; /* bar의 배경색 */
+    width: 100%; /* bar의 너비 */
+  }
+
+  .bar-fill{
+      height: 20px; /* bar의 높이 */
+      background-color:#4CAF50 ; /* 투표 수에 따른 채워지는 색상 */
+      width: 0; /* 초기 상태에서는 비어있다고 가정 */
+      transition: width .3s ease; /* 너비 변경 시 애니메이션 추가 */
+  }
+  
+  .hr{
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+    margin-left: 10px;
+  }
+
+  .hr_bottom {
+    border-bottom: #333 1px solid;
+  }
+  
+  .vote-container form {
+    display: block;
+    width: 100%;
+  }
+  
+  .vote-container textarea {
+    display: inline-block;
+    width:60%;
+    height:30px;
+    margin-right:10px; /* textarea와 button 사이의 간격 */
+  }
+  
+  .vote-container button[type=submit]{
+    display: inline-block;
+     background-color:#333;
+     color:white;
+     border:none;
+     padding:10px;
+     cursor:pointer;  
+     margin: 0 auto;
+  }
+  
+/* Vote.css */
+
+.comment-list {
+  margin-top: 20px;
+}
+
+.comment-list h4 {
+  margin-bottom: 10px;
+  text-align: left; /* 추가된 스타일 */
+
+}
+
+.comment-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+ 

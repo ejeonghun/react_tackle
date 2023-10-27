@@ -53,7 +53,7 @@ function Board({BoardName}) {
             {data.map((post) => (
               <div className='Main_Content' key={post.id} style={{width:'100%'}}>
                 {/* 첫번째 최신글 */}
-                <Link to={`/${post.id}`}> 
+                <Link to={`/vote/${post.id}`}> 
                   <h4>{post.title}</h4>
               <h5 style={{textAlign:'right', margin:'0', marginBlock:'0'}}>누적 금액 : ${post.betted_amount}</h5>
               <div style={{ display: 'flex', justifyContent: 'space-around', position: 'relative'}}>
