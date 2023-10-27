@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PointHistory.css';
 
 function PointHistory() {
   const [currentPoint, setCurrentPoint] = useState(1000); // 현재 포인트 상태
 
-  const history = [
+  const pointHistory = [
     { date: '10.24', description: '글쓰기', amount: '+100P' },
     { date: '10.24', description: '아이템 구매', amount: '-1000P' },
   ];
 
+  const navigate = useNavigate();
+
+  const goToGiftShop = () => {
+    navigate('/giftshop');
+  };
   return (
     <div className="container" style={{width:'100%'}}>
       <h2 className="info">포인트 입출금 내역</h2>
       <p className="now_point">현재 포인트: <strong>{currentPoint}P</strong></p> {/* 현재 포인트 출력 */}
       <div className='btn_div'> {/* btn div */}
         <button className='point_btn'>포인트 충전</button> {/* 포인트 충전 버튼 */}
-        <button className='point_btn'>포인트 환전</button> {/* 포인트 환전 버튼 */}
+        <button className='point_btn' onClick={goToGiftShop}>포인트 환전</button> {/* 포인트 환전 버튼 */}
       </div> 
       
 
@@ -28,7 +34,7 @@ function PointHistory() {
           </tr>
         </thead>
         <tbody>
-          {history.map((item, index) => (
+          {pointHistory.map((item, index) => (
             <tr key={index}>
               <td>{item.date}</td>
               <td>{item.description}</td>
