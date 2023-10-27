@@ -1,5 +1,93 @@
-/* h1, h2, h3, h4, h5 {
+.Mypage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    margin-top: 2vh;
+    flex-direction: column;
+}
 
+.Mypage_title {
+    margin: 0 auto;
+    width: 90%;
+    border: 1px solid black;
+    height: 110px;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    background-color: aliceblue;
+}
+
+.Mypage_title_img {
+    width: 10vh;
+    height: 10vh;
+    border-radius: 60%;
+    overflow: hidden;
+    border: 1px solid black;
+    margin-left: 1vh;
+    margin-top: 0.5vh;
+}
+
+.profile_img {
+    width: 10vh;
+    height: 10vh;
+    text-align: left;
+}
+
+.nickname {
+    display: flex;
+    margin: 0;
+    align-items: center;
     margin-block: 0;
     margin-inline: 0;
-} */
+}
+
+.Mypage_title_point {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.point_history {
+    text-decoration: none;
+}
+
+.Mypage_info {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    text-align: left;
+}
+
+.mypage_text {
+    border-bottom: 1px solid black;
+    margin-block: 0;
+    margin: 10px;
+}
+
+.icon_text, .icon_text_border {
+    display: flex;
+    align-items: center;
+}
+
+.icon_link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.icon_img {
+    width: 32px;
+    height: auto;
+    margin: 10px;
+}
+
+.icon_text_border {
+    border-bottom: 1px solid black;
+}
+
+.margin0 {
+    margin: 0;
+    margin-bottom: 1px;
+    margin-top: 10px;
+}

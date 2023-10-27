@@ -27,7 +27,7 @@ function PointHistory() {
       {/* 충전 버튼 클릭 시 /charge 로 Link */}
       {/* 환전 버튼 클릭 시 /exchange 로 Link */}
       <Link to="/change"><button className='point_btn'>포인트 충전</button> {/* 포인트 충전 버튼 */}</Link>
-      <Link to=""><button className='point_btn' onClick={goToGiftShop}>>포인트 환전</button> {/* 포인트 환전 버튼 */}</Link>
+      <button className='point_btn' onClick={goToGiftShop}>포인트 샵</button> {/* 포인트 환전 버튼 */}
       </div> 
       </div>
       
