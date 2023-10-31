@@ -1,93 +1,110 @@
+/* 마이페이지 전체 영역 스타일링 */
 .Mypage {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    text-align: left;
-    margin-top: 2vh;
-    flex-direction: column;
+    width: 80%; /* 페이지 너비 설정 */
+    margin: 0 auto; /* 페이지 중앙 정렬 */
+    padding: 3em; /* 내부 요소와의 간격 설정 */
+    background-color: #ffffff; /* 배경색 설정 */
 }
 
+/* 제목 영역 스타일링 */
 .Mypage_title {
-    margin: 0 auto;
-    width: 90%;
-    border: 1px solid black;
-    height: 110px;
-    flex-direction: row;
-    display: flex;
-    justify-content: space-between;
-    background-color: aliceblue;
+    display: flex; /* 요소를 가로로 배열 */
+    justify-content: space-between; /* 요소를 양쪽 끝으로 분배 */
+    padding: 2em; /* 내부 요소와의 간격 설정 */
+    border-bottom: 1px solid #e6e6e6; /* 테두리 설정 */
 }
 
+/* 제목 텍스트 영역 스타일링 */
+.Mypage_title_text {
+    display: flex; /* 요소를 가로로 배열 */
+    flex-direction: column; /* 요소를 세로로 배열 */
+    justify-content: center; /* 요소를 세로 중앙 정렬 */
+}
+
+/* 프로필 이미지 영역 스타일링 */
 .Mypage_title_img {
-    width: 10vh;
-    height: 10vh;
-    border-radius: 60%;
-    overflow: hidden;
-    border: 1px solid black;
-    margin-left: 1vh;
-    margin-top: 0.5vh;
-}
-
-.profile_img {
-    width: 10vh;
-    height: 10vh;
-    text-align: left;
-}
-
-.nickname {
-    display: flex;
-    margin: 0;
-    align-items: center;
-    margin-block: 0;
-    margin-inline: 0;
+    width: 80px; /* 이미지 너비 설정 */
+    height: 80px; /* 이미지 높이 설정 */
+    border-radius: 50%; /* 이미지를 원형으로 만듦 */
+    margin-right: 2em; /* 오른쪽 마진 설정 */
 }
 
 .Mypage_title_point {
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
+    flex-direction: column; /* 요소를 세로로 배열 */
+    display: flex; /* Flexbox 레이아웃 사용 */
+    justify-content: center; /* 요소를 세로 중앙 정렬 */
+    text-align: right; /* 텍스트를 오른쪽으로 정렬 */
 }
 
+/* 프로필 이미지 스타일링 */
+.profile_img {
+    width: 100%; /* 이미지 너비 설정 */
+    height: 100%; /* 이미지 높이 설정 */
+    object-fit: cover; /* 이미지를 영역에 맞게 자동 조절 */
+    border-radius: 50%;
+}
+
+/* 포인트 텍스트 스타일링 */
 .point_history {
-    text-decoration: none;
+    font-size: 15pt; /* 폰트 크기 설정 */
 }
 
+/* 닉네임 텍스트 스타일링 */
+.nickname {
+    font-size: 1.5em; /* 폰트 크기 설정 */
+    font-weight: bold; /* 폰트 굵기 설정 */
+    color: #333; /* 폰트 색상 설정 */
+}
+
+/* 정보 영역 스타일링 */
 .Mypage_info {
-    display: flex;
-    justify-content: left;
-    flex-direction: column;
-    text-align: left;
+    padding: 1em; /* 내부 요소와의 간격 설정 */
 }
 
+/* 정보 텍스트 스타일링 */
 .mypage_text {
-    border-bottom: 1px solid black;
-    margin-block: 0;
-    margin: 10px;
+    margin-bottom: 2em; /* 아래쪽 마진 설정 */
+    color: #666; /* 텍스트 색상 설정 */
+    font-size: 1.2em; /* 폰트 크기 설정 */
 }
 
-.icon_text, .icon_text_border {
-    display: flex;
-    align-items: center;
+/* 중앙에 배치할 아이콘 그룹 스타일링 (2개) */
+.icon_group_center {
+    display: flex; /* 요소를 가로로 배열 */
+    justify-content: center; /* 요소를 가로 중앙 정렬 */
+    margin-bottom: 1em; /* 아래쪽 마진 설정 */
 }
 
+/* 아래에 배치할 아이콘 그룹 스타일링 (3개) */
+.icon_group_bottom {
+    display: flex; /* 요소를 가로로 배열 */
+    justify-content: space-between; /* 요소를 양쪽 끝으로 분배 */
+}
+
+/* 아이콘 텍스트 스타일링 */
+.icon_text {
+    display: flex; /* 요소를 가로로 배열 */
+    align-items: center; /* 요소를 세로 중앙 정렬 */
+    margin: 0 1em; /* 양쪽 마진 설정 */
+    font-size: 10pt; /* 폰트 크기 설정 */
+}
+
+/* 아이콘 링크 스타일링 */
 .icon_link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
+    text-decoration: none; /* 텍스트 밑줄 제거 */
+    color: #007bff; /* 링크 색상 설정 */
+    margin-right: 1em; /* 오른쪽 마진 설정 */
 }
 
+/* 아이콘 이미지 스타일링 */
 .icon_img {
-    width: 32px;
-    height: auto;
-    margin: 10px;
+    width: 24px; /* 이미지 너비 설정 */
+    height: 24px; /* 이미지 높이 설정 */
+    margin-right: 1em; /* 오른쪽 마진 설정 */
 }
 
+/* 아이콘 텍스트 테두리 스타일링 */
 .icon_text_border {
-    border-bottom: 1px solid black;
-}
-
-.margin0 {
-    margin: 0;
-    margin-bottom: 1px;
-    margin-top: 10px;
+    border-bottom: 1px solid #e6e6e6; /* 아래쪽 테두리 설정 */
+    padding-bottom: 1em; /* 아래쪽 패딩 설정 */
 }

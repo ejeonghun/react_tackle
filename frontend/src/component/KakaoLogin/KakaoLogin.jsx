@@ -1,7 +1,8 @@
 const KakaoLogin = () => {
     const CLIENT_ID = `${process.env.REACT_APP_KAKAO_REST_API}`;
     // const REDIRECT_URI = `${process.env.REACT_APP_KAKAO_REDIRECT_URI}`; 배포시 주석 해제
-    const REDIRECT_URI = `${process.env.REACT_APP_KAKAO_REDIRECT_URI}`;
+    // const REDIRECT_URI = `https://api1.lunaweb.dev/api/v1/auth/kakao/callback`;
+    const REDIRECT_URI = `http://localhost:3000/auth/kakao/callback`
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`
 
     return(
