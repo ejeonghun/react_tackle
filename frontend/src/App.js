@@ -20,6 +20,7 @@ import Support from './component/Support/Support';
 import Vote from './component/Vote/Vote';
 import PointHistory from './component/PointHistory/PointHistory.js';
 import GiftShop from './component/GiftShop/GiftShop';
+import KakaoCallbackBackend from './component/KakaoLogin/KakaoCallbackBackend.tsx';
 
 
     // 메인 페이지 구성
@@ -62,6 +63,7 @@ function MainLayout() {
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/oauth_kakao" element={<KakaoCallback />} />
+        <Route path="/auth/kakao/callback" element={<KakaoCallbackBackend />} />
         <Route path="/write" element={<Write />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/category" element={<Category />} />
