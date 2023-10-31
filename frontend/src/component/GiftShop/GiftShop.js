@@ -21,7 +21,7 @@ const gifticons = [
 
 const GiftShop = () => (
 <div>
-    <h1>🛍️기프티샵🛍️</h1>
+    <h1>🛍️포인트샵🛍️</h1>
   <div className="gifticon-grid">
     {gifticons.map((gifticon, index) => (
       <img key={index} src={gifticon} className="gifticon-item" alt="gifticon" />
