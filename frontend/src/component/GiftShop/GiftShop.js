@@ -27,7 +27,7 @@ const GiftShop = () => (
       <img key={index} src={gifticon} className="gifticon-item" alt="gifticon" />
     ))}
   </div>
-</div>  
+</div>   
 );
 
 export default GiftShop;
