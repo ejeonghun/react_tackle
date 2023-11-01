@@ -13,12 +13,14 @@ export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(session ? true : false);
     const [nickname, setNickname] = useState(null); // nickname 상태 추가
     const [profileImage, setProfileImage] = useState(null); // profileImage 상태 추가
-    useEffect(() => { // 렌더링이 완료될 때 마다 실행 
-        if (sessionStorage.getItem('nickname')) {
-            setNickname(sessionStorage.getItem('nickname'));
-        }
-        if (sessionStorage.getItem('profileImage')) {
+    useEffect(() => { // 렌더링이 완료될 때 마다 실행
+        const nickname_session = sessionStorage.getItem('nickname');
+        const profileImage_session = sessionStorage.getItem('profileImage');
+
+        if (nickname_session != null && profileImage_session != null) { // 새로고침 시 세션스토리지에는 값이 있는데 로그인 상태가 풀리는걸 확인
+            setIsLoggedIn(true);
             setProfileImage(sessionStorage.getItem('profileImage'));
+            setNickname(sessionStorage.getItem('nickname'));
         }
     }, []); 
     // 최초 렌더링 시에만 실행

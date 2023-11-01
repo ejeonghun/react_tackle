@@ -78,7 +78,7 @@
 /* 아래에 배치할 아이콘 그룹 스타일링 (3개) */
 .icon_group_bottom {
     display: flex; /* 요소를 가로로 배열 */
-    justify-content: space-between; /* 요소를 양쪽 끝으로 분배 */
+    justify-content: center; /* 요소를 양쪽 끝으로 분배 */
 }
 
 /* 아이콘 텍스트 스타일링 */

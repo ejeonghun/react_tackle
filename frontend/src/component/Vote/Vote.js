@@ -6,13 +6,14 @@ import './Vote.css';
   function VotePage() {
     const [post, setPost] = useState(null);
     const { id } = useParams();
-    const [votes, setVotes] = useState(Array(2).fill(0)); // 옵션 수를 임시로 2개로 설정
+    const [votes, setVotes] = useState({});
     const [comment, setComment] = useState("");
     const [commentsList, setCommentsList] = useState([]);
     const colors = ['red', 'blue', 'green', 'purple'];
     const KakaoId = sessionStorage.getItem("KakaoId"); // 투표 기능을 위한 카카오 ID 가져오기
     const [selectedValue, setSelectedValue] = useState(''); // 포인트 배팅을 위한 select value 값 가져오기
     const [SelectedValueText, setSelectedValueText] = useState(''); // 포인트 배팅을 위한 select value 값 가져오기
+    const [options, setOptions] = useState([]); // 선택지 배열을 담는 state
 
       // 배팅 select 값이 변경될 때 호출되는 함수
       const handleSelectChange = (event) => {
@@ -26,49 +27,72 @@ import './Vote.css';
       }
       };
 
+      
 
-    useEffect(() => {
-      async function getData() {
-        const response = await axios.get(`https://api1.lunaweb.dev/api/v1/board/info?postId=${id}`);
-        setPost(response.data.data);
-      }
-  
-      getData();
-    }, [id]);
-  
-    const handleVote = async (index) => {
-      const confirmVote = window.confirm("투표하시겠습니까?");
-      if (!confirmVote) return; // 사용자가 투표를 취소하면 함수를 종료합니다.
+      // https://api1.lunaweb.dev/api/v1/board/info 이 주소로 axios.post 요청을 보낸다.
+      // 요청에 필요한 데이터는 postId와 id이다.
+      // postId는 게시글의 고유 id이다.
+      // id는 사용자의 고유 id이다.
+      // useEffect에서 데이터를 받아와 state를 설정하는 부분
+      useEffect(() => {
+        async function getData() {
+          const response = await axios({ // POST 요청으로 처리한다.
+            method: 'post',
+            url: `https://api1.lunaweb.dev/api/v1/board/info`,
+            headers: { 'Content-Type': 'application/json' },
+            data: { "postId": id, "id": KakaoId } // postId와 id(카카오 id값)을 보낸다.
+          });
+          setPost(response.data.data); // 게시글 정보를 받아와서 state를 설정한다.
 
-      // 수정 해야할 부분 
-      // 투표가 완료 되어야지만 투표 수가 업데이트 되어야 합니다.
-      const newVotes = [...votes];
-      newVotes[index]++;
-      setVotes(newVotes); // 투표 성공시에만 투표 수 업데이트
+          const voteItemsContent = response.data.data.voteItemsContent; // 선택지 내용 배열을 가져온다.
+          const voteItemIdMap = response.data.data.voteItemIdMap; // 선택지의 itemId와 득표수를 가져옵니다.
+          const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({
+            content: voteItemsContent[index],
+            itemId: itemId,
+            voteCount: voteItemIdMap[itemId]
+          }));
+          setOptions(voteItems);
+        }
+        getData();
+      }, [id, KakaoId]);
     
-      // API 호출
+    // api에서 호출한 데이터중 data.voteItemIdMap 을 들고옵니다.
+    // data.voteItemIdMap 은 선택지의 배열이고 ${itemId} 값 입니다.
+
+    // 선택지의 배열을 options에 넣어줍니다.
+    const handleVote = async (index) => {
+      if (!KakaoId) {
+        alert("로그인이 필요합니다."); // 카카오 로그인이 되어있지 않은 경우
+        return; // DB에 vote_result 의 idx 값에 null이 들어가면 해당 게시물을 불러오는 info API가 오류가 발생합니다.
+        // 이 점 유의
+      }
+      const confirmVote = window.confirm("투표하시겠습니까?");
+      if (!confirmVote) return;
+    
+      const newOptions = [...options];
+      newOptions[index].voteCount++;
+      setOptions(newOptions);
+    
       const response = await axios.post('https://api1.lunaweb.dev/api/v1/board/voting', {
         "postId": post.postId,
         "idx": `${KakaoId}`, // 세션에서 사용자의 kakaoId를 가져와서 idx로 사용합니다.
-        "itemId": index, // 선택한 항목의 인덱스를 itemId로 사용합니다.
+        "itemId": options[index].itemId,  // 선택한 항목의 인덱스를 itemId로 사용합니다.
         "status": "ING",
-        "bettingPoint": parseInt(selectedValue), // <select className='bet_select'> 의 value값을 가져와서 bettingPoint로 사용합니다. api에 쿼리를 보낼때 int형으로 보내야 합니다.
-        
+        "bettingPoint": parseInt(selectedValue),// <select className='bet_select'> 의 value값을 가져와서 bettingPoint로 사용합니다. api에 쿼리를 보낼때 int형으로 보내야 합니다.
         "getPoint": 0, // 실제 얻을 포인트로 변경해야 합니다.
         "createdAt": new Date().toISOString()
       });
       
-      // API 호출 결과를 확인합니다.
       if (response.data.message) { // 메세지가 있는 경우
-        if (response.success == "true") { // 투표 성공
+        if (response.success === "true") { // 투표 성공
           alert("투표가 완료 되었습니다.");
-        } else { // 투표 실패
-            alert(response.data.message); // 오류 코드를 alert로 띄웁니다.
+        } else {
+          alert(response.data.message); // api의 오류 코드를 alert로 띄웁니다.
         }
       }
     };
   
-    const totalVotes = votes.reduce((a,b) => a + b);
+    const totalVotes = options.reduce((total, option) => total + option.voteCount, 0);
   
     // 댓글 입력 핸들러
     const handleCommentChange = (event) => {
@@ -86,30 +110,28 @@ import './Vote.css';
   
     if (!post) return <div>Loading...</div>;
   
-    const options = ['Option 1', 'Option 2']; // 옵션을 임시로 설정
   
     return (
       <div className="vote-container">
         <h1 className="title">{post.title}</h1>
         <p className="content">{post.content}</p>
+        <p className="bettingAmount">총 배팅금액 : <strong>{post.bettingAmount}P</strong></p>
+        {/* 총 베팅금액 추후 API 수정 시 수정 */}
         <h4 className='hr'>투표</h4>
         <div className='hr_bottom'></div>
-      {options.map((option, index) => (
+        {options.map((option, index) => (
         <div key={index} className="option-container">
-          {/* 버튼과 bar-fill의 배경색을 동적으로 설정 */}
-          <button style={{ backgroundColor: colors[index % colors.length] }} onClick={() => handleVote(index)} className='vote_button'>{option}</button>
+          <button style={{ backgroundColor: colors[index % colors.length] }} onClick={() => handleVote(index)} className='vote_button'>{option.content}</button>
           <div className="bar">
-            {/* votes[index] / totalVotes 비율에 따라 .bar-fill 의 넓이 조절 */}
             <div 
               className="bar-fill" 
               style={{ 
-                width: `${totalVotes > 0 ? (votes[index] / totalVotes) * 100 : 0}%`,
+                width: `${totalVotes > 0 ? (option.voteCount / totalVotes) * 100 : 0}%`,
                 backgroundColor: colors[index % colors.length]
               }}
             />
           </div>
-          {/* 각 선택지 별 투표 수 및 비율 출력 */}
-          <span>{votes[index]} votes ({totalVotes > 0 ? Math.round((votes[index] / totalVotes) * 100) : 0}%)</span>
+          <span>{option.voteCount} votes ({totalVotes > 0 ? Math.round((option.voteCount / totalVotes) * 100) : 0}%)</span>
         </div>
       ))}
       <hr/>
