@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // 로그인 상태 관리를 위한 Context API
 const AuthContext = React.createContext();
-const session = sessionStorage.getItem("id");
+const session = sessionStorage.getItem("KakaoId");
 
 // session 값이 있으면 로그인 상태 유지
 // session 값이 있으면 const isLoggedIn = true;
@@ -17,7 +17,8 @@ export const AuthProvider = ({ children }) => {
         const nickname_session = sessionStorage.getItem('nickname');
         const profileImage_session = sessionStorage.getItem('profileImage');
 
-        if (nickname_session != null && profileImage_session != null) { // 새로고침 시 세션스토리지에는 값이 있는데 로그인 상태가 풀리는걸 확인
+        if (nickname_session != null && profileImage_session != null) { 
+            // 새로고침 시 세션스토리지에는 값이 있는데 로그인 상태가 풀리는걸 확인
             setIsLoggedIn(true);
             setProfileImage(sessionStorage.getItem('profileImage'));
             setNickname(sessionStorage.getItem('nickname'));

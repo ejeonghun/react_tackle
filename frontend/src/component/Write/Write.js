@@ -1,7 +1,7 @@
-import React, { useContext, useState} from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components'
 import AuthContext from '../AuthContext/AuthContext';
-
+import axios from 'axios';
 
 const Container = styled.div`
     display: flex;
@@ -116,21 +116,60 @@ const DelButton = styled.button`
 
 function Write() {
     const [selectCount, setSelectCount] = useState(2); // 초기 선택지는 2개
+    const KakaoId = sessionStorage.getItem("KakaoId"); // 게시글 작성 기능을 위한 카카오 ID 가져오기
+    const [categorySelect, setCategorySelect] = useState(""); // "카테고리"에 대한 선택된 값
+    const [bettingAmountSelect, setBettingAmountSelect] = useState(""); // "베팅 금액"에 대한 선택된 값
+    const [deadlineSelect, setDeadlineSelect] = useState(""); // "마감 기한"에 대한 선택된 값
+    const [title, setTitle] = useState(""); // 제목에 대한 상태
+    const [content, setContent] = useState(""); // 내용에 대한 상태
+    const [selectOptions, setSelectOptions] = useState(["", ""]); // 초기 선택지 2개를 빈 문자열로 초기화
 
+
+
+    // POST 값에 보낼 내용들에 state 대입
+    const Post_Submit = () => {
+        const requestData = {
+            idx: KakaoId,
+            categoryId: Number(categorySelect),
+            title: title,
+            content: content,
+            status: "ING",
+            bettingAmount: Number(bettingAmountSelect),
+            votingDeadLine: deadlineSelect,
+            voteItemsContent: selectOptions, // 선택지 내용
+        };
+    // API 요청을 보내는 부분
+    axios.post('https://api1.lunaweb.dev/api/v1/board/create', requestData)
+        .then(response => {
+            // API 요청이 성공했을 때의 처리
+            console.log(response.data);
+        })
+        .catch(error => {
+            // API 요청이 실패했을 때의 처리
+            console.error(error);
+            alert("글 작성에 실패했습니다. 다시 시도해주세요");
+        });
+    }
+
+    
     const addSelectOption = () => {
-        if (selectCount < 3) { 
-        setSelectCount(selectCount + 1);
+        if (selectOptions.length < 3) {
+            setSelectOptions([...selectOptions, ""]);
         } else {
             alert("최대 3개까지 선택지를 추가할 수 있습니다.");
         }
-    }
-
+    };
+    
     const delSelectOption = () => {
-        if (selectCount > 2) {
-            setSelectCount(selectCount - 1);
+        if (selectOptions.length > 2) {
+            const updatedOptions = selectOptions.slice(0, selectOptions.length - 1);
+            setSelectOptions(updatedOptions);
         } else {
             alert("최소 2개의 선택지가 필요합니다.");
-        };}
+        }
+    };
+
+
     const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
 
     if (isLoggedIn === false) {
@@ -143,55 +182,74 @@ function Write() {
 		<Container>
 			    <Form>
                     <DropdownContainer>
-					<Select name="dropdown1">
-					 <option value="">카테고리</option>	
-					 <option value="Option1">일상/연애</option>	
-					 <option value="Option2">게임</option>	
-					 <option value="Option3">스포츠</option>
-                     <option value="Option4">사회/과학</option>	
-                     <option value="Option5">정치/경제</option>	
-                     <option value="Option6">문화/예술</option>	
+					<Select name="dropdown1" onChange={(e) => setCategorySelect(e.target.value)}>
+                        {/* 선택값이 바뀔때마다 state에 value값 변경 */}
+					 <option>카테고리</option>	
+					 <option value="1">일상/연애</option>	
+					 <option value="2">게임</option>	
+					 <option value="3">스포츠</option>
+                     <option value="4">사회/과학</option>	
+                     <option value="5">정치/경제</option>	
+                     <option value="6">문화/예술</option>	
 
 				 </Select>
-
-				  <Select name="dropdown2">
-					  <option value="">베팅 금액</option>	
-					  <option value="Option1">1000P</option>	
-					  <option value="Option2">5000P</option>	
-					  <option value="Option3">10000P</option>	
+                 <Select name="dropdown2" onChange={(e) => setBettingAmountSelect(e.target.value)}>
+                    {/* 선택값이 바뀔때마다 state에 value값 변경 */}
+					  <option>베팅 금액</option>	
+					  <option value="1000">1000P</option>	
+					  <option value="5000">5000P</option>	
+					  <option value="10000">10000P</option>	
 				  </Select>
 
-				  <Select name="dropdown3">
-					  <option value="">마감 기한</option>	
-					  <option value="Option1">1일</option>	
-					  <option value="Option2">7일</option>	
-					  <option value="Option3">15일</option>	
-                      <option value="Option4">30일</option>	
+				  <Select name="dropdown3" onChange={(e) => setDeadlineSelect(e.target.value)}>
+                    {/* 선택값이 바뀔때마다 state에 value값 변경 */}
+					  <option>마감 기한</option>	
+					  <option value="1">1일</option>	
+					  <option value="2">2일</option>	
+					  <option value="3">3일</option>	
+                      <option value="4">4일</option>	
+                      <option value="5">5일</option>	
+                      <option value="6">6일</option>	
+                      <option value="7">7일</option>	
 
 				  </Select>
                 </DropdownContainer>
 				<Label>
                     <br/>
-					<Input type="text" name="title" placeholder="제목"/>
+					<Input type="text" name="title" placeholder="제목" value={title} 
+                    onChange={(e) => setTitle(e.target.value)}/>
+                    {/* 내용이 바뀔때마다 state에 값을 넣어줌 */}
+                    {/* 불필요한 랜더링이 발생할 수 있으므로 추 후 변경 요망 */}
 				</Label>
                 
 				<br/>
 				<Label>
-					<Textarea name="content" placeholder="내용을 입력하세요."/>
+					<Textarea name="content" placeholder="내용을 입력하세요." value={content}
+                    onChange={(e) => setContent(e.target.value)}/>
+                    {/* 내용이 바뀔때마다 state에 값을 넣어줌 */}
 				</Label>
 
-                <SelectContainer>
-                    {[...Array(selectCount)].map((_, index) => (
+                <SelectContainer> {/* 선택지 부분 */}
+                    {selectOptions.map((option, index) => (
                         <Label key={index}>
-                            <TextareaSmall name={`select${index + 1}`} placeholder={`선택지${index + 1}`}/>
+                            <TextareaSmall
+                                name={`select${index + 1}`}
+                                placeholder={`선택지${index + 1}`}
+                                value={option}
+                                onChange={(e) => {
+                                    const updatedOptions = [...selectOptions];
+                                    updatedOptions[index] = e.target.value;
+                                    setSelectOptions(updatedOptions);
+                                }}
+                            />
                         </Label>
-                    ))}
+                    ))} 
                 </SelectContainer>
                 <SelectContainer>
                 <AddButton type="button" onClick={addSelectOption}>선택지 추가</AddButton>
                 <DelButton type="button" onClick={delSelectOption}>선택지 삭제</DelButton>
                 </SelectContainer>
-                <Input type="submit" value="작성" />
+                <Input type="submit" onClick={Post_Submit} value="작성" />
 			</Form>
 	    </Container>	
      );
