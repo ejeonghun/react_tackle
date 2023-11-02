@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components'
 import AuthContext from '../AuthContext/AuthContext';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const Container = styled.div`
     display: flex;
@@ -123,11 +125,12 @@ function Write() {
     const [title, setTitle] = useState(""); // 제목에 대한 상태
     const [content, setContent] = useState(""); // 내용에 대한 상태
     const [selectOptions, setSelectOptions] = useState(["", ""]); // 초기 선택지 2개를 빈 문자열로 초기화
-
-
+    const Navigate = useNavigate();
 
     // POST 값에 보낼 내용들에 state 대입
-    const Post_Submit = () => {
+    const Post_Submit = (event) => {
+        event.preventDefault(); // 새로고침 방지
+    
         const requestData = {
             idx: KakaoId,
             categoryId: Number(categorySelect),
@@ -138,11 +141,13 @@ function Write() {
             votingDeadLine: deadlineSelect,
             voteItemsContent: selectOptions, // 선택지 내용
         };
-    // API 요청을 보내는 부분
-    axios.post('https://api1.lunaweb.dev/api/v1/board/create', requestData)
+        // API 요청을 보내는 부분
+        axios.post('https://api1.lunaweb.dev/api/v1/board/create', requestData)
         .then(response => {
             // API 요청이 성공했을 때의 처리
             console.log(response.data);
+            alert("게시글 작성이 완료되었습니다.");
+            Navigate('/'); // 게시글 작성 후 메인페이지로 리다이렉션
         })
         .catch(error => {
             // API 요청이 실패했을 때의 처리
@@ -150,7 +155,6 @@ function Write() {
             alert("글 작성에 실패했습니다. 다시 시도해주세요");
         });
     }
-
     
     const addSelectOption = () => {
         if (selectOptions.length < 3) {

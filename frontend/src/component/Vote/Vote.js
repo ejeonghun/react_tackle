@@ -14,6 +14,7 @@ import './Vote.css';
     const [selectedValue, setSelectedValue] = useState(''); // 포인트 배팅을 위한 select value 값 가져오기
     const [SelectedValueText, setSelectedValueText] = useState(''); // 포인트 배팅을 위한 select value 값 가져오기
     const [options, setOptions] = useState([]); // 선택지 배열을 담는 state
+    const [VotingStatus, setVotingStatus] = useState(false);
 
       // 배팅 select 값이 변경될 때 호출되는 함수
       const handleSelectChange = (event) => {
@@ -51,7 +52,8 @@ import './Vote.css';
             itemId: itemId,
             voteCount: voteItemIdMap[itemId]
           }));
-          const VotingStatus = response.data.data.voting;
+          setVotingStatus(response.data.data.voting);
+          
           setOptions(voteItems);
         }
         getData();
@@ -67,7 +69,7 @@ import './Vote.css';
         return; // DB에 vote_result 의 idx 값에 null이 들어가면 해당 게시물을 불러오는 info API가 오류가 발생합니다.
         // 이 점 유의
       }
-      if (VotingStatus === 'true') {
+      if (VotingStatus === false) {
         const confirmVote = window.confirm("투표하시겠습니까?");
         if (!confirmVote) return;
       
