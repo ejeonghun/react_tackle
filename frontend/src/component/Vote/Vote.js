@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Vote.css';
+import Loading from '../Loading/Loading';
+
 // const [votes, setVotes] = useState(Array(options.length).fill(0)); // 각 선택지의 투표 수를 담는 배열
   function VotePage() {
+    
     const [post, setPost] = useState(null);
     const { id } = useParams();
     const [votes, setVotes] = useState({});
@@ -123,7 +126,7 @@ import './Vote.css';
       }
     };
   
-    if (!post) return <div>Loading...</div>;
+    if (!post) return <div><Loading/></div>;
   
   
     return (
