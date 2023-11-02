@@ -71,7 +71,7 @@
     top: 0; /* 수정: 화면 상단에 고정 */
     bottom: 0; /* 추가: 화면 하단에 고정 */
     right: 0; /* 수정: 화면 오른쪽에 고정 */
-    background-color: rgb(255, 182, 148); /* 배경색 변경 */
+    background-color: rgb(71, 71, 72); /* 배경색 변경 */
     animation: fadeInRight 1.5s;
     z-index: 9999;
 }
@@ -94,11 +94,13 @@
     height: 100%;
     padding:20px;
     font-size: 20px;
+    text-align: left;
+    color:rgb(254, 0, 0); /* 링크 색상 설정 */
   }
   
   .hamburger_menu ul li a {
      text-decoration:none; /* 링크 밑줄 제거 */
-     color:black; /* 링크 색상 설정 */
+     color:rgb(255, 255, 255); /* 링크 색상 설정 */
   }
 
 /* 프로필 이미지와 이름이 들어갈 li 태그 */
@@ -106,7 +108,7 @@
     display: flex;
     flex-direction: column; /* 추가: 요소들을 수직으로 배치 */
     align-items: center;
-    padding-top: 10px;
+    padding-top: 15px;
     padding-bottom: 10px;
     padding-left: 15px;
     padding-right: 15px;
@@ -122,25 +124,13 @@
     height:70px; /* 이미지 크기 조정 */
     border-radius: 50%; /* 원형으로 만들기 */
     object-fit: cover; /* 이미지 비율 유지 */
-    margin-bottom: 10px;
+    margin-bottom: 13px;
 }
 
 /* 프로필 이름 */
 .hamburger_menu ul .profile span {
-    font-size: 24px; /* 글자 크기 조정 */
+    font-size: 20px; /* 글자 크기 조정 */
     font-weight: bold; /* 글자 두께 조정 */
     text-align: center; /* 추가: 이름을 가운데 정렬 */
 
 }
-
-  
-  
-
-/* 햄버거 메뉴 끝 */
-
-/* .nav_user {
-    top: 70vh;
-    position: fixed;
-    font-size: 14px;
-} */
-/* nav바 유저 닉네임 */
