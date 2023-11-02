@@ -8,7 +8,6 @@ import Hamburger from '../Hambuger/Hamburger';  // 햄버거 메뉴 추가
 
 function Boardlist() {
     const location = useLocation();
-    
     const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인 
     return ( 
     <div className='boardlist'>
@@ -46,6 +45,8 @@ function Nav() {
     const [isOpen, setIsOpen] = useState(false);
     const [key, setKey] = useState(0); // key state 추가
     const node = useRef(); // ref 생성
+    
+    const { isLoggedIn, nickname, profileImage } = useContext(AuthContext);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -73,7 +74,7 @@ function Nav() {
         };
     }, [isOpen]);
 
-    const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
+    // const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
     return (
         <div>
         <div className="nav_bar">
@@ -84,21 +85,28 @@ function Nav() {
             </Link>
                 {/* 햄버거 메뉴 추가 */}        
                 <div ref={node} className="hamburger_menu" style={{ right: isOpen ? '0%' : '8%', top: isOpen ? '0%' : '23%',
-                                                         width: isOpen ? '200px' : '', height: isOpen ? '100vh' : ''}}
-                                                        key={key}>
-                     {/* isOpen이 true이면 오른쪽으로 3% 이동, false이면 8% 이동 레이아웃 이동*/}
+                                                             width: isOpen ? '180px' : '', height: isOpen ? '100vh' : ''}}
+                                                            key={key}>
                     <Hamburger isOpen={isOpen} toggle={toggleMenu} />
-                    { isOpen && ( // isOpen이 true이면 메뉴를 보여줌
+                    { isOpen && (
                         <ul>
-                            <li><Link to="/support" onClick={() => setIsOpen(false)}>고객센터</Link></li>
+                            {isLoggedIn ? (
+                                 <>
+                                    <li className = "profile">
+                                    <img src={profileImage} alt="프로필 사진" /> {/* 프로필 이미지 추가 */}
+                                    <span>{nickname}</span> {/* 닉네임 추가 */}
+                                    </li>
+                                    <li><Link to="/logout" onClick={() => setIsOpen(false)}>로그아웃</Link></li>
+
+                                
+                            </>
+                        ) : (
+                        <li><Link to="/login" onClick={() => setIsOpen(false)}>로그인</Link></li>
+                        )}
                             <li><Link to="/mypage" onClick={() => setIsOpen(false)}>마이페이지</Link></li>
+                            <li><Link to="/support" onClick={() => setIsOpen(false)}>고객센터</Link></li>
                             <li><Link to="/category" onClick={() => setIsOpen(false)}>카테고리</Link></li>
-                            {isLoggedIn && <li><Link to="/logout" onClick={() => setIsOpen(false)}>로그아웃</Link></li>} {/* 로그인 상태일 때만 로그아웃 버튼 보여줌 */}
-                            {!isLoggedIn && <li><Link to="/login" onClick={() => setIsOpen(false)}>로그인</Link></li>}
-                            <br/><br/><br/><br/>
-                            {isLoggedIn ? <li className='nav_user'>로그인 상태입니다.</li> : <li className='nav_user'>로그아웃 상태입니다.</li>} 
-                            {/* 로그인 여부에 따라 다른 문구 출력 */}
-                    </ul>      
+                    </ul>     
                     )}
                 </div>
         </div>
