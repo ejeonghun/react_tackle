@@ -1,4 +1,10 @@
 # react_tackle
+<div align="center">
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/></a>&nbsp
+</div>
+명확한 답이 없는 문제 및 갈등의 주제에 대하여 다른 사용자들 과의 생각을 게시자의 의견에 대한 사용자들의 “투표” 로 갈등을 해소
+
+
 
 ## Frontend : 이정훈, 이우석, 정성윤
 ## Backend : 이승열, 이시영

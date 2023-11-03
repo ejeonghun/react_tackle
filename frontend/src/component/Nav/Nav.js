@@ -9,6 +9,7 @@ import Hamburger from '../Hambuger/Hamburger';  // 햄버거 메뉴 추가
 function Boardlist() {
     const location = useLocation();
     const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인 
+    
     return ( 
     <div className='boardlist'>
     <div className='search'>
@@ -45,12 +46,15 @@ function Nav() {
     const [isOpen, setIsOpen] = useState(false);
     const [key, setKey] = useState(0); // key state 추가
     const node = useRef(); // ref 생성
-    
+    const overlayRef = useRef(); // 추가: 어두운 배경 레퍼런스
+
     const { isLoggedIn, nickname, profileImage } = useContext(AuthContext);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
         setKey(prevKey => prevKey + 1); // 메뉴가 토글될 때마다 key 값 증가
+        // 어두운 배경 레퍼런스를 참조하여 투명도 조절
+
     } 
 
     const handleClickOutside = e => {
@@ -83,9 +87,10 @@ function Nav() {
                 <img src="/img/Logo.png" alt="메인 아이콘" className='Logo' />
                 <img src="/img/Main.png" alt="메인 아이콘" className='Main_text' />
             </Link>
-                {/* 햄버거 메뉴 추가 */}        
+                {/* 햄버거 메뉴 추가 */}   
+                <div className='hamburger_parent'>     
                 <div ref={node} className="hamburger_menu" style={{ right: isOpen ? '0%' : '8%', top: isOpen ? '0%' : '23%',
-                                                             width: isOpen ? '180px' : '', height: isOpen ? '100vh' : ''}}
+                                                             width: isOpen ? '' : '', height: isOpen ? '100vh' : ''}}
                                                             key={key}>
                     <Hamburger isOpen={isOpen} toggle={toggleMenu} />
                     { isOpen && (
@@ -101,14 +106,21 @@ function Nav() {
                                 
                             </>
                         ) : (
+                            <>{/* 비 로그인 시 출력되는 프로필 이미지 */}
+                                    <li className="profile">
+                                    <img src="/img/tmp_profile_img.jpg" alt="프로필 사진" /> {/* 프로필 이미지 추가 */}
+                                    <Link to="/login" onClick={() => setIsOpen(false)}><span className='non_login_span'>로그인하세요</span></Link> {/* 닉네임 추가 */}
+                                    </li>
                         <li><Link to="/login" onClick={() => setIsOpen(false)}>로그인</Link></li>
-                        )}
+                        </>)}
                             <li><Link to="/mypage" onClick={() => setIsOpen(false)}>마이페이지</Link></li>
                             <li><Link to="/support" onClick={() => setIsOpen(false)}>고객센터</Link></li>
                             <li><Link to="/category" onClick={() => setIsOpen(false)}>카테고리</Link></li>
                     </ul>     
                     )}
                 </div>
+                </div>
+                <div className={`overlay ${isOpen ? 'overlay-visible' : ''}`} ref={overlayRef} style={{ opacity: isOpen ? 1 : 0 }}></div>
         </div>
 
 

@@ -90,7 +90,9 @@
      padding-right: 20px;
      padding-left:20px;
     padding-bottom: 10px; */
-    width: 20vh;
+    /* width: 20vh; */
+    margin-left: 4vh;
+    margin-right: 4vh;
     height: 100%;
     padding:20px;
     font-size: 20px;
@@ -105,6 +107,7 @@
 
 /* 프로필 이미지와 이름이 들어갈 li 태그 */
 .hamburger_menu ul .profile {
+    margin-top: 30px;
     display: flex;
     flex-direction: column; /* 추가: 요소들을 수직으로 배치 */
     align-items: center;
@@ -115,6 +118,7 @@
     font-size: 20px;
     background-color: rgb(71, 71, 72);/* 배경색 추가 */
     color: #fffdfd; /* 글자 색상 추가 */
+    border-bottom: #fffdfd solid 1px;
 }
 
 
@@ -134,3 +138,18 @@
     text-align: center; /* 추가: 이름을 가운데 정렬 */
 
 }
+
+/* styles.css */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* 어두운 배경 색상 및 투명도 */
+    z-index: 999; /* 메뉴 위에 오도록 설정 */
+    opacity: 0; /* 초기에는 보이지 않게 */
+    transition: opacity 0.5s ease-in-out; /* 트랜지션 애니메이션 적용 */
+    pointer-events: none; /* 메뉴가 열릴 때만 이벤트 활성화 */
+  }
+  
