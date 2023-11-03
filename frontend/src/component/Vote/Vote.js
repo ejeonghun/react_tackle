@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Vote.css';
+import Loading from '../Loading/Loading';
+
 // const [votes, setVotes] = useState(Array(options.length).fill(0)); // 각 선택지의 투표 수를 담는 배열
   function VotePage() {
+    
     const [post, setPost] = useState(null);
     const { id } = useParams();
     const [votes, setVotes] = useState({});
@@ -14,6 +17,7 @@ import './Vote.css';
     const [selectedValue, setSelectedValue] = useState(''); // 포인트 배팅을 위한 select value 값 가져오기
     const [SelectedValueText, setSelectedValueText] = useState(''); // 포인트 배팅을 위한 select value 값 가져오기
     const [options, setOptions] = useState([]); // 선택지 배열을 담는 state
+    const [VotingStatus, setVotingStatus] = useState(false);
 
       // 배팅 select 값이 변경될 때 호출되는 함수
       const handleSelectChange = (event) => {
@@ -51,6 +55,8 @@ import './Vote.css';
             itemId: itemId,
             voteCount: voteItemIdMap[itemId]
           }));
+          setVotingStatus(response.data.data.voting);
+          
           setOptions(voteItems);
         }
         getData();
@@ -66,29 +72,41 @@ import './Vote.css';
         return; // DB에 vote_result 의 idx 값에 null이 들어가면 해당 게시물을 불러오는 info API가 오류가 발생합니다.
         // 이 점 유의
       }
-      const confirmVote = window.confirm("투표하시겠습니까?");
-      if (!confirmVote) return;
-    
-      const newOptions = [...options];
-      newOptions[index].voteCount++;
-      setOptions(newOptions);
-    
-      const response = await axios.post('https://api1.lunaweb.dev/api/v1/board/voting', {
-        "postId": post.postId,
-        "idx": `${KakaoId}`, // 세션에서 사용자의 kakaoId를 가져와서 idx로 사용합니다.
-        "itemId": options[index].itemId,  // 선택한 항목의 인덱스를 itemId로 사용합니다.
-        "status": "ING",
-        "bettingPoint": parseInt(selectedValue),// <select className='bet_select'> 의 value값을 가져와서 bettingPoint로 사용합니다. api에 쿼리를 보낼때 int형으로 보내야 합니다.
-        "getPoint": 0, // 실제 얻을 포인트로 변경해야 합니다.
-        "createdAt": new Date().toISOString()
-      });
+      if (VotingStatus === false) {
+        const confirmVote = window.confirm("투표하시겠습니까?");
+        if (!confirmVote) return;
       
-      if (response.data.message) { // 메세지가 있는 경우
-        if (response.success === "true") { // 투표 성공
-          alert("투표가 완료 되었습니다.");
-        } else {
-          alert(response.data.message); // api의 오류 코드를 alert로 띄웁니다.
+        const newOptions = [...options];
+        newOptions[index].voteCount++;
+        setOptions(newOptions);
+      
+        const response = await axios.post('https://api1.lunaweb.dev/api/v1/board/voting', {
+          "postId": post.postId,
+          "idx": `${KakaoId}`, // 세션에서 사용자의 kakaoId를 가져와서 idx로 사용합니다.
+          "itemId": options[index].itemId,  // 선택한 항목의 인덱스를 itemId로 사용합니다.
+          "status": "ING",
+          "bettingPoint": parseInt(selectedValue),// <select className='bet_select'> 의 value값을 가져와서 bettingPoint로 사용합니다. api에 쿼리를 보낼때 int형으로 보내야 합니다.
+          "getPoint": 0, // 실제 얻을 포인트로 변경해야 합니다.
+          "createdAt": new Date().toISOString()
+        });
+        
+        if (response.data.message) { // 메세지가 있는 경우
+          if (response.success === "true") { // 투표 성공
+            alert("투표가 완료 되었습니다.");
+            const response = await axios({ 
+              method: 'post',
+              url: `https://api1.lunaweb.dev/api/v1/board/info`,
+              headers: { 'Content-Type': 'application/json' },
+              data: { "postId": id, "id": KakaoId }
+            });
+            setPost(response.data.data);
+            // 투표가 완료되면 다시 api 호출을 하여 리랜더링 한다.
+          } else {
+            alert(response.data.message); // api의 오류 코드를 alert로 띄웁니다.
+          }
         }
+      } else {
+        alert("이미 투표를 완료하셨습니다.");
       }
     };
   
@@ -108,7 +126,7 @@ import './Vote.css';
       }
     };
   
-    if (!post) return <div>Loading...</div>;
+    if (!post) return <div><Loading/></div>;
   
   
     return (

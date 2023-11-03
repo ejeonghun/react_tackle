@@ -8,8 +8,8 @@ import Hamburger from '../Hambuger/Hamburger';  // 햄버거 메뉴 추가
 
 function Boardlist() {
     const location = useLocation();
-    
     const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인 
+    
     return ( 
     <div className='boardlist'>
     <div className='search'>
@@ -46,10 +46,15 @@ function Nav() {
     const [isOpen, setIsOpen] = useState(false);
     const [key, setKey] = useState(0); // key state 추가
     const node = useRef(); // ref 생성
+    const overlayRef = useRef(); // 추가: 어두운 배경 레퍼런스
+
+    const { isLoggedIn, nickname, profileImage } = useContext(AuthContext);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
         setKey(prevKey => prevKey + 1); // 메뉴가 토글될 때마다 key 값 증가
+        // 어두운 배경 레퍼런스를 참조하여 투명도 조절
+
     } 
 
     const handleClickOutside = e => {
@@ -73,7 +78,7 @@ function Nav() {
         };
     }, [isOpen]);
 
-    const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
+    // const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
     return (
         <div>
         <div className="nav_bar">
@@ -82,25 +87,40 @@ function Nav() {
                 <img src="/img/Logo.png" alt="메인 아이콘" className='Logo' />
                 <img src="/img/Main.png" alt="메인 아이콘" className='Main_text' />
             </Link>
-                {/* 햄버거 메뉴 추가 */}        
+                {/* 햄버거 메뉴 추가 */}   
+                <div className='hamburger_parent'>     
                 <div ref={node} className="hamburger_menu" style={{ right: isOpen ? '0%' : '8%', top: isOpen ? '0%' : '23%',
-                                                         width: isOpen ? '200px' : '', height: isOpen ? '100vh' : ''}}
-                                                        key={key}>
-                     {/* isOpen이 true이면 오른쪽으로 3% 이동, false이면 8% 이동 레이아웃 이동*/}
+                                                             width: isOpen ? '' : '', height: isOpen ? '100vh' : ''}}
+                                                            key={key}>
                     <Hamburger isOpen={isOpen} toggle={toggleMenu} />
-                    { isOpen && ( // isOpen이 true이면 메뉴를 보여줌
+                    { isOpen && (
                         <ul>
-                            <li><Link to="/support" onClick={() => setIsOpen(false)}>고객센터</Link></li>
+                            {isLoggedIn ? (
+                                 <>
+                                    <li className = "profile">
+                                    <img src={profileImage} alt="프로필 사진" /> {/* 프로필 이미지 추가 */}
+                                    <span>{nickname}</span> {/* 닉네임 추가 */}
+                                    </li>
+                                    <li><Link to="/logout" onClick={() => setIsOpen(false)}>로그아웃</Link></li>
+
+                                
+                            </>
+                        ) : (
+                            <>{/* 비 로그인 시 출력되는 프로필 이미지 */}
+                                    <li className="profile">
+                                    <img src="/img/tmp_profile_img.jpg" alt="프로필 사진" /> {/* 프로필 이미지 추가 */}
+                                    <Link to="/login" onClick={() => setIsOpen(false)}><span className='non_login_span'>로그인하세요</span></Link> {/* 닉네임 추가 */}
+                                    </li>
+                        <li><Link to="/login" onClick={() => setIsOpen(false)}>로그인</Link></li>
+                        </>)}
                             <li><Link to="/mypage" onClick={() => setIsOpen(false)}>마이페이지</Link></li>
+                            <li><Link to="/support" onClick={() => setIsOpen(false)}>고객센터</Link></li>
                             <li><Link to="/category" onClick={() => setIsOpen(false)}>카테고리</Link></li>
-                            {isLoggedIn && <li><Link to="/logout" onClick={() => setIsOpen(false)}>로그아웃</Link></li>} {/* 로그인 상태일 때만 로그아웃 버튼 보여줌 */}
-                            {!isLoggedIn && <li><Link to="/login" onClick={() => setIsOpen(false)}>로그인</Link></li>}
-                            <br/><br/><br/><br/>
-                            {isLoggedIn ? <li className='nav_user'>로그인 상태입니다.</li> : <li className='nav_user'>로그아웃 상태입니다.</li>} 
-                            {/* 로그인 여부에 따라 다른 문구 출력 */}
-                    </ul>      
+                    </ul>     
                     )}
                 </div>
+                </div>
+                <div className={`overlay ${isOpen ? 'overlay-visible' : ''}`} ref={overlayRef} style={{ opacity: isOpen ? 1 : 0 }}></div>
         </div>
 
 
