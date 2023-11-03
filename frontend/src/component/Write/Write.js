@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import AuthContext from '../AuthContext/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Upload_img from '../img/img_upload.png';
 
 
 const Container = styled.div`
@@ -26,7 +27,7 @@ const Label = styled.label`
    font-size: 20px;
    font-weight: bold;
    margin-bottom : 10px; 
-   text-align:left; // 왼쪽 정렬
+   text-align:center; // 왼쪽 정렬
    width : 100%; // 부모 요소(Form)의 전체 너비를 차지하도록 설정
 
 `;
@@ -84,7 +85,7 @@ const Textarea = styled.textarea` // 제목,내용
 
 `;
 const TextareaSmall = styled.textarea` // 선택자
-    width: 90%; // 더 작은 너비
+    width: 92%; // 더 작은 너비
     padding: 5px; // 더 작은 패딩
     border-radius: 5px;
     border:solid 1px #dcdcdc;
@@ -116,6 +117,25 @@ const DelButton = styled.button`
     font-size: 16px;
 `;
 
+const ImgLable = styled.label`
+    all: unset;
+    padding: 10px; /*padding를 주어 텍스트를 바탕으로 주변이 10px만큼 떨어지도록 설정*/
+    text-align: center; /*버튼에서 텍스트가 가운데 있도록 설정*/
+    background-color: #d5d5d5; /*배경 색을 설정(원하는 걸로 바꿔도 됨)*/
+    color: black; /*글자 색*/
+    font-weight: 500; /*폰트 사이즈를 500으로 바꿈*/
+    cursor: pointer; 
+    border-radius: 10px; /*버튼의 둥근 정도를 설정*/
+    transition: opacity linear 0.1s;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+`;
+
+
+
 function Write() {
     const [selectCount, setSelectCount] = useState(2); // 초기 선택지는 2개
     const KakaoId = sessionStorage.getItem("KakaoId"); // 게시글 작성 기능을 위한 카카오 ID 가져오기
@@ -126,7 +146,11 @@ function Write() {
     const [content, setContent] = useState(""); // 내용에 대한 상태
     const [selectOptions, setSelectOptions] = useState(["", ""]); // 초기 선택지 2개를 빈 문자열로 초기화
     const Navigate = useNavigate();
+    const [image, setImage] = useState(''); // 이미지 URL을 저장할 state
+    const [uploadStatus, setUploadStatus] = useState("end"); // 이미지 업로드 상태
 
+
+    // API 부분
     // POST 값에 보낼 내용들에 state 대입
     const Post_Submit = (event) => {
         event.preventDefault(); // 새로고침 방지
@@ -140,7 +164,12 @@ function Write() {
             bettingAmount: Number(bettingAmountSelect),
             votingDeadLine: deadlineSelect,
             voteItemsContent: selectOptions, // 선택지 내용
+            votingImgUrl: image // 이미지 URL 추가
         };
+
+    // 이미지 업로드가 완료되었는지 확인
+    // 초기값은 end이고 만약 이미지 업로드 api를 호출하면 ing로 변경 추후 image가 state에 저장되면 end로 변경
+    if (uploadStatus === "end") {
         // API 요청을 보내는 부분
         axios.post('https://api1.lunaweb.dev/api/v1/board/create', requestData)
         .then(response => {
@@ -154,7 +183,46 @@ function Write() {
             console.error(error);
             alert("글 작성에 실패했습니다. 다시 시도해주세요");
         });
-    }
+        } else {
+            // 이미지 업로드가 완료되지 않았으면 alert 띄우기
+            alert("이미지 업로드 중입니다.");
+        }
+    };
+
+    
+    // 이미지 업로드 API 부분
+    // 예외처리 필요 , localhost 환경에서 작동을 안함, 도메인에 올려서 사용해야함, 내부ip/test 에서는 작동
+    const handleImageUpload = async (event) => {
+        setUploadStatus("ing"); // 이미지 업로드 상태를 ing로 변경
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = async () => {
+          const base64Image = reader.result.split(',')[1];
+          const formData = new FormData();
+          formData.append('image', base64Image);
+    
+          try {
+            const response = await axios.post('https://api.imgur.com/3/image', formData, {
+              headers: {
+                'Authorization': 'Client-ID 1f3d2eb034dd021'
+              }
+            });
+            
+            setImage(response.data.data.link); // 업로드된 이미지의 URL을 state에 저장
+            setUploadStatus("end"); // 이미지 업로드 상태 "완료"로 설정
+            console.log(setImage);
+          } catch (error) {
+            console.error(error);
+            setUploadStatus("fail"); // 이미지 업로드 상태 "실패"로 설정
+          }
+        };
+      };
+    
+
+
+
+    // 핸들러 부분 
     
     const addSelectOption = () => {
         if (selectOptions.length < 3) {
@@ -173,7 +241,7 @@ function Write() {
         }
     };
 
-
+    // 로그인 여부 확인후 안되어있으면 login 페이지로
     const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
 
     if (isLoggedIn === false) {
@@ -232,7 +300,12 @@ function Write() {
                     onChange={(e) => setContent(e.target.value)}/>
                     {/* 내용이 바뀔때마다 state에 값을 넣어줌 */}
 				</Label>
-
+                <ImgLable>
+                    <img src={Upload_img} alt='Upload' style={{width:'40px', height:'40px'}}/>
+                    <input type='file' accept="image/*" onChange={handleImageUpload} style={{display:'none'}}/>
+                    <p style={{marginLeft:'10px'}}>이미지 업로드</p>
+                {image && <img src={image} alt='Uploaded' />}
+                </ImgLable>
                 <SelectContainer> {/* 선택지 부분 */}
                     {selectOptions.map((option, index) => (
                         <Label key={index}>

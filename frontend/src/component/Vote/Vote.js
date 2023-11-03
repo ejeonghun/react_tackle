@@ -4,6 +4,7 @@ import axios from 'axios';
 import './Vote.css';
 import Loading from '../Loading/Loading';
 
+
 // const [votes, setVotes] = useState(Array(options.length).fill(0)); // 각 선택지의 투표 수를 담는 배열
   function VotePage() {
     
