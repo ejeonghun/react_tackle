@@ -20,6 +20,7 @@ import Loading from '../Loading/Loading';
     const [options, setOptions] = useState([]); // 선택지 배열을 담는 state
     const [VotingStatus, setVotingStatus] = useState(false);
     const nickname = sessionStorage.getItem("nickname"); // 댓글 작성자 닉네임 가져오기
+    const [boardImg, setBoardImg] = useState(''); // 게시글 이미지 가져오기
 
       // 배팅 select 값이 변경될 때 호출되는 함수
       const handleSelectChange = (event) => {
@@ -57,6 +58,9 @@ import Loading from '../Loading/Loading';
             itemId: itemId,
             voteCount: voteItemIdMap[itemId]
           }));
+          if (response.data.data.votingImgUrl != null) { // JSON 파일에 이미지가 있는 경우
+            setBoardImg(response.data.data.votingImgUrl);
+          }
           setVotingStatus(response.data.data.voting);
           
           setOptions(voteItems);
@@ -136,7 +140,13 @@ import Loading from '../Loading/Loading';
       <div className="vote-container">
         <h1 className="title">{post.title}</h1>
         <p className="content">{post.content}</p>
+        {/* boardImg의 값이 null 아니라면 이미지를 표시한다. */}
+        {boardImg && <img src={boardImg} alt="게시글 이미지" className="board-img" />}
+        {boardImg && <br/>}
+        <div className='bottom_info'>
+        <p className="nickname">작성자 : {post.idx}</p>
         <p className="bettingAmount">총 배팅금액 : <strong>{post.bettingAmount}P</strong></p>
+        </div>
         {/* 총 베팅금액 추후 API 수정 시 수정 */}
         <h4 className='hr'>투표</h4>
         <div className='hr_bottom'></div>

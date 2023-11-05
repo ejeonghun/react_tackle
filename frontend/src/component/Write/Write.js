@@ -203,6 +203,7 @@ function Write() {
           formData.append('image', base64Image);
     
           try {
+            // const response = await axios.post('https://api.imgur.com/3/image', formData, {
             const response = await axios.post('https://api.imgur.com/3/image', formData, {
               headers: {
                 'Authorization': 'Client-ID 1f3d2eb034dd021'
@@ -218,6 +219,10 @@ function Write() {
           }
         };
       };
+
+    // 이미지 업로드 API 부분 
+    // Cloudflare Workers 프록시 서버 사용, 배포 시 주석 처리 및 위의 코드 주석 해제
+
     
 
 
