@@ -73,3 +73,12 @@
     margin-top: 280px; /* "충전하기" 버튼과 다른 버튼 사이의 간격을 조절합니다 */
     width: 90%; 
 }
+
+
+.charge-button-container .charge-select {
+    display: flex;
+}
+
+.charge-select {
+    margin-top : 10px;
+}

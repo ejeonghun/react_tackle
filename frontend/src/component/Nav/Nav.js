@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import React, {useState, useContext, useEffect, useRef} from 'react';
+import Non_login_profileImage from '../img/tmp_profile_img.jpg'; // 프로필 이미지 추가
 import './Nav.css';
 // import LottieAnimation from '../Lottie/Lottie';
 import AuthContext from '../AuthContext/AuthContext';
@@ -108,7 +109,7 @@ function Nav() {
                         ) : (
                             <>{/* 비 로그인 시 출력되는 프로필 이미지 */}
                                     <li className="profile">
-                                    <img src="/img/tmp_profile_img.jpg" alt="프로필 사진" /> {/* 프로필 이미지 추가 */}
+                                    <img src={Non_login_profileImage} alt="프로필 사진" /> {/* 프로필 이미지 추가 */}
                                     <Link to="/login" onClick={() => setIsOpen(false)}><span className='non_login_span'>로그인하세요</span></Link> {/* 닉네임 추가 */}
                                     </li>
                         <li><Link to="/login" onClick={() => setIsOpen(false)}>로그인</Link></li>

@@ -4,6 +4,7 @@ import axios from 'axios';
 import './Vote.css';
 import Loading from '../Loading/Loading';
 
+
 // const [votes, setVotes] = useState(Array(options.length).fill(0)); // 각 선택지의 투표 수를 담는 배열
   function VotePage() {
     
@@ -18,6 +19,8 @@ import Loading from '../Loading/Loading';
     const [SelectedValueText, setSelectedValueText] = useState(''); // 포인트 배팅을 위한 select value 값 가져오기
     const [options, setOptions] = useState([]); // 선택지 배열을 담는 state
     const [VotingStatus, setVotingStatus] = useState(false);
+    const nickname = sessionStorage.getItem("nickname"); // 댓글 작성자 닉네임 가져오기
+    const [boardImg, setBoardImg] = useState(''); // 게시글 이미지 가져오기
 
       // 배팅 select 값이 변경될 때 호출되는 함수
       const handleSelectChange = (event) => {
@@ -31,7 +34,7 @@ import Loading from '../Loading/Loading';
       }
       };
 
-      
+    // API의 JSON 파일에 만약 이미지 요소가 있으면 화면상에 랜더링을 하고 없으면 하지 않는다.
 
       // https://api1.lunaweb.dev/api/v1/board/info 이 주소로 axios.post 요청을 보낸다.
       // 요청에 필요한 데이터는 postId와 id이다.
@@ -55,6 +58,9 @@ import Loading from '../Loading/Loading';
             itemId: itemId,
             voteCount: voteItemIdMap[itemId]
           }));
+          if (response.data.data.votingImgUrl != null) { // JSON 파일에 이미지가 있는 경우
+            setBoardImg(response.data.data.votingImgUrl);
+          }
           setVotingStatus(response.data.data.voting);
           
           setOptions(voteItems);
@@ -117,6 +123,7 @@ import Loading from '../Loading/Loading';
       setComment(event.target.value);
     };
   
+    // 댓글을 입력하면 API에 댓글을 전송하고, API를 재호출 하지 않고 화면상에 랜더링만 한다.
     // 댓글 제출 핸들러
     const handleCommentSubmit = (event) => {
       event.preventDefault();
@@ -133,7 +140,13 @@ import Loading from '../Loading/Loading';
       <div className="vote-container">
         <h1 className="title">{post.title}</h1>
         <p className="content">{post.content}</p>
+        {/* boardImg의 값이 null 아니라면 이미지를 표시한다. */}
+        {boardImg && <img src={boardImg} alt="게시글 이미지" className="board-img" />}
+        {boardImg && <br/>}
+        <div className='bottom_info'>
+        <p className="nickname">작성자 : {post.idx}</p>
         <p className="bettingAmount">총 배팅금액 : <strong>{post.bettingAmount}P</strong></p>
+        </div>
         {/* 총 베팅금액 추후 API 수정 시 수정 */}
         <h4 className='hr'>투표</h4>
         <div className='hr_bottom'></div>
@@ -181,10 +194,13 @@ import Loading from '../Loading/Loading';
 
       {/* 댓글 목록 */}
       {commentsList.length > 0 && (
-        <>
+        <> {/* 댓글이 있는 경우에만 렌더링 */}
           <h4>댓글 목록</h4>
           {commentsList.map((commentText,index)=>(
-            <p key={index} className='comment-item'>{commentText}</p>
+            <div style={{display:'flex'}} className='comment-item'>
+            <p>{nickname} : </p>
+            <p key={index}>{commentText}</p>
+            </div>
           ))}
         </>
        )}

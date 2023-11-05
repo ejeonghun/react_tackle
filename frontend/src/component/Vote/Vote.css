@@ -113,11 +113,29 @@
 
 .bettingAmount {
   font-size: 14px;
-  display: inline-block;
-  float: left;
+  width: 150px;
+  height: 22px;
+  border-radius:5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.nickname {
+  font-size: 14px;
   width: 150px;
   height: 22px;
   border-radius:5px;
   border: 1px solid #ccc;
   margin-left: 10px;
+}
+
+.board-img {
+  width:50vh;
+  height: auto;
+}
+
+.bottom_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

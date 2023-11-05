@@ -22,6 +22,7 @@ import PointHistory from './component/PointHistory/PointHistory.js';
 import GiftShop from './component/GiftShop/GiftShop';
 import KakaoCallbackBackend from './component/KakaoLogin/KakaoCallbackBackend.tsx';
 import MyVotePage from './component/Mypage/Function/MyVote.jsx';
+import Test from './component/test/test.js';
 
 
     // 메인 페이지 구성
@@ -76,6 +77,7 @@ function MainLayout() {
         <Route path="/vote/:id" element={<Vote />} />
         <Route path='giftshop' element={<GiftShop/>} />
         <Route path='/mypage/myvote' element={<MyVotePage/>} />
+        <Route path='/test' element={<Test/>} />
         {/* 여기에서 vote/? 의 값에 따라서 API로 부터 JSON형식으로 데이터를 받아 데이터를 처리하는 로직을 작성해야함. */}
       </Routes>
       
