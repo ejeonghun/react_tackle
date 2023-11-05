@@ -19,6 +19,7 @@ import Loading from '../Loading/Loading';
     const [SelectedValueText, setSelectedValueText] = useState(''); // 포인트 배팅을 위한 select value 값 가져오기
     const [options, setOptions] = useState([]); // 선택지 배열을 담는 state
     const [VotingStatus, setVotingStatus] = useState(false);
+    const nickname = sessionStorage.getItem("nickname"); // 댓글 작성자 닉네임 가져오기
 
       // 배팅 select 값이 변경될 때 호출되는 함수
       const handleSelectChange = (event) => {
@@ -32,7 +33,7 @@ import Loading from '../Loading/Loading';
       }
       };
 
-      
+    // API의 JSON 파일에 만약 이미지 요소가 있으면 화면상에 랜더링을 하고 없으면 하지 않는다.
 
       // https://api1.lunaweb.dev/api/v1/board/info 이 주소로 axios.post 요청을 보낸다.
       // 요청에 필요한 데이터는 postId와 id이다.
@@ -118,6 +119,7 @@ import Loading from '../Loading/Loading';
       setComment(event.target.value);
     };
   
+    // 댓글을 입력하면 API에 댓글을 전송하고, API를 재호출 하지 않고 화면상에 랜더링만 한다.
     // 댓글 제출 핸들러
     const handleCommentSubmit = (event) => {
       event.preventDefault();
@@ -182,10 +184,13 @@ import Loading from '../Loading/Loading';
 
       {/* 댓글 목록 */}
       {commentsList.length > 0 && (
-        <>
+        <> {/* 댓글이 있는 경우에만 렌더링 */}
           <h4>댓글 목록</h4>
           {commentsList.map((commentText,index)=>(
-            <p key={index} className='comment-item'>{commentText}</p>
+            <div style={{display:'flex'}} className='comment-item'>
+            <p>{nickname} : </p>
+            <p key={index}>{commentText}</p>
+            </div>
           ))}
         </>
        )}

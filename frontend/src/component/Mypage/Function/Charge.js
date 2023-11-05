@@ -1,8 +1,11 @@
 import React, { useContext, useState } from 'react';
 import AuthContext from '../../AuthContext/AuthContext';
 import './Charge.css';
+import KakaoPayImg from '../../img/payment_icon_yellow_medium.png';
 
 function ChargesPage() {
+    const Img_URL = `${process.env.REACT_APP_IMG_URI}/payment_icon_yellow_medium.png`
+
     const { isLoggedIn, nickname } = useContext(AuthContext);
     const [chargeAmount, setChargeAmount] = useState(0); // 초기값을 0으로 설정
 
@@ -37,14 +40,16 @@ function ChargesPage() {
                     </button>
                 )}
             </div>
-
+            <div className="charge-button-container"> {/* 포인트 량 선택 Div */}
             <button className="charge-button" onClick={() => handleChargeClick(1000)}>+천원</button>
             <button className="charge-button" onClick={() => handleChargeClick(5000)}>+오천원</button>
             <button className="charge-button" onClick={() => handleChargeClick(10000)}>+만원</button>
-
-            <button className="charge-button large-button bottom-button" onClick={() => alert(`충전 금액: ${chargeAmount}`)}>
-                충전하기
-            </button>
+            </div>
+            {/* <button className="charge-button large-button bottom-button" onClick={() => alert(`충전 금액: ${chargeAmount}`)}> */}
+                <div className='charge-select'> {/* 결제 플랫폼 선택 Div*/}
+                <img src={KakaoPayImg} alt="카카오페이" title="카카오페이"></img>
+                </div>
+            {/* </button> */}
         </div>
     );
 }

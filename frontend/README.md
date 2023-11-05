@@ -68,3 +68,132 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+```
+frontend
+├─ .env
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ favicon.ico
+│  ├─ img
+│  │  ├─ check-box.png
+│  │  ├─ comment.png
+│  │  ├─ kakao_login_large_wide.png
+│  │  ├─ Logo.png
+│  │  ├─ Main.png
+│  │  ├─ money.png
+│  │  ├─ pencil.png
+│  │  ├─ shopping.png
+│  │  ├─ tmp_profile_img.jpg
+│  │  └─ write_button.png
+│  ├─ index.html
+│  ├─ logo192.png
+│  ├─ logo512.png
+│  ├─ manifest.json
+│  ├─ robots.txt
+│  ├─ sample.json
+│  └─ SF-Pro.ttf
+├─ READMD.md
+├─ README.md
+└─ src
+   ├─ App.css
+   ├─ App.js
+   ├─ App.test.js
+   ├─ component
+   │  ├─ AuthContext
+   │  │  └─ AuthContext.js
+   │  ├─ Board
+   │  │  ├─ Board.css
+   │  │  ├─ Board.js
+   │  │  └─ Board_페이지네이션기능 지원.js
+   │  ├─ Category
+   │  │  └─ Category.js
+   │  ├─ CategoryBoard
+   │  │  └─ CategoryBoard.js
+   │  ├─ Footer
+   │  │  ├─ Footer.css
+   │  │  └─ Footer.js
+   │  ├─ GiftShop
+   │  │  ├─ gifticon.png
+   │  │  ├─ gifticon2.png
+   │  │  ├─ gifticon3.png
+   │  │  ├─ gifticon4.png
+   │  │  ├─ gifticon5.png
+   │  │  ├─ gifticon6.png
+   │  │  ├─ GiftShop.css
+   │  │  └─ GiftShop.js
+   │  ├─ Hambuger
+   │  │  ├─ Hamburger.css
+   │  │  └─ Hamburger.js
+   │  ├─ Hotboard
+   │  │  ├─ Hotboard.css
+   │  │  └─ Hotboard.js
+   │  ├─ img
+   │  │  ├─ img_upload.png
+   │  │  └─ tmp_profile_img.jpg
+   │  ├─ KakaoLogin
+   │  │  ├─ KakaoCallback.tsx
+   │  │  ├─ KakaoCallbackBackend.tsx
+   │  │  ├─ KakaoLogin.jsx
+   │  │  └─ kakaoLogin.png
+   │  ├─ Loading
+   │  │  ├─ Loading.gif
+   │  │  ├─ Loading.js
+   │  │  └─ Styles.js
+   │  ├─ Login
+   │  │  ├─ Login.css
+   │  │  └─ Login.js
+   │  ├─ Logout
+   │  │  └─ Logout.js
+   │  ├─ Lottie
+   │  │  ├─ Law.json
+   │  │  └─ Lottie.js
+   │  ├─ Main
+   │  │  ├─ Main.css
+   │  │  └─ Main.js
+   │  ├─ ModalBasic
+   │  │  ├─ ModalBasic.css
+   │  │  └─ ModalBasic.js
+   │  ├─ Mypage
+   │  │  ├─ Function
+   │  │  │  ├─ Charge.css
+   │  │  │  ├─ Charge.js
+   │  │  │  ├─ MyVote.css
+   │  │  │  ├─ MyVote.jsx
+   │  │  │  ├─ Point.css
+   │  │  │  └─ Point.js
+   │  │  ├─ Mypage.css
+   │  │  └─ Mypage.js
+   │  ├─ Nav
+   │  │  ├─ Logo.png
+   │  │  ├─ Logo.svg
+   │  │  ├─ Nav.css
+   │  │  └─ Nav.js
+   │  ├─ Participationboard
+   │  │  ├─ Participation.css
+   │  │  └─ Participation.js
+   │  ├─ PointHistory
+   │  │  ├─ PointHistory.css
+   │  │  └─ PointHistory.js
+   │  ├─ Support
+   │  │  ├─ Support.js
+   │  │  └─ Support.jsx
+   │  ├─ test
+   │  │  └─ test.js
+   │  ├─ Vote
+   │  │  ├─ Vote.css
+   │  │  └─ Vote.js
+   │  ├─ VSBoard
+   │  │  └─ VSBoard.js
+   │  ├─ Write
+   │  │  └─ Write.js
+   │  └─ Write_btn
+   │     └─ Write_btn.js
+   ├─ index.css
+   ├─ index.js
+   ├─ logo.svg
+   ├─ reportWebVitals.js
+   └─ setupTests.js
+
+```
