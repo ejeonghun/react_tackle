@@ -4,12 +4,12 @@
   src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
   /* 작동 안될시 public 폴더에 있는 ttf 파일 import */
 }
-/* @font-face {
+@font-face {
   font-family: "YouTube Sans KR";
   src: url("https://fonts.googleapis.com/css2?family=YouTube+Sans:wght@400;500;600;700;800&display=swap") format("woff2");
-  font-weight: normal;
+  font-weight: 600;
   font-style: normal;
-} */
+}
 
 * {
   /* font-family: "YouTube Sans KR"; */
