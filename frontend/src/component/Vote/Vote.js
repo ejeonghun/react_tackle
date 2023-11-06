@@ -21,7 +21,6 @@ import Loading from '../Loading/Loading';
     const [VotingStatus, setVotingStatus] = useState(false);
     const nickname = sessionStorage.getItem("nickname"); // 댓글 작성자 닉네임 가져오기
     const [boardImg, setBoardImg] = useState(''); // 게시글 이미지 가져오기
-    const [totalVote, setTotalVote] = useState(0); // 총 투표 수 가져오기
 
       // 배팅 select 값이 변경될 때 호출되는 함수
       const handleSelectChange = (event) => {
@@ -151,7 +150,7 @@ import Loading from '../Loading/Loading';
         {boardImg && <img src={boardImg} alt="게시글 이미지" className="board-img" />}
         {boardImg && <br/>}
         <div className='bottom_info'>
-        <p className="nickname">작성자 : {post.idx}</p>
+        <p className="v_nickname">작성자 : {post.idx}</p>
         <p className='totalVote'>총 <strong>{totalVotes}</strong>표</p>
         <p className="bettingAmount">총 배팅금액 : <strong>{post.bettingAmount}P</strong></p>
         </div>

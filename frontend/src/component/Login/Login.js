@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-
-
-
 import './Login.css';
 import SocialKakao from '../KakaoLogin/KakaoLogin.jsx';
 
@@ -17,6 +14,7 @@ function Login() {
       alert("서비스 약관에 동의해주세요.");
     }
   }
+
 
  return (
    <div>
@@ -48,13 +46,15 @@ function Login() {
         </textarea>
       </ul>
       {/*약관 동의 체크박스*/}
-     <div className="agreement">
+     <div className="check">
        <input type="checkbox" id="agree" checked={isAgreed} onChange={handleAgreementChange} />
        <label htmlFor="agree">서비스 약관에 동의하십니까?</label>
      </div>
-      </div>
-      {isAgreed && <SocialKakao/>}
+     
+     {isAgreed && <SocialKakao/>}
       {/* 카카오 로그인 */}
+      </div>
+
    </div>
  )
 }
