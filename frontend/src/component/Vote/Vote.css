@@ -139,3 +139,12 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.totalVote {
+  font-size: 14px;
+  width: 150px;
+  height: 22px;
+  border-radius:5px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+}
