@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import styled from 'styled-components'
 import AuthContext from '../AuthContext/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +21,7 @@ function Write() {
     const Navigate = useNavigate();
     const [image, setImage] = useState(''); // 이미지 URL을 저장할 state
     const [uploadStatus, setUploadStatus] = useState("end"); // 이미지 업로드 상태
-
+    const [isAddOption, setIsAddOption] = useState(true);  // 추가 상태 변수
 
     // API 부분
     // POST 값에 보낼 내용들에 state 대입
@@ -102,23 +101,44 @@ function Write() {
 
 
     // 핸들러 부분 
-    
-    const addSelectOption = () => {
-        if (selectOptions.length < 3) {
-            setSelectOptions([...selectOptions, ""]);
+    const toggleSelectOption = () => {
+        if (isAddOption) {
+            if (selectOptions.length < 3) {
+                setSelectOptions([...selectOptions, ""]);
+            } else {
+                alert("최대 3개까지 선택지를 추가할 수 있습니다.");
+            }
         } else {
-            alert("최대 3개까지 선택지를 추가할 수 있습니다.");
+            if (selectOptions.length > 2) {
+                const updatedOptions = selectOptions.slice(0, selectOptions.length - 1);
+                setSelectOptions(updatedOptions);
+            } else {
+                alert("최소 2개의 선택지가 필요합니다.");
+            }
         }
+        setIsAddOption(!isAddOption);  // 상태 반전
     };
+
+    // 위의 기능으로 대체
+
+    // const addSelectOption = () => {
+    //     if (selectOptions.length < 3) {
+    //         setSelectOptions([...selectOptions, ""]);
+    //     } else {
+    //         alert("최대 3개까지 선택지를 추가할 수 있습니다.");
+    //     }
+    // };
     
-    const delSelectOption = () => {
-        if (selectOptions.length > 2) {
-            const updatedOptions = selectOptions.slice(0, selectOptions.length - 1);
-            setSelectOptions(updatedOptions);
-        } else {
-            alert("최소 2개의 선택지가 필요합니다.");
-        }
-    };
+    // const delSelectOption = () => {
+    //     if (selectOptions.length > 2) {
+    //         const updatedOptions = selectOptions.slice(0, selectOptions.length - 1);
+    //         setSelectOptions(updatedOptions);
+    //     } else {
+    //         alert("최소 2개의 선택지가 필요합니다.");
+    //     }
+    // };
+
+
 
     // 로그인 여부 확인후 안되어있으면 login 페이지로
     const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
@@ -183,6 +203,7 @@ function Write() {
                             <textarea
                                 name={`select${index + 1}`}
                                 placeholder={`선택지${index + 1}`}
+                                className={`select${index + 1}`}
                                 value={option}
                                 onChange={(e) => {
                                     const updatedOptions = [...selectOptions];
@@ -193,19 +214,21 @@ function Write() {
                         </label>
                     ))} 
                 </div>
-                <div className='SelectContainer'>
+                <div className='FunctionContainer'>
                     <div className='ButtonContainer'>
-                        <button type="button" className="AddButton" onClick={addSelectOption}>➕</button>
-                        <button type="button" className="DelButton" onClick={delSelectOption}>➖</button>
+                        <p style={{float:'right'}}>선택지 추가 / 삭제</p>
+                        <button type="button" className="ToggleButton button-1" onClick={toggleSelectOption}>
+                            {isAddOption ? '➕' : '➖'}
+                        </button>
                     </div>
                     <label className="ImgLabel">
-                    {/* <img src={Upload_img} alt='Upload' style={{width:'40px', height:'40px'}}/> */}
+                    <img src={Upload_img} alt='Upload' style={{width:'40px', height:'40px'}}/>
+                    <p>이미지 업로드</p>
                     <input type='file' accept="image/*" onChange={handleImageUpload}/>
-                    <p style={{marginLeft:'10px'}}>📷</p>
                 {image && <img src={image} alt='Uploaded' />}
                 </label>
-                </div> 
-                <input type="submit" onClick={Post_Submit} value="작성" />
+                </div>
+                <input type="submit" className='button-2' onClick={Post_Submit} value="작성" />
 			</form>
 	    </div>	
      );
