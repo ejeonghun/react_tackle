@@ -21,7 +21,6 @@ import Loading from '../Loading/Loading';
     const [VotingStatus, setVotingStatus] = useState(false);
     const nickname = sessionStorage.getItem("nickname"); // 댓글 작성자 닉네임 가져오기
     const [boardImg, setBoardImg] = useState(''); // 게시글 이미지 가져오기
-    const JWTToken = sessionStorage.getItem("accessToken"); // JWT 토큰 가져오기
 
       // 배팅 select 값이 변경될 때 호출되는 함수
       const handleSelectChange = (event) => {
@@ -45,14 +44,13 @@ import Loading from '../Loading/Loading';
       useEffect(() => {
         async function getData() {
           const response = await axios({ // POST 요청으로 처리한다.
-            method: 'get',
-            url: `https://api1.lunaweb.dev/api/v1/board/info?postId=${id}`,
-            headers: { 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${JWTToken}`
-          },
-            
+            method: 'post',
+            url: `https://api1.lunaweb.dev/api/v1/board/info`,
+            headers: { 'Content-Type': 'application/json' },
+            data: { "postId": id, "id": KakaoId } // postId와 id(카카오 id값)을 보낸다.
           });
           setPost(response.data.data); // 게시글 정보를 받아와서 state를 설정한다.
+
           const voteItemsContent = response.data.data.voteItemsContent; // 선택지 내용 배열을 가져온다.
           const voteItemIdMap = response.data.data.voteItemIdMap; // 선택지의 itemId와 득표수를 가져옵니다.
           const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({

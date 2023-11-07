@@ -85,8 +85,14 @@
 .ButtonContainer {
     display: flex;
     justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
-    align-items: flex-end; /* 버튼을 세로 중앙 정렬 */
-    gap: 1px; /* 버튼 사이의 간격 조정 (원하는 크기로 조절) */
+    align-items: center; /* 버튼을 세로 중앙 정렬 */
+    gap: 5px; /* 버튼 사이의 간격 조정 (원하는 크기로 조절) */
+    flex-direction: column;
+}
+
+.ButtonContainer p {
+    font-size: 13px;
+    margin:0;
 }
 
 .AddButton, .DelButton {
@@ -105,15 +111,17 @@
 }
 
 .ImgLabel {
-    height: 30px;
-    cursor: pointer;
-    all: unset;
     padding: 5px;
     background-color: #d5d5d5;
+    width:100px;
+    /* all: unset;
+
+    text-align: center;
+
     color: #333;
     font-weight: bold;
-    border-radius: 10px;
-    transition: opacity 0.2s;
+
+    
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
@@ -131,5 +139,91 @@
     border-radius: 1rem;
     cursor: pointer;
     justify-content: flex-end;
+  
+.button-2 {
+    margin-top: 10px;
+    width: 100%;
+    height: 45px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    }
+
+    .button-2:hover {
+        background-color: #2EE59D;
+        box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+        color: #fff;
+        transform: translateY(-7px);
+      }
+  
+  .button-1 {
+    width: 140px;
+    height: 45px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    }
+  
+  .button-1:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+
+
+.SelectContainer label textarea {
+    resize: none;
+    width:99%;
+}
+
+.FunctionContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ImgLabel input{
+    display: none;
+}
+
+.ImgLabel p {
+    margin: 0;
+    font-size: 12px;
+    color: #333;
+    font-weight: bold;
+}
+
+.dropdown1 {
+    width: 110px; 
+    height: 30px;  
+    padding: 3px;  
+    border-radius: 5px;
+    border: solid 1px #dcdcdc;
+    font-size:14px; 
+
+
+}
+.dropdown1:focus {
+    outline:none;
+    box-shadow :0,0,0,.2rem rgba(0,123,255,.25); 
+}
 
 }
