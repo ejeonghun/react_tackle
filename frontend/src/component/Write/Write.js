@@ -201,11 +201,13 @@ function Write() {
                     <label className="ImgLabel">
                     {/* <img src={Upload_img} alt='Upload' style={{width:'40px', height:'40px'}}/> */}
                     <input type='file' accept="image/*" onChange={handleImageUpload}/>
-                    <p style={{marginLeft:'10px'}}>📷</p>
+                    {/* <p style={{marginLeft:'10px'}}>📷</p> */}
                 {image && <img src={image} alt='Uploaded' />}
                 </label>
                 </div> 
+                <div className='Submitbutton'>
                 <input type="submit" onClick={Post_Submit} value="작성" />
+                </div>
 			</form>
 	    </div>	
      );
