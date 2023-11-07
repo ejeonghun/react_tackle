@@ -225,6 +225,13 @@ function Write() {
                     <img src={Upload_img} alt='Upload' style={{width:'40px', height:'40px'}}/>
                     <p>이미지 업로드</p>
                     <input type='file' accept="image/*" onChange={handleImageUpload}/>
+                    {/* <p style={{marginLeft:'10px'}}>📷</p> */}
+                {image && <img src={image} alt='Uploaded' />}
+                </label>
+                </div> 
+                <div className='Submitbutton'>
+                <input type="submit" onClick={Post_Submit} value="작성" />
+                </div>
                 {image && <img src={image} alt='Uploaded' />}
                 </label>
                 </div>
