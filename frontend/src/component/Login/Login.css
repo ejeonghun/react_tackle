@@ -58,3 +58,17 @@
     border-radius: 4px;
     transform: scale(1) translate(-50%, -50%)
 }
+
+.agreements {
+  font-size: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.agreements li {
+  margin-bottom: 10px;
+}
+
+.agreements label {
+  cursor: pointer;
+}
