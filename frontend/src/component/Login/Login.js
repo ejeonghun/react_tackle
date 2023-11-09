@@ -46,6 +46,7 @@ function Login() {
   return (
     <div>
       <h1>이용약관</h1>
+      <div className="agreements-container">
         <ul className="agreements">
           <li>
             <input type="checkbox" name="agree1" checked={agreements.agree1} onChange={handleAgreementChange} />
@@ -64,10 +65,10 @@ function Login() {
           <input type="checkbox" id="selectAll" checked={selectAll} onChange={handleSelectAllChange} />
           <label htmlFor="selectAll">전체 동의</label>
         </div>
-        {Object.values(agreements).every((agreement) => agreement) && <SocialKakao />}
+        </div>
+        {Object.values(agreements).every((agreement) => agreement) && <SocialKakao className="kakao-login-button" />}
     </div>
   )
 }
 
 export default Login;
-
