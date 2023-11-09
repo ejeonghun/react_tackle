@@ -49,8 +49,8 @@ function Board({BoardName}) {
             {data.map((post) => (
             <div className='Main_Content' key={post.postId} style={{width:'100%'}}>
               <Link to={`/vote/${post.postId}`}> 
-                <div className="category_title"><h5 className="category">[{categories[post.categoryId]}]</h5><h4>{post.title}</h4></div>
-                <h5 style={{textAlign:'right', margin:'0', marginBlock:'0'}}>누적 금액 : ${post.bettingAmount}</h5>
+                <div className="category_title"><h5 className="category">[{categories[post.categoryId]}]</h5><h4 className="board_title">{post.title}</h4></div>
+                <h5 style={{textAlign:'right', margin:'0', marginBlock:'0'}}>누적 금액 : {post.bettingAmount}P</h5>
                 <div style={{ display: 'flex', justifyContent: 'space-around', position: 'relative'}}>
                   <div style={{width:'50%', textAlign:'center', backgroundColor:'rgba(246, 165, 165, 1)',boxShadow :'0px 4px 4px rgba(0, 0, 0, 0.25)' ,borderRadius: '25px',position: 'relative', left:'1%'}}>
                     <h5>{post.voteItemsContent}</h5>

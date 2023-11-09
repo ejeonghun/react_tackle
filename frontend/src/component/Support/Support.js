@@ -4,26 +4,26 @@ import { FaHeadset } from 'react-icons/fa';
 const supportData = [
     {
         question: "투표 충전은 어떻게 하나요?",
-        answer: "니 알아 하세요"
+        answer: "로그인 후 금액을 입력하고 카카오 페이를 이용하시면 됩니다."
     },
     {
-        question: "이우석",
+        question: "투표 웹앱을 사용하는 방법은 무엇인가요?",
         answer: "존잘"
     },
     {
-        question: "이정훈",
+        question: "투표 생성 및 관리를 어떻게 할 수 있나요?",
         answer: "해줘"
     },
     {
-        question: "정성윤",
+        question: "투표 결과와 통계를 어떻게 확인하나요?",
         answer: "담배 끊어라"
     },
     {
-        question: "이승열",
+        question: "투표 관련 문제 또는 오류가 발생했을 때 어떻게 도움을 받을 수 있나요?",
         answer: "API 만듫어줘"
     },
     {
-        question: "이시영",
+        question: "투표 웹앱에 대한 개인정보 보호 및 보안 조치는 어떻게 되나요?",
         answer: "해주세요"
     },
     // 추가적인 질문과 답변들...

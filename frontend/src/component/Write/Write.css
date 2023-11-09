@@ -1,0 +1,211 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f7f7f7;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+.Label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.TitleInput {
+    width: 100%;
+    padding: 15px 0;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    font-weight: bold;
+}
+
+.ContentTextarea {
+    width: 100%;
+    height: 200px;
+    padding: 10px 0;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    font-weight: bold;
+    resize: none;
+}
+
+.DropdownContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+    padding: 6px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.SelectContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Dropdown 스타일 */
+.Select {
+    width: 110px;
+    height: 40px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    font-size: 16px;
+}
+
+/* 여기에 추가적인 스타일링을 적용할 수 있습니다. */
+
+
+.Textarea {
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+}
+
+.TextareaSmall {
+    width: 92%;
+    padding: 5px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+}
+
+.ButtonContainer {
+    display: flex;
+    justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
+    align-items: center; /* 버튼을 세로 중앙 정렬 */
+    gap: 5px; /* 버튼 사이의 간격 조정 (원하는 크기로 조절) */
+    flex-direction: column;
+}
+
+.ButtonContainer p {
+    font-size: 13px;
+    margin:0;
+}
+
+.AddButton, .DelButton {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    background-color: #52ffeb;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.ImgLabel {
+    cursor: pointer;
+    transition: opacity 0.2s;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #d5d5d5;
+    width:100px;
+    /* all: unset;
+
+    text-align: center;
+
+    color: #333;
+    font-weight: bold;
+
+    
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.button-2 {
+    margin-top: 10px;
+    width: 100%;
+    height: 45px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    }
+
+    .button-2:hover {
+        background-color: #2EE59D;
+        box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+        color: #fff;
+        transform: translateY(-7px);
+      }
+  
+  .button-1 {
+    width: 140px;
+    height: 45px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    }
+  
+  .button-1:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+
+
+.SelectContainer label textarea {
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    font-weight: bold;
+    resize: none;
+    width:99%;
+}
+
+.FunctionContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ImgLabel input{
+    display: none;
+}
+
+.ImgLabel p {
+    margin: 0;
+    font-size: 12px;
+    color: #333;
+    font-weight: bold;
+}
+
+
+
