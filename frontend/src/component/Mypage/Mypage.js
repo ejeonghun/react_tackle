@@ -46,7 +46,7 @@ function Mypage() {
                 <img src="./img/pencil.png" alt="" className="icon_img"></img>
                 <h2>작성한 글</h2>
             </Link>
-            <Link to="comment" className="icon_link">
+            <Link to="myreplie" className="icon_link">
                 <img src="./img/comment.png" alt="" className="icon_img"></img>
                 <h2>작성한 댓글</h2>
             </Link>

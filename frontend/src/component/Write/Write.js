@@ -33,6 +33,21 @@ font-size: 1.1rem;
 }
 `;
 
+const Spinner = styled.div`
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 37px;
+  height: 37px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
 function Write() {
 
 
@@ -245,10 +260,10 @@ function Write() {
                         </button>
                     </div>
                     <label className="ImgLabel">
-                    <img src={Upload_img} alt='Upload' style={{width:'40px', height:'40px'}}/>
-                    <p>이미지 업로드</p>
-                    <input type='file' accept="image/*" onChange={handleImageUpload}/>
-                {image && <img src={image} alt='Uploaded' />}
+                    {uploadStatus === "ing" ? <Spinner /> : <img src={Upload_img} alt='Upload' style={{width:'40px', height:'40px'}}/>}
+                    {uploadStatus === "ing" ? <p>업로드 중 ...</p> : <p>이미지 업로드</p>}
+                    {uploadStatus === "ing" ? null : <input type='file' accept="image/*" onChange={handleImageUpload}/>}
+                    {/* {uploadStatus === "ing" ? <Spinner /> : image && <img src={image} alt='Uploaded' />} */}
                 </label>
                 </div>
                 <input type="submit" className='button-2' onClick={Post_Submit} value="작성" />
