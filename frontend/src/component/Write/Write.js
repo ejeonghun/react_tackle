@@ -90,7 +90,11 @@ function Write() {
             // API 요청이 성공했을 때의 처리
             console.log(response.data);
             alert("게시글 작성이 완료되었습니다.");
+            if(window.confirm("작성한 게시글을 확인하시겠습니까?")) {
+                Navigate(`/Vote/${response.data.data}`)
+            } else {
             Navigate('/'); // 게시글 작성 후 메인페이지로 리다이렉션
+            }
         })
         .catch(error => {
             // API 요청이 실패했을 때의 처리
