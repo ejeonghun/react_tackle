@@ -15,7 +15,7 @@ import Loading from '../Loading/Loading';
     const [commentsList, setCommentsList] = useState([]);
     const colors = ['red', 'blue', 'green', 'purple'];
     const KakaoId = sessionStorage.getItem("KakaoId"); // 투표 기능을 위한 카카오 ID 가져오기
-    const [selectedValue, setSelectedValue] = useState(''); // 포인트 배팅을 위한 select value 값 가져오기
+    const [selectedValue, setSelectedValue] = useState(0); // 포인트 배팅을 위한 select value 값 가져오기
     const [SelectedValueText, setSelectedValueText] = useState(''); // 포인트 배팅을 위한 select value 값 가져오기
     const [options, setOptions] = useState([]); // 선택지 배열을 담는 state
     const [VotingStatus, setVotingStatus] = useState(false);
@@ -56,18 +56,27 @@ import Loading from '../Loading/Loading';
           setPost(response.data.data); // 게시글 정보를 받아와서 state를 설정한다.
           const voteItemsContent = response.data.data.voteItemsContent; // 선택지 내용 배열을 가져온다.
           const voteItemIdMap = response.data.data.voteItemIdMap; // 선택지의 itemId와 득표수를 가져옵니다.
-          const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({
-            content: voteItemsContent[index],
-            itemId: itemId,
-            voteCount: voteItemIdMap[itemId]
-          }));
+          const voteingStatus = response.data.data.voting; // 해당 유저의 투표 여부를 가져옵니다.
+          if (voteingStatus === true) {
+            const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({
+              content: voteItemsContent[index],
+              itemId: itemId,
+              voteCount: voteItemIdMap[itemId]
+            }));
+            setOptions(voteItems);
+          } else {
+            const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({
+              content: voteItemsContent[index],
+              itemId: itemId,
+              voteCount: 0 // 투표가 완료되지 않은 경우 투표 수를 물음표로 표시한다.
+            }));
+            setOptions(voteItems);
+          }
 
           if (response.data.data.votingImgUrl != null) { // JSON 파일에 이미지가 있는 경우
             setBoardImg(response.data.data.votingImgUrl);
           }
           setVotingStatus(response.data.data.voting);
-          
-          setOptions(voteItems);
         }
         getData();
       
@@ -92,6 +101,11 @@ import Loading from '../Loading/Loading';
         return; // DB에 vote_result 의 idx 값에 null이 들어가면 해당 게시물을 불러오는 info API가 오류가 발생합니다.
         // 이 점 유의
       }
+      
+      if (selectedValue === 0) { // 예외 처리
+        alert("포인트를 배팅해주세요.");
+        return;
+      }
 
       if (!post) { <Loading/>}
       if (VotingStatus === false) {
@@ -106,11 +120,11 @@ import Loading from '../Loading/Loading';
         const response = await axios.post('https://api1.lunaweb.dev/api/v1/board/voting', {
           "postId": post.postId,
           "idx": `${KakaoId}`, // 세션에서 사용자의 kakaoId를 가져와서 idx로 사용합니다.
-          "itemId": options[index].itemId,  // 선택한 항목의 인덱스를 itemId로 사용합니다.
-          "status": "ING",
+          "itemId": parseInt(options[index].itemId),  // 선택한 항목의 인덱스를 itemId로 사용합니다.
+          // "status": "ING",
           "bettingPoint": parseInt(selectedValue),// <select className='bet_select'> 의 value값을 가져와서 bettingPoint로 사용합니다. api에 쿼리를 보낼때 int형으로 보내야 합니다.
-          "getPoint": 0, // 실제 얻을 포인트로 변경해야 합니다.
-          "createdAt": new Date().toISOString()
+          // "getPoint": 0, // 실제 얻을 포인트로 변경해야 합니다.
+          // "createdAt": new Date().toISOString()
         });
         
         if (response.data.message) { // 메세지가 있는 경우
@@ -204,7 +218,7 @@ import Loading from '../Loading/Loading';
       <div className='point_bet'>
       {/*포인트 배팅은 1000P, 5000P, 10000P 으로 제한한다.*/}
       <select className='bet_select' value={selectedValue} onChange={handleSelectChange}>
-        <option>포인트 배팅</option>
+        <option value={0}>포인트 배팅</option>
         <option value={1000}>1000P</option>
         <option value={5000}>5000P</option>
         <option value={10000}>10000P</option>
