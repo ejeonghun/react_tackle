@@ -4,7 +4,8 @@
     align-items: center;
     justify-content: center;
     background-color: #f7f7f7;
-    padding: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .Form {
@@ -24,7 +25,7 @@
 .TitleInput {
     width: 100%;
     padding: 15px 0;
-    border-radius: 1rem;
+    border-radius: 8px;
     border: 2px solid #ddd;
     font-weight: bold;
 }
@@ -33,7 +34,7 @@
     width: 100%;
     height: 200px;
     padding: 10px 0;
-    border-radius: 1rem;
+    border-radius: 8px;
     border: 2px solid #ddd;
     font-weight: bold;
     resize: none;
@@ -43,11 +44,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
-    width: 100%;
-    margin-bottom: 1px;
+    justify-content: space-between;
+    margin-bottom: 20px;
     background-color: #f0f0f0;
-    padding: 10px;
+    padding: 6px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .SelectContainer {
@@ -85,8 +87,14 @@
 .ButtonContainer {
     display: flex;
     justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
-    align-items: flex-end; /* 버튼을 세로 중앙 정렬 */
-    gap: 1px; /* 버튼 사이의 간격 조정 (원하는 크기로 조절) */
+    align-items: center; /* 버튼을 세로 중앙 정렬 */
+    gap: 5px; /* 버튼 사이의 간격 조정 (원하는 크기로 조절) */
+    flex-direction: column;
+}
+
+.ButtonContainer p {
+    font-size: 13px;
+    margin:0;
 }
 
 .AddButton, .DelButton {
@@ -105,31 +113,99 @@
 }
 
 .ImgLabel {
-    height: 30px;
     cursor: pointer;
-    all: unset;
+    transition: opacity 0.2s;
+    border-radius: 10px;
     padding: 5px;
     background-color: #d5d5d5;
+    width:100px;
+    /* all: unset;
+
+    text-align: center;
+
     color: #333;
     font-weight: bold;
-    border-radius: 10px;
-    transition: opacity 0.2s;
+
+    
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 }
 
-.Submitbutton{
-    display: flex;
-    width: 30px;
-    height: 30px;
+.button-2 {
     margin-top: 10px;
+    width: 100%;
+    height: 45px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
     border: none;
-    text-align: center;
-    font-size: 18px;
-    border-radius: 1rem;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
     cursor: pointer;
-    justify-content: flex-end;
+    outline: none;
+    }
 
+    .button-2:hover {
+        background-color: #2EE59D;
+        box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+        color: #fff;
+        transform: translateY(-7px);
+      }
+  
+  .button-1 {
+    width: 140px;
+    height: 45px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    }
+  
+  .button-1:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+
+
+.SelectContainer label textarea {
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    font-weight: bold;
+    resize: none;
+    width:99%;
 }
+
+.FunctionContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ImgLabel input{
+    display: none;
+}
+
+.ImgLabel p {
+    margin: 0;
+    font-size: 12px;
+    color: #333;
+    font-weight: bold;
+}
+
+
+

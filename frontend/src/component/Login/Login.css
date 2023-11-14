@@ -1,81 +1,83 @@
 .service {
-  margin-top: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-}
+    margin-top: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .service ul {
+    margin-bottom: 20px;
+  }
+  
+  .service ul li {
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .service textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
 
-.service ul {
-  margin-bottom: 20px;
+  .check input[type="checkbox"] {
+    -webkit-appearance: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    outline: none !important;
+    border: 1px solid #9999;
+    vertical-align: middle;
 }
-
-.service ul li {
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.service textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.check {
-  margin-bottom: 10px;
-}
-
-.check input[type="checkbox"] {
-  -webkit-appearance: none;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  position: relative;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  outline: none !important;
-  border: 1px solid #9999;
-  vertical-align: middle;
-}
-
 .check input[type="checkbox"]::before {
-  content: "\2713";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  overflow: hidden;
-  transform: scale(0) translate(-50%, -50%);
-  line-height: 1;
-  transition: transform 0.3s ease-in-out; /* 애니메이션 효과 추가 */
+    content: "\2713";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    transform: scale(0) translate(-50%, -50%);
+    line-height: 1;
+    transition: transform 0.3s ease-in-out; /* 애니메이션 효과 추가 */
 }
-
 .check input[type="checkbox"]:checked {
-  background-color: #677d94;
-  border-color: rgba(255, 255, 255, 0.3);
-  color: white;
+    background-color: #677d94;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+.check input[type="checkbox"]:checked::before {
+    border-radius: 4px;
+    transform: scale(1) translate(-50%, -50%)
 }
 
-.check input[type="checkbox"]:checked::before {
-  border-radius: 4px;
-  transform: scale(1) translate(-50%, -50%)
+.agreements-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 가운데 정렬을 위해 변경 */
 }
+
 
 .agreements {
+  text-align: left;
   font-size: 20px;
   list-style-type: none;
   padding: 0;
+  margin-top: 50px;
 }
 
 .agreements li {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .agreements label {
   cursor: pointer;
 }
-

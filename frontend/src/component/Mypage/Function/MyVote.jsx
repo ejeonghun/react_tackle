@@ -7,14 +7,19 @@ function MyVotePage() {
   const [voteResults, setVoteResults] = useState([]);
   const [isListView, setIsListView] = useState(true);
   const KakaoId = sessionStorage.getItem('KakaoId');
+  const JWTToken = sessionStorage.getItem("accessToken"); // JWT 토큰 가져오기
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`https://api1.lunaweb.dev/api/v1/voteResult/info?memberIdx=${KakaoId}`);
+      const response = await axios({ // POST 요청으로 처리한다.
+        method: 'get',
+        url: `https://api1.lunaweb.dev/api/v1/voteResult/info`,
+        headers: { 'Content-Type': 'application/json',
+            'Authorization': `Bearer ${JWTToken}` }});
       setVoteResults(response.data.data);
     }
     fetchData();
-  }, [KakaoId]);
+  }, [JWTToken]);
 
   const toggleView = () => {
     setIsListView(!isListView);

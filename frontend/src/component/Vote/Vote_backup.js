@@ -21,7 +21,6 @@ import Loading from '../Loading/Loading';
     const [VotingStatus, setVotingStatus] = useState(false);
     const nickname = sessionStorage.getItem("nickname"); // 댓글 작성자 닉네임 가져오기
     const [boardImg, setBoardImg] = useState(''); // 게시글 이미지 가져오기
-    const JWTToken = sessionStorage.getItem("accessToken"); // JWT 토큰 가져오기
 
       // 배팅 select 값이 변경될 때 호출되는 함수
       const handleSelectChange = (event) => {
@@ -43,17 +42,15 @@ import Loading from '../Loading/Loading';
       // id는 사용자의 고유 id이다.
       // useEffect에서 데이터를 받아와 state를 설정하는 부분
       useEffect(() => {
-        // 게시글을 불러오는 API
         async function getData() {
           const response = await axios({ // POST 요청으로 처리한다.
-            method: 'get',
-            url: `https://api1.lunaweb.dev/api/v1/board/info?postId=${id}`,
-            headers: { 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${JWTToken}`
-          },
-            
+            method: 'post',
+            url: `https://api1.lunaweb.dev/api/v1/board/info`,
+            headers: { 'Content-Type': 'application/json' },
+            data: { "postId": id, "id": KakaoId } // postId와 id(카카오 id값)을 보낸다.
           });
           setPost(response.data.data); // 게시글 정보를 받아와서 state를 설정한다.
+
           const voteItemsContent = response.data.data.voteItemsContent; // 선택지 내용 배열을 가져온다.
           const voteItemIdMap = response.data.data.voteItemIdMap; // 선택지의 itemId와 득표수를 가져옵니다.
           const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({
@@ -70,13 +67,6 @@ import Loading from '../Loading/Loading';
           setOptions(voteItems);
         }
         getData();
-      
-      // 댓글을 불러오는 API
-        async function getComments() {
-          const response = await axios.get(`https://api1.lunaweb.dev/api/v1/replies/info?postId=${id}`);
-          setCommentsList(response.data);
-        }
-        getComments();
       }, [id, KakaoId]);
     
 
@@ -92,8 +82,6 @@ import Loading from '../Loading/Loading';
         return; // DB에 vote_result 의 idx 값에 null이 들어가면 해당 게시물을 불러오는 info API가 오류가 발생합니다.
         // 이 점 유의
       }
-
-      if (!post) { <Loading/>}
       if (VotingStatus === false) {
         const confirmVote = window.confirm("투표하시겠습니까?");
         if (!confirmVote) return;
@@ -101,8 +89,7 @@ import Loading from '../Loading/Loading';
         const newOptions = [...options];
         newOptions[index].voteCount++;
         setOptions(newOptions);
-
-      // 투표를 완료하면 API에 투표 결과를 전송하고, API를 재호출 하지 않고 화면상에 랜더링만 한다.
+      
         const response = await axios.post('https://api1.lunaweb.dev/api/v1/board/voting', {
           "postId": post.postId,
           "idx": `${KakaoId}`, // 세션에서 사용자의 kakaoId를 가져와서 idx로 사용합니다.
@@ -142,27 +129,13 @@ import Loading from '../Loading/Loading';
   
     // 댓글을 입력하면 API에 댓글을 전송하고, API를 재호출 하지 않고 화면상에 랜더링만 한다.
     // 댓글 제출 핸들러
-    const handleCommentSubmit = async (event) => {
+    const handleCommentSubmit = (event) => {
       event.preventDefault();
       if(comment.trim() !== "") {
-        const response = await axios.post('https://api1.lunaweb.dev/api/v1/replies/create', {
-          "idx": KakaoId, 
-          "postId": id, 
-          "comment": comment
-        });
-    
-        if (response.data.success) {
-          // 서버에서 새로 받은 댓글 목록으로 commentsList를 업데이트
-          const commentsResponse = await axios.get(`https://api1.lunaweb.dev/api/v1/replies/info?postId=${id}`);
-          setCommentsList(commentsResponse.data);
-          // 댓글 입력란 초기화
-          setComment("");
-        } else {
-          alert('댓글 작성에 실패했습니다.');
-        }
+        setCommentsList([...commentsList, comment]);
+        setComment("");
       }
     };
-    
 
 
 
@@ -213,7 +186,7 @@ import Loading from '../Loading/Loading';
       </div>
       <hr/>
       {/* 댓글 작성 폼 */}
-      <div className='CommentWrite'>
+      <div className='commentwrite'>
         <form onSubmit={handleCommentSubmit} style={{ display: 'flex', justifyContent: 'space-between' }}>
           <textarea 
             value={comment} 
@@ -225,21 +198,19 @@ import Loading from '../Loading/Loading';
         </form>
       </div>
 
+
       {/* 댓글 목록 */}
       {commentsList.length > 0 && (
-      <>
-        <h4>댓글 목록</h4>
-        {commentsList.map((comment, index) => (
-          comment && (
+        <> {/* 댓글이 있는 경우에만 렌더링 */}
+          <h4>댓글 목록</h4>
+          {commentsList.map((commentText,index)=>(
             <div style={{display:'flex'}} className='comment-item'>
-              <p>{comment.idx} : </p>
-              <p key={index}>{comment.comment}</p>
+            <p>{nickname} : </p>
+            <p key={index}>{commentText}</p>
             </div>
-          )
-        ))}
-      </>
-    )}
-
+          ))}
+        </>
+       )}
       
     </div>
 );
