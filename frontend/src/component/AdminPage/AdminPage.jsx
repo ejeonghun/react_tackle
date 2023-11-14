@@ -52,7 +52,7 @@ function AdminPage() {
             {/* return 문안에서 idx값을 비교해 렌더링할 요소 선택 */}
         <div className="Admin_Top">
             <h2>관리자 페이지</h2>
-            <p>idx 값으로 접속함</p>
+            <button onClick={() => Navigate('/admin/member')}>유저 조회</button>
         </div>
         <div className="Admin_Page_Container">
         <table className="myVoteTable">

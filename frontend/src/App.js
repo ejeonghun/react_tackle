@@ -25,6 +25,7 @@ import MyVotePage from './component/Mypage/Function/MyVote.jsx';
 import Test from './component/test/test.js';
 import AdminPage from './component/AdminPage/AdminPage.jsx'
 import MyReplie from './component/Mypage/Function/MyReplie.jsx';
+import AdminMember from './component/AdminPage/AdminMember.jsx';
 
 
     // 메인 페이지 구성
@@ -82,6 +83,7 @@ function MainLayout() {
         <Route path='/test' element={<Test/>} />
         <Route path='/admin' element={<AdminPage/>} />
         <Route path='/mypage/myreplie' element={<MyReplie/>} />
+        <Route path='/admin/member' element={<AdminMember/>} />
         {/* 여기에서 vote/? 의 값에 따라서 API로 부터 JSON형식으로 데이터를 받아 데이터를 처리하는 로직을 작성해야함. */}
       </Routes>
       
