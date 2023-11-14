@@ -9,6 +9,10 @@ function ChargesPage() {
     const { isLoggedIn, nickname } = useContext(AuthContext);
     const [chargeAmount, setChargeAmount] = useState(null); // 초기값을 null로 설정
 
+    const KaKaoPayDemo = () => {
+        window.location.href = "https://developers.kakao.com/demo/pay/index";
+    }
+
     if (!isLoggedIn) {
         alert("이 서비스는 로그인이 필요합니다.");
         window.location.href = "/login";
@@ -53,7 +57,7 @@ function ChargesPage() {
                 <button className="charge-button" onClick={() => handleChargeClick(10000)}>+만원</button>
             </div>
             <div className="charge-select">
-                <img src={KakaoPayImg} alt="카카오페이" title="카카오페이" />
+                <img src={KakaoPayImg} alt="카카오페이" title="카카오페이" onClick={KaKaoPayDemo}/>
             </div>
         </div>
     );
