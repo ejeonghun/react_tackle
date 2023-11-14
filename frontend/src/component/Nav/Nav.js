@@ -85,7 +85,7 @@ function Nav() {
         <div className="nav_bar">
             {/* <LottieAnimation /> Lottie 사용 X*/}
             <Link className="MainIcon" to="/">
-                <img src="/img/Logo.png" alt="메인 아이콘" className='Logo' />
+                {/* <img src="/img/Logo.png" alt="메인 아이콘" className='Logo' /> */}
                 <img src="/img/Main.png" alt="메인 아이콘" className='Main_text' />
             </Link>
                 {/* 햄버거 메뉴 추가 */}   
