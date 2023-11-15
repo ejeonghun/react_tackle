@@ -7,6 +7,10 @@ import './Board.css'
 
 function Board({BoardName}) {
   const [loading, setLoading] = useState(true);
+  const [allData, setAllData] = useState(null); // 모든 데이터를 저장하는 스테이트
+  const [visibleData, setVisibleData] = useState([]); // 렌더링에 사용되는 데이터를 저장하는 스테이트
+  const [visibleCount, setVisibleCount] = useState(4); // 보여주는 데이터의 개수를 저장하는 스테이트
+
 
   const categories = {
     1: "일상/연애",
@@ -31,14 +35,21 @@ function Board({BoardName}) {
         async function getData() {
           // const response = await fetch('http://localhost:3000/sample.json'); 개발 시 사용
           const response = await axios.get('https://api1.lunaweb.dev/api/v1/board/list');
-            setData(response.data); // 데이터가 로드되면 상태를 업데이트합니다.
+            setAllData(response.data); 
+            setVisibleData(response.data.slice(0, visibleCount)); // 처음에는 4개만 보여줌
             }
             
             getData();
             setLoading(false); // api 호출 완료 됐을 때 false로 변경하려 로딩화면 숨김처리
         }, []); 
       
-  if (!data) return <div><Loading/></div>; 
+          // "더보기" 버튼을 눌렀을 때 호출되는 함수
+        const handleLoadMore = () => {
+          setVisibleCount(prevCount => prevCount + 4); // 보여주는 데이터의 개수를 4개 증가
+          setVisibleData(allData.slice(0, visibleCount + 4)); // 증가된 개수만큼 데이터를 보여줌
+        };
+      
+        if (!visibleData) return <div><Loading/></div>; 
 
     return (
         <div>
@@ -46,7 +57,7 @@ function Board({BoardName}) {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width:'90%', height:'auto'}}>
             <h2 style={{borderBottom:'1px solid black'}}>{boardName}</h2> {/* 현재 path에 따라 게시판 이름을 변경합니다. */}
             {/* 각각의 게시글을 순회합니다. */}
-            {data.map((post) => (
+            {visibleData.map((post) => (
             <div className='Main_Content' key={post.postId} style={{width:'100%'}}>
               <Link to={`/vote/${post.postId}`}> 
                 <div className="category_title"><h5 className="category">[{categories[post.categoryId]}]</h5><h4 className="board_title">{post.title}</h4></div>
@@ -67,6 +78,7 @@ function Board({BoardName}) {
               </Link>
             </div>
           ))}
+          <button onClick={handleLoadMore} className="button-2" style={{marginBottom:'10px'}}><img src={require("./arrow_down.png")} alt="더보기" style={{width:'28px'}}></img></button> {/* "더보기" 버튼 */}
           </div>
           <Write_Btn/> {/* 글쓰기 버튼 */}
           </div>

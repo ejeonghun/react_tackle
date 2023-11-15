@@ -22,6 +22,7 @@ import Loading from '../Loading/Loading';
     const nickname = sessionStorage.getItem("nickname"); // 댓글 작성자 닉네임 가져오기
     const [boardImg, setBoardImg] = useState(''); // 게시글 이미지 가져오기
     const JWTToken = sessionStorage.getItem("accessToken"); // JWT 토큰 가져오기
+    const [TotalVoteCount, setTotalVoteCount] = useState(0); // 총 투표 수 가져오기
 
       // 배팅 select 값이 변경될 때 호출되는 함수
       const handleSelectChange = (event) => {
@@ -61,17 +62,23 @@ import Loading from '../Loading/Loading';
             const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({
               content: voteItemsContent[index],
               itemId: itemId,
-              voteCount: voteItemIdMap[itemId]
+              voteCount: voteItemIdMap[itemId],
             }));
             setOptions(voteItems);
+            
           } else {
             const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({
               content: voteItemsContent[index],
               itemId: itemId,
-              voteCount: 0 // 투표가 완료되지 않은 경우 투표 수를 물음표로 표시한다.
+              voteCount: 0 // 투표가 완료되지 않은 경우 투표 수를 0 으로 표시한다.
             }));
             setOptions(voteItems);
+            
           }
+          
+          // 투표 여부와 관계없이 투표 카운트의 합계를 계산하여 상태를 갱신합니다.
+          setTotalVoteCount(Object.values(voteItemIdMap).reduce((total, count) => total + count, 0));
+
 
           if (response.data.data.votingImgUrl != null) { // JSON 파일에 이미지가 있는 경우
             setBoardImg(response.data.data.votingImgUrl);
@@ -89,7 +96,8 @@ import Loading from '../Loading/Loading';
       }, [id, KakaoId]);
     
 
-      const totalVotes = options.reduce((total, option) => total + option.voteCount, 0); // 총 투표 수를 구하는 함수
+      // const totalVotes = options.reduce((total, option) => total + option.voteCount, 0); // 총 투표 수를 구하는 함수
+      // const totalVotes = TotalVoteCount; // 총 투표 수를 구하는 함수
 
     // api에서 호출한 데이터중 data.voteItemIdMap 을 들고옵니다.
     // data.voteItemIdMap 은 선택지의 배열이고 ${itemId} 값 입니다.
@@ -192,7 +200,7 @@ import Loading from '../Loading/Loading';
         {boardImg && <br/>}
         <div className='bottom_info'>
         <p className="v_nickname">작성자 : {post.idx}</p>
-        <p className='totalVote'>총 <strong>{totalVotes}</strong>표</p>
+        <p className='totalVote'>총 <strong>{TotalVoteCount}</strong>표</p>
         <p className="bettingAmount">총 배팅금액 : <strong>{post.bettingAmount}P</strong></p>
         </div>
         {/* 총 베팅금액 추후 API 수정 시 수정 */}
@@ -205,12 +213,12 @@ import Loading from '../Loading/Loading';
             <div 
               className="bar-fill" 
               style={{ 
-                width: `${totalVotes > 0 ? (option.voteCount / totalVotes) * 100 : 0}%`,
+                width: `${TotalVoteCount > 0 ? (option.voteCount / TotalVoteCount) * 100 : 0}%`,
                 backgroundColor: colors[index % colors.length]
               }}
             />
           </div>
-          <span>{option.voteCount} votes ({totalVotes > 0 ? Math.round((option.voteCount / totalVotes) * 100) : 0}%)</span>
+          <span>{option.voteCount} votes ({TotalVoteCount > 0 ? Math.round((option.voteCount / TotalVoteCount) * 100) : 0}%)</span>
         </div>
       ))}
       <hr/>
