@@ -1,6 +1,5 @@
 /* 마이페이지 전체 영역 스타일링 */
 .Mypage {
-    width: 80%; /* 페이지 너비 설정 */
     margin: 0 auto; /* 페이지 중앙 정렬 */
     padding: 3em; /* 내부 요소와의 간격 설정 */
     background-color: #ffffff; /* 배경색 설정 */
@@ -46,7 +45,7 @@
 .mypage_text {
     margin-bottom: 2em; /* 아래쪽 마진 설정 */
     color: #666; /* 텍스트 색상 설정 */
-    font-size: 1.2em; /* 폰트 크기 설정 */
+    font-size: 1.3em; /* 폰트 크기 설정 */
 }
 
 /* 프로필 이미지 스타일링 */
@@ -72,16 +71,17 @@
 .icon_group {
     display: flex; /* 요소를 가로로 배열 */
     align-items: center; /* 요소를 가운데 정렬 */
-    margin-bottom: 3em; /* 아래쪽 마진 설정 */
+    margin-bottom: 2.5em; /* 아래쪽 마진 설정 */
     text-align: center; /* 텍스트를 가운데 정렬 */
+    border-bottom: 1px solid #e6e6e6; /* 테두리 설정 */
 
 }
 
 /* 아이콘 이미지 스타일링 */
 .icon_img {
-    width: 32px; /* 이미지 너비 설정 */
-    height: 32px; /* 이미지 높이 설정 */
-    margin-right: 1.5em; /* 오른쪽 마진 설정 */
+    width: 25px; /* 이미지 너비 설정 */
+    height: 25px; /* 이미지 높이 설정 */
+    margin-right: 1.2em; /* 오른쪽 마진 설정 */
 }
 
 .icon_text {
@@ -89,5 +89,5 @@
     margin-top: 30px;
 }
 .icon_group span {
-    font-size: 32px; /* 텍스트 크기 조정 */
+    font-size: 25px; /* 텍스트 크기 조정 */
 }
