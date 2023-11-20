@@ -32,6 +32,31 @@ font-size: 1.1rem;
     box-shadow: 0 0 3px blue;
 }
 `;
+const Select2 = styled(ReactSelect)`
+width: 20%;
+margin-left: 0;
+margin-right: 0;
+font-size: 14px;
+
+@media (max-width: 820px) {
+    font-size: 0.7rem;
+    margin-left: 0.09rem;
+    margin-right: 0.09rem;
+}
+
+.react-select__control {
+    transition: all .3s;
+}
+
+.react-select__control:hover {
+    border-color: blue;
+}
+
+.react-select__control--is-focused {
+    border-color: blue;
+    box-shadow: 0 0 3px blue;
+}
+`;
 
 const Spinner = styled.div`
   border: 5px solid #f3f3f3;
@@ -203,11 +228,11 @@ function Write() {
 		<div className='Container'>
 			    <form className='Form'>
                     <div className='DropdownContainer'>
-                    <Select
+                    {/* <Select
                     options={categoryOptions}
                     placeholder="카테고리"
                     onChange={(option) => setCategorySelect(option.value)}
-                    />
+                    /> */}
                     <Select
                     options={bettingAmountOptions}
                     placeholder="베팅 금액"
@@ -218,16 +243,22 @@ function Write() {
                     placeholder="마감 기한"
                     onChange={(option) => setDeadlineSelect(option.value)}
                     />
-
                   </div>
-				<label>
-                    <br/>
-					<input className="TitleInput" type="text" name="title" placeholder="제목" value={title} 
-                    onChange={(e) => setTitle(e.target.value)}/>
-                    {/* 내용이 바뀔때마다 state에 값을 넣어줌 */}
-                    {/* 불필요한 랜더링이 발생할 수 있으므로 추 후 변경 요망 */}
-				</label>
-                
+                <div className='CategoryTitleContainer'>
+                    <Select2
+                    options={categoryOptions}
+                    placeholder="카테고리"
+                    onChange={(option) => setCategorySelect(option.value)}
+                    />
+                    <input
+                        className="TitleInput"
+                        type="text"
+                        name="title"
+                        placeholder="제목"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </div>
 				<br/>
 				<label>
 					<textarea className="ContentTextarea" name="content" placeholder="내용을 입력하세요." value={content}

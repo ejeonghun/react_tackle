@@ -22,19 +22,19 @@
     width: 100%;
 }
 
-.TitleInput {
+/* .TitleInput {
     width: 100%;
     padding: 15px 0;
-    border-radius: 8px;
+    border-radius: 0%;
     border: 2px solid #ddd;
     font-weight: bold;
-}
+} */
 
 .ContentTextarea {
     width: 100%;
     height: 200px;
-    padding: 10px 0;
-    border-radius: 8px;
+    padding: 10px, 0;
+    border-radius: 0%;
     border: 2px solid #ddd;
     font-weight: bold;
     resize: none;
@@ -46,15 +46,14 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
     padding: 6px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .SelectContainer {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
 /* Dropdown 스타일 */
@@ -62,8 +61,7 @@
     width: 110px;
     height: 40px;
     padding: 8px;
-    border-radius: 8px;
-    border: 2px solid #ddd;
+    border-radius: 0px;
     font-size: 16px;
 }
 
@@ -118,7 +116,7 @@
     border-radius: 10px;
     padding: 5px;
     background-color: #d5d5d5;
-    width:100px;
+    width:70px;
     /* all: unset;
 
     text-align: center;
@@ -184,11 +182,11 @@
 
 
 .SelectContainer label textarea {
-    border-radius: 8px;
+    border-radius: 0px;
     border: 2px solid #ddd;
     font-weight: bold;
     resize: none;
-    width:99%;
+    width: 100%;
 }
 
 .FunctionContainer {
@@ -206,6 +204,30 @@
     color: #333;
     font-weight: bold;
 }
+
+.FunctionContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.CategoryTitleContainer {
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    gap: 0px; /* 카테고리와 제목 사이의 간격 조절 */
+    height: 40px; /* 높이를 조절, 필요에 따라 변경 가능 */
+}
+
+.TitleInput {
+    flex: 1; /* 나머지 공간을 차지하도록 설정 */
+    padding: 10px; /* 내부 여백을 조절, 필요에 따라 변경 가능 */
+    border-radius: 4px; /* 필요에 따라 변경 가능 */
+    border: 1px solid #ddd; /* 필요에 따라 변경 가능 */
+
+}
+
+
+
 
 
 
