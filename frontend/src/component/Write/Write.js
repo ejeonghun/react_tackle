@@ -33,7 +33,7 @@ font-size: 1.1rem;
 }
 `;
 const Select2 = styled(ReactSelect)`
-width: 20%;
+width: 22%;
 margin-left: 0;
 margin-right: 0;
 font-size: 14px;
@@ -285,7 +285,7 @@ function Write() {
                 </div>
                 <div className='FunctionContainer'>
                     <div className='ButtonContainer'>
-                        <p style={{float:'right'}}>선택지 추가 / 삭제</p>
+                        {/* <p style={{float:'right'}}>선택지 추가 / 삭제</p> */}
                         <button type="button" className="ToggleButton button-1" onClick={toggleSelectOption}>
                             {isAddOption ? '➕' : '➖'}
                         </button>
