@@ -42,6 +42,10 @@ font-size: 14px;
     font-size: 0.7rem;
     margin-left: 0.09rem;
     margin-right: 0.09rem;
+
+    .TitleInput {
+        width: 60%;
+    }
 }
 
 .react-select__control {

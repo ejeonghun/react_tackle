@@ -82,7 +82,7 @@ function MainLayout() {
         <Route path='/mypage/myvote' element={<MyVotePage/>} />
         <Route path='/test' element={<Test/>} />
         <Route path='/admin' element={<AdminPage/>} />
-        <Route path='/mypage/myreplie' element={<MyReplie/>} />
+        <Route path='/mypage/mycomment' element={<MyReplie/>} />
         <Route path='/admin/member' element={<AdminMember/>} />
         {/* 여기에서 vote/? 의 값에 따라서 API로 부터 JSON형식으로 데이터를 받아 데이터를 처리하는 로직을 작성해야함. */}
       </Routes>

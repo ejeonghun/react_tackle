@@ -40,7 +40,7 @@ function Mypage() {
             <img src="./img/pencil.png" alt="" className="icon_img" />
             <span>작성한 글</span>
         </Link>
-        <Link to="comment" className="icon_group">
+        <Link to="mycomment" className="icon_group">
             <img src="./img/comment.png" alt="" className="icon_img" />
             <span>작성한 댓글</span>
         </Link>

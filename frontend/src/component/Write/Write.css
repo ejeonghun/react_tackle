@@ -227,3 +227,9 @@
     border: 1px solid #ddd; /* 필요에 따라 변경 가능 */
 
 }
+
+@media (max-width: 820px) {
+    .TitleInput {
+        width: 70%;
+    }
+}
