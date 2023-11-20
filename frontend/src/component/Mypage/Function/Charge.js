@@ -36,7 +36,6 @@ function ChargesPage() {
     return (
         <div className="points-container">
             <h1 className="user-name">{nickname} 님의 포인트</h1>
-
             <div className="input-container">
                 <input
                     type="number"
@@ -52,9 +51,9 @@ function ChargesPage() {
                 )}
             </div>
             <div className="charge-button-container">
-                <button className="charge-button" onClick={() => handleChargeClick(1000)}>+천원</button>
-                <button className="charge-button" onClick={() => handleChargeClick(5000)}>+오천원</button>
-                <button className="charge-button" onClick={() => handleChargeClick(10000)}>+만원</button>
+                <button className="charge-button" onClick={() => handleChargeClick(1000)}>₩ 1000</button>
+                <button className="charge-button" onClick={() => handleChargeClick(5000)}>₩ 5000</button>
+                <button className="charge-button" onClick={() => handleChargeClick(10000)}>₩ 10000</button>
             </div>
             <div className="charge-select">
                 <img src={KakaoPayImg} alt="카카오페이" title="카카오페이" onClick={KaKaoPayDemo}/>

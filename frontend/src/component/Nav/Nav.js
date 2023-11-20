@@ -115,9 +115,9 @@ function Nav() {
                         <li><Link to="/login" onClick={() => setIsOpen(false)}>로그인</Link></li>
                         </>)}
                             <li><Link to="/mypage" onClick={() => setIsOpen(false)}>마이페이지</Link></li>
+                            <li><Link to="/category" onClick={() => setIsOpen(false)}>카테고리</Link></li>                    
                             <li><Link to="/support" onClick={() => setIsOpen(false)}>고객센터</Link></li>
-                            <li><Link to="/category" onClick={() => setIsOpen(false)}>카테고리</Link></li>
-                    </ul>     
+                            </ul>     
                     )}
                 </div>
                 </div>
