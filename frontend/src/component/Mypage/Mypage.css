@@ -22,8 +22,8 @@
 
 /* 프로필 이미지 영역 스타일링 */
 .Mypage_title_img {
-    width: 80px; /* 이미지 너비 설정 */
-    height: 80px; /* 이미지 높이 설정 */
+    width: 100px; /* 이미지 너비 설정 */
+    height: 100px; /* 이미지 높이 설정 */
     border-radius: 50%; /* 이미지를 원형으로 만듦 */
     margin-right: 2em; /* 오른쪽 마진 설정 */
 }

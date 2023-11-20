@@ -94,18 +94,21 @@ font-size: 1.1rem;
           },
             
           });
+          setVotingStatus(response.data.data.voting);
+          setPostVoteStatus(response.data.data.status === "ING" ? true : false); // ing 이면 true , end 이면 false
           setPost(response.data.data); // 게시글 정보를 받아와서 state를 설정한다.
           const voteItemsContent = response.data.data.voteItemsContent; // 선택지 내용 배열을 가져온다.
-          setPostVoteStatus(response.data.data.status === 'ING' ? true : false); // ing 이면 true , end 이면 false
           const voteItemIdMap = response.data.data.voteItemIdMap; // 선택지의 itemId와 득표수를 가져옵니다.
-          const voteingStatus = response.data.data.voting; // 해당 유저의 투표 여부를 가져옵니다.
-          if ((voteingStatus === true) || (PostVoteStatus === false)) { // 만약 투표를 했거나, 투표가 마감된 경우에는 선택지 결과값 출력
+          setCategory(getCategoryName(response.data.data.categoryId)); // 카테고리 번호를 카테고리 이름으로 변경합니다.
+          
+          console.log(VotingStatus, PostVoteStatus);
+          if ((VotingStatus === true) || (PostVoteStatus === false)) { // 만약 투표를 했거나, 투표가 마감된 경우에는 선택지 결과값 출력
             const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({
               content: voteItemsContent[index],
               itemId: itemId,
               voteCount: voteItemIdMap[itemId],
             }));
-          setCategory(getCategoryName(response.data.data.categoryId));
+          
             setOptions(voteItems);
             
           } else {
@@ -115,7 +118,6 @@ font-size: 1.1rem;
               voteCount: 0 // 투표가 완료되지 않은 경우 투표 수를 0 으로 표시한다.
             }));
             setOptions(voteItems);
-            
           }
           
           // 투표 여부와 관계없이 투표 카운트의 합계를 계산하여 상태를 갱신합니다.
@@ -125,7 +127,7 @@ font-size: 1.1rem;
           if (response.data.data.votingImgUrl != null) { // JSON 파일에 이미지가 있는 경우
             setBoardImg(response.data.data.votingImgUrl);
           }
-          setVotingStatus(response.data.data.voting);
+          
         }
         getData();
       
