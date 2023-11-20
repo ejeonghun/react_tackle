@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Vote.css';
 import Loading from '../Loading/Loading';
-
+import { getCategoryName } from '../Category/CategoryList.jsx';
 
 // const [votes, setVotes] = useState(Array(options.length).fill(0)); // 각 선택지의 투표 수를 담는 배열
   function VotePage() {
@@ -23,6 +23,7 @@ import Loading from '../Loading/Loading';
     const [boardImg, setBoardImg] = useState(''); // 게시글 이미지 가져오기
     const JWTToken = sessionStorage.getItem("accessToken"); // JWT 토큰 가져오기
     const [TotalVoteCount, setTotalVoteCount] = useState(0); // 총 투표 수 가져오기
+    const [Category, setCategory] = useState(''); // 카테고리 state 지정
 
       // 배팅 select 값이 변경될 때 호출되는 함수
       const handleSelectChange = (event) => {
@@ -64,6 +65,7 @@ import Loading from '../Loading/Loading';
               itemId: itemId,
               voteCount: voteItemIdMap[itemId],
             }));
+          setCategory(getCategoryName(response.data.data.categoryId));
             setOptions(voteItems);
             
           } else {
@@ -193,7 +195,11 @@ import Loading from '../Loading/Loading';
   
     return (
       <div className="vote-container">
-        <h1 className="title">{post.title}</h1>
+
+        <div className="title">
+          <p>{Category}</p>
+          <h1>{post.title}</h1>
+          </div>
         <p className="content">{post.content}</p>
         {/* boardImg의 값이 null 아니라면 이미지를 표시한다. */}
         {boardImg && <img src={boardImg} alt="게시글 이미지" className="board-img" />}
