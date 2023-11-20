@@ -15,6 +15,10 @@
   margin: 0;
   margin-block: 0.3em;
 }
+
+.comment_date {
+  margin-left: auto;
+}
   
   .content {
     text-align:center; 
@@ -116,7 +120,7 @@
  
 .select_betting {
   display: inline-block;
-  padding-left:30px;
+  /* padding-left:30px; */
 }
 
 .bettingAmount {
@@ -165,4 +169,10 @@
   border: 1px solid #ccc;
   margin: 0 auto;
   margin-top: 10px;
+}
+
+.point_bet {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

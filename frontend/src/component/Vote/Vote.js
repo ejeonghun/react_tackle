@@ -4,6 +4,34 @@ import axios from 'axios';
 import './Vote.css';
 import Loading from '../Loading/Loading';
 import { getCategoryName } from '../Category/CategoryList.jsx';
+import styled from 'styled-components';
+import ReactSelect from "react-select";
+
+const Select = styled(ReactSelect)`
+width: 20vh;
+margin-left: 2rem;
+margin-right: 2rem;
+font-size: 1.1rem;
+
+@media (max-width: 820px) {
+    font-size: 0.7rem;
+    margin-left: 0.09rem;
+    margin-right: 0.09rem;
+}
+
+.react-select__control {
+    transition: all .3s;
+}
+
+.react-select__control:hover {
+    border-color: blue;
+}
+
+.react-select__control--is-focused {
+    border-color: blue;
+    box-shadow: 0 0 3px blue;
+}
+`;
 
 // const [votes, setVotes] = useState(Array(options.length).fill(0)); // 각 선택지의 투표 수를 담는 배열
   function VotePage() {
@@ -25,17 +53,23 @@ import { getCategoryName } from '../Category/CategoryList.jsx';
     const [TotalVoteCount, setTotalVoteCount] = useState(0); // 총 투표 수 가져오기
     const [Category, setCategory] = useState(''); // 카테고리 state 지정
 
-      // 배팅 select 값이 변경될 때 호출되는 함수
-      const handleSelectChange = (event) => {
-        const selectedOption = event.target.value;
-        if (selectedOption === '포인트 배팅') {
-          setSelectedValue(selectedOption);
-          setSelectedValueText('');
-        } else {
-        setSelectedValue(selectedOption);
-        setSelectedValueText('Betting : '+ selectedOption + 'P');
-      }
+      // 배팅 select 값이 변경될 때 호출되는 함수 기존 HTML Select 코드임
+      // const handleSelectChange = (event) => {
+      //   const selectedOption = event.target.value;
+      //   if (selectedOption === '포인트 배팅') {
+      //     setSelectedValue(selectedOption);
+      //     setSelectedValueText('');
+      //   } else {
+      //   setSelectedValue(selectedOption);
+      //   setSelectedValueText('Betting : '+ selectedOption + 'P');
+      // }
+      // };
+
+      const handleSelectChange = (selectedOption) => {
+        setSelectedValue(selectedOption.value);
+        setSelectedValueText('Betting : '+ selectedOption.value + 'P');
       };
+      
 
     // API의 JSON 파일에 만약 이미지 요소가 있으면 화면상에 랜더링을 하고 없으면 하지 않는다.
 
@@ -187,7 +221,13 @@ import { getCategoryName } from '../Category/CategoryList.jsx';
       }
     };
     
-
+    const bettingOptions = [
+      { value: 0, label: "포인트 배팅" },
+      { value: 1000, label: "1000P" },
+      { value: 5000, label: "5000P" },
+      { value: 10000, label: "10000P" }
+  ];
+                  
 
 
     if (!post) return <div><Loading/></div>;
@@ -231,12 +271,18 @@ import { getCategoryName } from '../Category/CategoryList.jsx';
       {/* 포인트 배팅 */}
       <div className='point_bet'>
       {/*포인트 배팅은 1000P, 5000P, 10000P 으로 제한한다.*/}
-      <select className='bet_select' value={selectedValue} onChange={handleSelectChange}>
+      {/* <select className='bet_select' value={selectedValue} onChange={handleSelectChange}>
         <option value={0}>포인트 배팅</option>
         <option value={1000}>1000P</option>
         <option value={5000}>5000P</option>
         <option value={10000}>10000P</option>
-      </select>
+      </select> */}
+      <Select
+        options={bettingOptions}
+        placeholder="베팅 금액"
+        value={bettingOptions.find(option => option.value === selectedValue)}
+        onChange={handleSelectChange}
+      />
       <p className='select_betting'>{SelectedValueText}</p>
       </div>
       <hr/>
@@ -262,6 +308,7 @@ import { getCategoryName } from '../Category/CategoryList.jsx';
             <div style={{display:'flex'}} className='comment-item'>
               <p>{comment.idx} : </p>
               <p key={index}>{comment.comment}</p>
+              <p className='comment_date'>{comment.createdMinutesAgo}</p>
             </div>
           )
         ))}
