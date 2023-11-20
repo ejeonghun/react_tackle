@@ -46,7 +46,24 @@
     transition: background-color .3s ease; /* 배경색 변경 시 애니메이션 추가 */
     width:100px;
   }
+  .vote_button {
+    background: linear-gradient(270deg, #d31616, #315a31, #4f4f9e);
+    background-size: 300% 300%;
+    animation: gradient 3s ease-in-out infinite;
+    transition: transform 0.3s ease-in-out;
+    z-index: 9999;
+  }
   
+  .vote_button:hover {
+    transform: scale(1.1);
+  }
+  
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
   .bar{
     height: 20px;
     background-color: #ddd; /* bar의 배경색 */
@@ -57,8 +74,20 @@
       height: 20px; /* bar의 높이 */
       background-color:#4CAF50 ; /* 투표 수에 따른 채워지는 색상 */
       width: 0; /* 초기 상태에서는 비어있다고 가정 */
-      transition: width .3s ease; /* 너비 변경 시 애니메이션 추가 */
+      /* transition: width .3s ease; 너비 변경 시 애니메이션 추가 */
+      position: relative;
+      overflow: visible;
   }
+
+  .bar-fill {
+    animation: fill 5s ease-out;
+  }
+  
+  @keyframes fill {
+    0% { width: 0; }
+  }
+  
+
   
   .hr{
     width: 100%;
@@ -175,4 +204,45 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+
+@keyframes colorChange1 {
+  0% { background-color: red; }
+  50% { background-color: blue; }
+  100% { background-color: red; }
+}
+
+@keyframes colorChange2 {
+  0% { background-color: blue; }
+  50% { background-color: green; }
+  100% { background-color: blue; }
+}
+
+@keyframes colorChange3 {
+  0% { background-color: green; }
+  50% { background-color: purple; }
+  100% { background-color: green; }
+}
+
+@keyframes colorChange4 {
+  0% { background-color: purple; }
+  50% { background-color: red; }
+  100% { background-color: purple; }
+}
+
+.option1 {
+  animation: colorChange1 3s infinite;
+}
+
+.option2 {
+  animation: colorChange2 3s infinite;
+}
+
+.option3 {
+  animation: colorChange3 3s infinite;
+}
+
+.option4 {
+  animation: colorChange4 3s infinite;
 }
