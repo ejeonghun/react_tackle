@@ -16,4 +16,10 @@ const category = categories.find(c => c.index === categoryIndex);
 return category ? category.name : 'Not found';
 }
 
-export {categories,getCategoryName}
+
+const getCategoryId = (categoryKey) => {
+const category = categories.find(c => c.key === categoryKey);
+return category ? category.index : 'Not found';
+}
+
+export {categories,getCategoryName,getCategoryId}

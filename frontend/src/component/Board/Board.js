@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Write_Btn from "../Write_btn/Write_btn"
 import axios from 'axios';
 import Loading from '../Loading/Loading';
 import './Board.css'
+import { getCategoryId } from "../Category/CategoryList.jsx";
 
 function Board({BoardName}) {
   const [loading, setLoading] = useState(true);
   const [allData, setAllData] = useState(null); // 모든 데이터를 저장하는 스테이트
   const [visibleData, setVisibleData] = useState([]); // 렌더링에 사용되는 데이터를 저장하는 스테이트
   const [visibleCount, setVisibleCount] = useState(4); // 보여주는 데이터의 개수를 저장하는 스테이트
-
+  const { categoryKey } = useParams(); // 카테고리 키 값을 가지고 옴
 
   const categories = {
     1: "일상/연애",
@@ -32,15 +33,27 @@ function Board({BoardName}) {
 
       useEffect(() => {
         setLoading(true); // api 호출 전에 true로 변경하여 로딩화면 띄우기
-        async function getData() {
-          // const response = await fetch('http://localhost:3000/sample.json'); 개발 시 사용
-          const response = await axios.get('https://api1.lunaweb.dev/api/v1/board/list');
-          response.data.sort((a, b) => b.postId - a.postId); // 여기서 데이터를 정렬합니다.
-            setAllData(response.data); 
-            setVisibleData(response.data.slice(0, visibleCount)); // 처음에는 4개만 보여줌
-            }
-            
-            getData().then(() => setLoading(false)); // setLoading을 getData가 완료된 후에 호출합니다.
+        if (getCategoryId(categoryKey) !== "Not found") { // 카테고리 이면 카테고리 값을 파라미터에 넣어서 API 호출
+          async function getData() {
+            const response = await axios.get(`https://api1.lunaweb.dev/api/v1/board/list?categoryId=${getCategoryId(categoryKey)}`);
+            response.data.sort((a, b) => b.postId - a.postId); // 여기서 데이터를 정렬합니다.
+              setAllData(response.data); 
+              setVisibleData(response.data.slice(0, visibleCount)); // 처음에는 4개만 보여줌
+              }
+              
+              
+              getData().then(() => setLoading(false)); // setLoading을 getData가 완료된 후에 호출합니다.
+          } else {
+            async function getData() { // 카테고리가 아니면 전체 게시글을 가져옵니다.
+              const response = await axios.get('https://api1.lunaweb.dev/api/v1/board/list');
+              response.data.sort((a, b) => b.postId - a.postId); // 여기서 데이터를 정렬합니다.
+                setAllData(response.data); 
+                setVisibleData(response.data.slice(0, visibleCount)); // 처음에는 4개만 보여줌
+                }
+                
+                
+                getData().then(() => setLoading(false)); // setLoading을 getData가 완료된 후에 호출합니다.
+        }
         }, []); 
       
           // "더보기" 버튼을 눌렀을 때 호출되는 함수
@@ -50,7 +63,7 @@ function Board({BoardName}) {
         };
       
         if (!visibleData) return <div><Loading/></div>; 
-
+        if (visibleData.length === 0) return <h2>게시글이 없습니다.</h2>; // 데이터가 없을 때
     return (
         <div>
         <div style={{ display: 'flex', justifyContent: 'center', width: '100%', textAlign:'left'}}> {/* height: '100vh' */}
