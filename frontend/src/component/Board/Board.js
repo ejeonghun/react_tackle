@@ -35,12 +35,12 @@ function Board({BoardName}) {
         async function getData() {
           // const response = await fetch('http://localhost:3000/sample.json'); 개발 시 사용
           const response = await axios.get('https://api1.lunaweb.dev/api/v1/board/list');
+          response.data.sort((a, b) => b.postId - a.postId); // 여기서 데이터를 정렬합니다.
             setAllData(response.data); 
             setVisibleData(response.data.slice(0, visibleCount)); // 처음에는 4개만 보여줌
             }
             
-            getData();
-            setLoading(false); // api 호출 완료 됐을 때 false로 변경하려 로딩화면 숨김처리
+            getData().then(() => setLoading(false)); // setLoading을 getData가 완료된 후에 호출합니다.
         }, []); 
       
           // "더보기" 버튼을 눌렀을 때 호출되는 함수
