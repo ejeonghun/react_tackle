@@ -248,7 +248,7 @@ font-size: 1.1rem;
       <div className="vote-container">
 
         <div className="title">
-          <p>{Category}</p>
+          <p>[{Category}]</p>
           <h1>{post.title}</h1>
           </div>
         <p className="content">{post.content}</p>
@@ -315,7 +315,7 @@ font-size: 1.1rem;
       {/* 댓글 목록 */}
       {commentsList.length > 0 && (
       <>
-        <h4>댓글 목록</h4>
+        <h4 className="left-align">댓글 목록</h4>
         {commentsList.map((comment, index) => (
           comment && (
             <div style={{display:'flex'}} className='comment-item'>

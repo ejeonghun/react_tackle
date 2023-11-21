@@ -246,3 +246,8 @@
 .option4 {
   animation: colorChange4 3s infinite;
 }
+
+.left-align {
+  text-align: left;
+  padding-left: 10px; /* 원하는 만큼의 여백을 추가 */
+}
