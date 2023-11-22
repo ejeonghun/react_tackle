@@ -11,17 +11,21 @@ function Mypage() {
     const [data, setData] = useState(null); // data라는 상태를 만듭니다.
     const { isLoggedIn } = useContext(AuthContext); // isLogin 상태 추가
     const { profileImage } = useContext(AuthContext); // nickname, profileImage 상태 추가
+    const idx = sessionStorage.getItem("KakaoId");
     //닉네임 변경
     const handleNicknameClick = async () => {
         const newNickname = window.prompt("새 닉네임을 입력하세요", data.nickname);
         if (newNickname) {
-            try {
-                const response = await axios.put(
-                    'https://api1.lunaweb.dev/api/v1/member/update-nickname',
-                    { nickname: newNickname },
-                    { headers: { 'Authorization': `Bearer ${JWTToken}` } }
+            try { 
+                const response = await axios.post( // 닉네임 변경 API 호출
+                // POST요청으로 idx값을 보내고, 닉네임도 보냅니다.
+                    `https://api1.lunaweb.dev/api/v1/member/update?idx=${idx}`, {
+                        nickname: newNickname 
+                    }
+                    // { headers: { 'Authorization': `Bearer ${JWTToken}` } }
                 );
-                setData({ ...data, nickname: response.data.nickname });
+                response.data.success === true ? alert("닉네임이 변경되었습니다.") : alert("닉네임 변경에 실패했습니다.");
+                window.location.reload(); // 닉네임 변경 후 페이지 새로고침
             } catch (error) {
                 console.log("Failed to update nickname", error);
             }
@@ -65,7 +69,7 @@ function Mypage() {
             <div className="Mypage">
                 <div className="Mypage_title">
                     <div className="Mypage_title_text">
-                        <h2 className="nickname" onClick={handleNicknameClick}>
+                        <h2 className="nickname" onClick={handleNicknameClick} style={{cursor:'pointer'}}>
                             {data.nickname}님
                         </h2>                    
                         <div className="Mypage_title_point" style={{ display: 'flex' }}>
