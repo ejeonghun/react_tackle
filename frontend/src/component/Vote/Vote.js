@@ -345,7 +345,7 @@ font-size: 1.1rem;
         {commentsList.map((comment, index) => (
           comment && (
             <div style={{display:'flex'}} className='comment-item'>
-              <p>{comment.idx} : </p>
+              <p>{comment.nickname ? comment.nickname : comment.idx} : </p> {/* 닉네임이 없는 경우 idx를 표시한다. */}
               <p key={index}>{comment.comment}</p>
               <p className='comment_date'>{comment.createdMinutesAgo}</p>
             </div>
