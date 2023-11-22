@@ -135,6 +135,36 @@ function Write() {
     
     // 이미지 업로드 API 부분
     // 예외처리 필요 , localhost 환경에서 작동을 안함, 도메인에 올려서 사용해야함, 내부ip/test 에서는 작동
+    // const handleImageUpload = async (event) => {
+    //     setUploadStatus("ing"); // 이미지 업로드 상태를 ing로 변경
+    //     const file = event.target.files[0];
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onloadend = async () => {
+    //       const base64Image = reader.result.split(',')[1];
+    //       const formData = new FormData();
+    //       formData.append('image', base64Image);
+    
+    //       try {
+    //         // const response = await axios.post('https://api.imgur.com/3/image', formData, {
+    //         const response = await axios.post('https://api.imgur.com/3/image', formData, {
+    //           headers: {
+    //             'Authorization': 'Client-ID 1f3d2eb034dd021'
+    //           }
+    //         });
+            
+    //         setImage(response.data.data.link); // 업로드된 이미지의 URL을 state에 저장
+    //         setUploadStatus("end"); // 이미지 업로드 상태 "완료"로 설정
+    //         console.log(setImage);
+    //       } catch (error) {
+    //         console.error(error);
+    //         setUploadStatus("fail"); // 이미지 업로드 상태 "실패"로 설정
+    //       }
+    //     };
+    //   };
+
+    // 이미지 업로드 API 부분 
+    // Cloudflare Workers 프록시 서버 사용, 배포 시 주석 처리 및 위의 코드 주석 해제
     const handleImageUpload = async (event) => {
         setUploadStatus("ing"); // 이미지 업로드 상태를 ing로 변경
         const file = event.target.files[0];
@@ -144,15 +174,11 @@ function Write() {
           const base64Image = reader.result.split(',')[1];
           const formData = new FormData();
           formData.append('image', base64Image);
-    
+      
           try {
-            // const response = await axios.post('https://api.imgur.com/3/image', formData, {
-            const response = await axios.post('https://api.imgur.com/3/image', formData, {
-              headers: {
-                'Authorization': 'Client-ID 1f3d2eb034dd021'
-              }
-            });
-            
+            // Cloudflare Worker의 URL로 요청을 전송
+            const response = await axios.post('https://imgur.wjdgns4019.workers.dev/', formData);
+      
             setImage(response.data.data.link); // 업로드된 이미지의 URL을 state에 저장
             setUploadStatus("end"); // 이미지 업로드 상태 "완료"로 설정
             console.log(setImage);
@@ -162,10 +188,7 @@ function Write() {
           }
         };
       };
-
-    // 이미지 업로드 API 부분 
-    // Cloudflare Workers 프록시 서버 사용, 배포 시 주석 처리 및 위의 코드 주석 해제
-
+      
     
 
 
