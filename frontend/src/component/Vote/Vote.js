@@ -247,8 +247,8 @@ font-size: 1.1rem;
           setCommentsList(commentsResponse.data);
           // 댓글 입력란 초기화
           setComment("");
-        } else {
-          alert('댓글 작성에 실패했습니다.');
+        } else { // 만약 실패하면 실패 메세지 출력
+          alert(response.data.message);
         }
       }
     };

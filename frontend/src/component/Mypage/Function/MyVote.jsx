@@ -13,7 +13,7 @@ function MyVotePage() {
     async function fetchData() {
       const response = await axios({ // POST 요청으로 처리한다.
         method: 'get',
-        url: `https://api1.lunaweb.dev/api/v1/voteResult/info`,
+        url: `https://api1.lunaweb.dev/api/v1/mypage/myVote`,
         headers: { 'Content-Type': 'application/json',
             'Authorization': `Bearer ${JWTToken}` }});
       setVoteResults(response.data.data);
