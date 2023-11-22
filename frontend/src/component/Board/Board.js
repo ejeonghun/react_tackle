@@ -33,14 +33,16 @@ function Board({BoardName}) {
 
       useEffect(() => {
         setLoading(true); // api 호출 전에 true로 변경하여 로딩화면 띄우기
-        if (getCategoryId(categoryKey) !== "Not found") { // 카테고리 이면 카테고리 값을 파라미터에 넣어서 API 호출
+        if (window.location.pathname !== '/') { // 카테고리 이면 카테고리 값을 파라미터에 넣어서 API 호출
           async function getData() {
             const response = await axios.get(`https://api1.lunaweb.dev/api/v1/board/list?categoryId=${getCategoryId(categoryKey)}`);
             response.data.sort((a, b) => b.postId - a.postId); // 여기서 데이터를 정렬합니다.
               setAllData(response.data); 
               setVisibleData(response.data.slice(0, visibleCount)); // 처음에는 4개만 보여줌
+              if (response.data.length === 0) { // 데이터가 없으면 예외처리
+                setVisibleData('null data'); // 데이터가 없으면 null을 설정
               }
-              
+            }
               
               getData().then(() => setLoading(false)); // setLoading을 getData가 완료된 후에 호출합니다.
           } else {
@@ -54,7 +56,7 @@ function Board({BoardName}) {
                 
                 getData().then(() => setLoading(false)); // setLoading을 getData가 완료된 후에 호출합니다.
         }
-        }, []); 
+        }, [categoryKey]); // categoryKey가 변경될 때마다 API를 다시 요청합니다.
       
           // "더보기" 버튼을 눌렀을 때 호출되는 함수
         const handleLoadMore = () => {
@@ -62,15 +64,20 @@ function Board({BoardName}) {
           setVisibleData(allData.slice(0, visibleCount + 4)); // 증가된 개수만큼 데이터를 보여줌
         };
       
-        if (!visibleData) return <div><Loading/></div>; 
-        if (visibleData.length === 0) return <h2>게시글이 없습니다.</h2>; // 데이터가 없을 때
+        if (!visibleData) return <div><Loading/></div>; // 데이터가 없으면 로딩화면을 띄웁니다.
     return (
         <div>
         <div style={{ display: 'flex', justifyContent: 'center', width: '100%', textAlign:'left'}}> {/* height: '100vh' */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width:'90%', height:'auto'}}>
             <h2 style={{borderBottom:'1px solid black'}}>{boardName}</h2> {/* 현재 path에 따라 게시판 이름을 변경합니다. */}
+          {/* visibleData의 값이 'null data'일 경우 "게시물이 없습니다." 메시지를 렌더링 */}
+          {visibleData === 'null data' ? (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width:'100%', height:'100%'}}>
+            <h3>게시물이 없습니다.</h3>
+          </div>
+        ) : (
             {/* 각각의 게시글을 순회합니다. */}
-            {visibleData.map((post) => (
+            ,visibleData.map((post) => (
             <div className='Main_Content' key={post.postId} style={{width:'100%'}}>
               <Link to={`/vote/${post.postId}`}> 
                 <div className="category_title"><h5 className="category">[{categories[post.categoryId]}]</h5><h4 className="board_title">{post.title}</h4></div>
@@ -93,14 +100,17 @@ function Board({BoardName}) {
                 </div>
               </Link>
             </div>
-          ))}
+          )))
+          }
+          
           <button onClick={handleLoadMore} className="button-2" style={{marginBottom:'10px'}}><img src={require("./arrow_down.png")} alt="더보기" style={{width:'28px'}}></img></button> {/* "더보기" 버튼 */}
           </div>
           <Write_Btn/> {/* 글쓰기 버튼 */}
           </div>
-          
         </div>
     )
+
+
 };
 
 export default Board;
