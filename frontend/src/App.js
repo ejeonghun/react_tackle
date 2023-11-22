@@ -18,7 +18,7 @@ import Category from './component/Category/Category.js';
 import CategoryBoard from './component/CategoryBoard/CategoryBoard.js';
 import Support from './component/Support/Support';
 import Vote from './component/Vote/Vote';
-import PointHistory from './component/PointHistory/PointHistory.js';
+import PointHistory from './component/Mypage/Function/PointHistory.js';
 import GiftShop from './component/GiftShop/GiftShop';
 import KakaoCallbackBackend from './component/KakaoLogin/KakaoCallbackBackend.tsx';
 import MyVotePage from './component/Mypage/Function/MyVote.jsx';
@@ -77,7 +77,7 @@ function MainLayout() {
         <Route path="/support" element={<Support />} />
         <Route path="/mypage/charge" element={<Charge />} />
         <Route path="/mypage/point" element={<Point />} />
-        <Route path="/PointHistory" element={<PointHistory />} />
+        <Route path="/mypage/pointhistory" element={<PointHistory />} />
         <Route path="/vote/:id" element={<Vote />} />
         <Route path='giftshop' element={<GiftShop/>} />
         <Route path='/mypage/myvote' element={<MyVotePage/>} />

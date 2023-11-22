@@ -69,7 +69,7 @@ function Mypage() {
                             {data.nickname}님
                         </h2>                    
                         <div className="Mypage_title_point" style={{ display: 'flex' }}>
-                            <Link to="/PointHistory" className="point_history">
+                            <Link to="pointhistory" className="point_history">
                                 <h4>{formattedPoint}P ▶</h4>
                             </Link>
                         </div>
