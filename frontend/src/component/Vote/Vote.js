@@ -53,6 +53,7 @@ font-size: 1.1rem;
     const [TotalVoteCount, setTotalVoteCount] = useState(0); // 총 투표 수 가져오기
     const [Category, setCategory] = useState(''); // 카테고리 state 지정
     const [PostVoteStatus, setPostVoteStatus] = useState(false); // 투표 기한? 'END':'ING' state 지정
+    const [PointData, setPointData] = useState(0); // 포인트 데이터 가져오기
 
       // 배팅 select 값이 변경될 때 호출되는 함수 기존 HTML Select 코드임
       // const handleSelectChange = (event) => {
@@ -137,8 +138,28 @@ font-size: 1.1rem;
           setCommentsList(response.data);
         }
         getComments();
-      }, [id, KakaoId]);
-    
+
+
+        const getMyPageData = async () => {
+          try {
+              const Point_response = await axios.get('https://api1.lunaweb.dev/api/v1/member/info', {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${JWTToken}`
+                  }
+              });
+              setPointData(Point_response.data);
+          } catch (error) {
+              console.log("Failed to fetch data", error);
+              alert("세션이 만료되었습니다, 다시 로그인해주세요.")
+              window.location.href = "/logout";
+          }
+      };
+      getMyPageData();
+      }, [id, KakaoId, JWTToken]);
+
+
+    const formattedPoint = PointData && PointData.point ? PointData.point.toLocaleString() : '';
 
       // const totalVotes = options.reduce((total, option) => total + option.voteCount, 0); // 총 투표 수를 구하는 함수
       // const totalVotes = TotalVoteCount; // 총 투표 수를 구하는 함수
@@ -281,6 +302,11 @@ font-size: 1.1rem;
       ))}
       <hr/>
       {/* 포인트 배팅 */}
+
+      <div className='MyPoint'>
+        <h4 className='Betting_text'>배팅</h4>
+        <h5 className='MyPoint_text'>내 포인트 : {formattedPoint}P</h5>
+        </div>
       <div className='point_bet'>
       {/*포인트 배팅은 1000P, 5000P, 10000P 으로 제한한다.*/}
       {/* <select className='bet_select' value={selectedValue} onChange={handleSelectChange}>

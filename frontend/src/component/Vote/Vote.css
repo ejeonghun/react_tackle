@@ -206,6 +206,26 @@
   flex-direction: column;
 }
 
+.MyPoint_text { /* 현재 내 포인트 */
+  margin:0px;
+  margin-block: 0px;
+  margin-bottom: 8px;
+  margin-top: 2px;
+  margin-right: 10px;
+}
+
+.MyPoint {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Betting_text {
+  display: inline-flex;
+  margin:0px;
+  margin-block: 0px;
+  margin-left: 10px;
+}
+
 
 @keyframes colorChange1 {
   0% { background-color: red; }
@@ -251,3 +271,6 @@
   text-align: left;
   padding-left: 10px; /* 원하는 만큼의 여백을 추가 */
 }
+
+
+
