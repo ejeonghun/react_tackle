@@ -189,9 +189,6 @@ function Write() {
         };
       };
       
-    
-
-
 
     // 핸들러 부분 
     const toggleSelectOption = () => {
