@@ -1,47 +1,58 @@
 import React from 'react';
+import axios from 'axios';
 
 function onClickPayment({pg_method, amount, nickname}) {
     /* 1. 가맹점 식별하기 */
-    // 변수로 받음
     const { IMP } = window;
     IMP.init('imp00168260');
 
     /* 2. 결제 데이터 정의하기 */
     const data = {
-      pg: `${pg_method}`,                           // PG사
-      pay_method: 'card',                           // 결제수단
-      merchant_uid: `mid_${new Date().getTime()}`,   // 주문번호
-      amount: `${amount}`,                                 // 결제금액
-      name: '태클 포인트 충전',                  // 주문명
-      buyer_name: `${nickname}`,                           // 구매자 이름
-      buyer_tel: '01012341234',                     // 구매자 전화번호
-      buyer_email: 'example@example',               // 구매자 이메일
-      buyer_addr: '신사동 661-16',                    // 구매자 주소
-      buyer_postcode: '06018',                      // 구매자 우편번호
+      pg: `${pg_method}`,
+      pay_method: 'card',
+      merchant_uid: `mid_${new Date().getTime()}`,
+      amount: `${amount}`,
+      name: '태클 포인트 충전',
+      buyer_name: `${nickname}`,
+      buyer_tel: '01012341234',
+      buyer_email: 'example@example',
+      buyer_addr: '신사동 661-16',
+      buyer_postcode: '06018',
     };
 
     /* 4. 결제 창 호출하기 */
     IMP.request_pay(data, callback);
-  }
 
-  /* 3. 콜백 함수 정의하기 */
-  function callback(response) {
-    const {
-      success,
-      merchant_uid,
-      error_msg,
-    } = response;
+    /* 3. 콜백 함수 정의하기 */
+    function callback(response) {
+        const {
+            success,
+            imp_uid,
+            error_msg,
+        } = response;
 
-    if (success) {
-      alert('결제 성공');
-    } else {
-      alert(`결제 실패: ${error_msg}`);
+        if (success) {
+            // session storage에서 access token 가져오기
+            const JWTToken = sessionStorage.getItem('accessToken');
+            axios.post('https://api1.lunaweb.dev/api/v1/payment/valid/' + imp_uid, {}, {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${JWTToken}`
+              }
+          })
+            // API에 POST 요청 보내기
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+            alert('결제 성공');
+        } else {
+            alert(`결제 실패: ${error_msg}`);
+        }
     }
-
-    // <div>
-    // <button onClick={() => onClickPayment('kakaopay')}>카카오페이 결제하기</button>
-    // <button onClick={() => onClickPayment('tosspay')}>토스페이 결제하기</button>
-    // </div>
-
 }
+
 export default onClickPayment;

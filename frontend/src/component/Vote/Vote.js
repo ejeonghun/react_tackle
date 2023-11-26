@@ -155,7 +155,9 @@ font-size: 1.1rem;
               window.location.href = "/logout";
           }
       };
-      getMyPageData();
+      if (JWTToken) { // JWT 토큰이 존재하는 경우에만 getMyPageData 함수를 호출합니다.
+        getMyPageData();
+      }
       }, [id, KakaoId, JWTToken]);
 
 
@@ -305,7 +307,7 @@ font-size: 1.1rem;
 
       <div className='MyPoint'>
         <h4 className='Betting_text'>배팅</h4>
-        <h5 className='MyPoint_text'>내 포인트 : {formattedPoint}P</h5>
+        <h5 className='MyPoint_text'>{formattedPoint ? `내 포인트 : ${formattedPoint}P` : "로그인을 해주세요."}</h5>
         </div>
       <div className='point_bet'>
       {/*포인트 배팅은 1000P, 5000P, 10000P 으로 제한한다.*/}

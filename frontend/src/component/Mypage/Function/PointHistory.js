@@ -58,7 +58,8 @@ function PointHistory() {
     if (num === 0) { return "투표 게시글 작성"; }
     else if (num === 1) { return "투표 승리"; }
     else if (num === 2) { return "투표 패배"; }
-    else if (num === 3) { return "환불?"; }
+    else if (num === 3) { return "배팅"; }
+    else if (num === 4) { return "포인트 충전"; }
   }
 
   return (
