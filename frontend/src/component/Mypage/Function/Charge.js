@@ -8,6 +8,7 @@ import PaycoPayImg from '../../img/PAYCO_Red.png';
 // import onClickPayment from '../../PayService/PayService.js'; // 결제 서비스 내부에서 정의함.
 import coinGif from '../../img/coincharge.gif';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
@@ -19,13 +20,46 @@ function ChargesPage() {
     const { isLoggedIn, nickname } = useContext(AuthContext);
     const [chargeAmount, setChargeAmount] = useState(null); // 초기값을 null로 설정
 
+    const {Api_req_success, setApi_req_success} = useState(false);
 
-    useEffect(() => {
-        if (modalIsOpen) {
-            const timerId = setTimeout(() => setModalIsOpen(false), 3000);
-            return () => clearTimeout(timerId);
+    const location = useLocation();
+    const urlParams = new URLSearchParams(location.search);
+    const imp_uid = urlParams.get('imp_uid');
+    const success_status = urlParams.get('imp_success');
+    const now_weburl = window.location.origin; // 현재 웹 주소를 가져옴 -> 테스트 서버, 실제 서버 구분
+    const [apiRequestMade, setApiRequestMade] = useState(false);
+
+
+    // 만약 모바일에서 결제를 진행하면 새로운 창에서 결제를 진행하게 되는데 결제가 완료, 취소되면 
+    // 내가 설정한 콜백 URL로 쿼리스트링을 달고 이동하게 되는걸 처리하는 구문
+    useEffect(() => { 
+        if (imp_uid && !apiRequestMade) {
+          setApiRequestMade(true);
+          const JWTToken = sessionStorage.getItem('accessToken');
+          axios.post('https://api1.lunaweb.dev/api/v1/payment/valid/' + imp_uid, {}, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${JWTToken}`
+            }
+          })
+          .then((response) => {
+            console.log(response);
+            setChargeAmount(response.data.response.amount);
+            setModalIsOpen(true);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
         }
-    }, [modalIsOpen]);
+      
+        if (modalIsOpen) {
+          const timerId = setTimeout(() => {
+            setModalIsOpen(false);
+            window.history.replaceState({}, document.title, window.location.pathname);
+          }, 3000);
+          return () => clearTimeout(timerId);
+        }
+      }, [modalIsOpen, imp_uid, apiRequestMade]);
 
     // const KaKaoPayDemo = () => {
     //     window.location.href = "https://developers.kakao.com/demo/pay/index";
@@ -43,30 +77,22 @@ function ChargesPage() {
         const { IMP } = window;
         IMP.init('imp00168260');
 
-        const data = {
-            pg: `${pg_method}`,
-            pay_method: 'card',
-            merchant_uid: `mid_${new Date().getTime()}`,
-            amount: `${amount}`,
-            name: '태클 포인트 충전',
-            buyer_name: `${nickname}`,
-            buyer_tel: '01012341234',
-            buyer_email: 'example@example',
-            buyer_addr: '신사동 661-16',
-            buyer_postcode: '06018',
-        };
-        IMP.request_pay(data, callback); // 결제 모듈 호출 
-
-        function callback(response) {
-            const {
-                success,
-                imp_uid,
-                error_msg,
-            } = response;
-
-            if (success) {
-                const JWTToken = sessionStorage.getItem('accessToken');
-                axios.post('https://api1.lunaweb.dev/api/v1/payment/valid/' + imp_uid, {}, {
+            IMP.request_pay({
+                pg : `${pg_method}`,
+                pay_method : 'card',
+                merchant_uid: `mid_${new Date().getTime()}`, 
+                name : '태클 포인트 충전',
+                amount : `${amount}`,
+                buyer_email : 'Iamport@chai.finance',
+                buyer_name : `${nickname}`,
+                buyer_tel : '010-1234-5678',
+                buyer_addr : '서울특별시 강남구 삼성동',
+                buyer_postcode : '123-456',
+                m_redirect_url: `${now_weburl}/mypage/charge/`
+            }, function (rsp) { // callback
+                if (rsp.success) {
+                    const JWTToken = sessionStorage.getItem('accessToken');
+                axios.post('https://api1.lunaweb.dev/api/v1/payment/valid/' + rsp.imp_uid, {}, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${JWTToken}`
@@ -79,14 +105,13 @@ function ChargesPage() {
                 .catch((error) => {
                     console.error(error);
                 });
-            } else {
-                alert(`결제 실패: ${error_msg}`);
             }
+            });
         }
-    }
 
     const closeModal = () => {
         setModalIsOpen(false);
+        window.history.replaceState({}, document.title, window.location.pathname);
     }
 
 

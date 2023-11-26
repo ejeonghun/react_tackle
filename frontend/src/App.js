@@ -27,7 +27,7 @@ import AdminPage from './component/AdminPage/AdminPage.jsx'
 import MyReplie from './component/Mypage/Function/MyReplie.jsx';
 import AdminMember from './component/AdminPage/AdminMember.jsx';
 import MyCreatedPost from './component/Mypage/Function/MyCreatedPost.jsx';
-import Pay from './component/test/pay.js';
+import PayService from './component/PayService/PayService.js';
 
 
     // 메인 페이지 구성
@@ -43,7 +43,7 @@ import Pay from './component/test/pay.js';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
     <AuthProvider>
       <div className="App">
         <MainLayout />
@@ -52,6 +52,7 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 function MainLayout() {
   const location = useLocation();
@@ -87,7 +88,6 @@ function MainLayout() {
         <Route path='/mypage/mycomment' element={<MyReplie/>} />
         <Route path='/admin/member' element={<AdminMember/>} />
         <Route path='/mypage/wrote' element={<MyCreatedPost/>} />
-        <Route path='/pay' element={<Pay/>} />
         {/* 여기에서 vote/? 의 값에 따라서 API로 부터 JSON형식으로 데이터를 받아 데이터를 처리하는 로직을 작성해야함. */}
       </Routes>
       
