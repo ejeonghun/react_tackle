@@ -9,9 +9,8 @@ const KakaoLogin = () => {
         <img
             alt="카카오 로그인"
             src='/img/kakao_login_large_wide.png'
-            width="400px"
+            width="300px"
             height="auto"
-            style={{margin: '10px 24px 16px 24px'}}
             onClick={() => window.location.href = kakaoURL}
         />
     )
