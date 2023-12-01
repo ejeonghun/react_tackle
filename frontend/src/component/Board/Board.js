@@ -103,7 +103,7 @@ function Board({BoardName}) {
           )))
           }
           
-          <button onClick={handleLoadMore} className="button-2" style={{marginBottom:'10px'}}><img src={require("./arrow_down.png")} alt="더보기" style={{width:'28px'}}></img></button> {/* "더보기" 버튼 */}
+          <button onClick={handleLoadMore} className="button-2" style={{marginBottom:'10px'}}><img src={require("./arrow_down.png")} alt="더보기" style={{width:'14px'}}></img></button> {/* "더보기" 버튼 */}
           </div>
           <Write_Btn/> {/* 글쓰기 버튼 */}
           </div>

@@ -313,10 +313,10 @@ function Write() {
                         <button type="button" className="ToggleButton button-1" onClick={toggleSelectOption}>
                             {isAddOption ? '➕' : '➖'}
                         </button>
-                    <label className="ImgLabel">
-                    {uploadStatus === "ing" ? <Spinner /> : <img src={Upload_img} alt='Upload' style={{width:'20px', height:'20px'}}/>}
-                    {uploadStatus === "ing" ? <p>업로드 중 ...</p> : <p>이미지 업로드</p>}
-                    {uploadStatus === "ing" ? null : <input type='file' accept="image/*" onChange={handleImageUpload}/>}
+                    <label className="ToggleButton button-1">
+                    {uploadStatus === "ing" ? <Spinner /> : <img src={Upload_img} alt='Upload'/>}
+                    {/* {uploadStatus === "ing" ? <p>업로드 중 ...</p> : <p>이미지 업로드</p>} */}
+                    {uploadStatus === "ing" ? null : <input type='file' accept="image/*" onChange={handleImageUpload} hidden/>}
                     {/* {uploadStatus === "ing" ? <Spinner /> : image && <img src={image} alt='Uploaded' />} */}
                 </label>
                 </div>

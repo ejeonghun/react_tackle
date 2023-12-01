@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #f7f7f7;
+    background-color: #fff;
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
@@ -175,23 +175,13 @@
 
 .ImgLabel {
     cursor: pointer;
-    /* transition: opacity 0.2s; */
     border-radius: 10px;
     padding: 5px;
-    background-color: #d5d5d5;
-    /* width:1px; */
-    /* all: unset;
+    background-color: #fffefe;
+    width: 45px;
+    height: 45px;
+    border-radius: 45px;
 
-    text-align: center;
-
-    color: #333;
-    font-weight: bold;
-
-    
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 
 .ImgLabel input{
@@ -211,23 +201,34 @@
     align-items: center;
 }
 
+
 .CategoryTitleContainer {
     display: flex;
-    align-items: center; /* 수직 중앙 정렬 */
-    height: 40px; /* 높이를 조절, 필요에 따라 변경 가능 */
+    align-items: center;
+    height: 40px;
+}
+@media (max-width:) {
+    .CategoryTitleContainer {
+        height: auto; /* Allow the container to adjust its height based on content */
+        flex-direction: column; /* Stack the items vertically on smaller screens */
+        align-items: flex-start; /* Align items to the start on smaller screens */
+    }
 }
 
 .TitleInput {
     width: 100%;
-    /* flex: 1; 나머지 공간을 차지하도록 설정 */
-    padding: 10px; /* 내부 여백을 조절, 필요에 따라 변경 가능 */
-    border-radius: 4px; /* 필요에 따라 변경 가능 */
-    border: 1px solid #ddd; /* 필요에 따라 변경 가능 */
-
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 20px) {
     .TitleInput {
         width: 70%;
+    }
+
+    .CategoryTitleContainer {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
