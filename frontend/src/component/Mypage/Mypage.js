@@ -24,7 +24,7 @@ function Mypage() {
                     }
                     // { headers: { 'Authorization': `Bearer ${JWTToken}` } }
                 );
-                response.data.success === true ? alert("닉네임이 변경되었습니다.") : alert("닉네임 변경에 실패했습니다.");
+                response.data.success === true ? alert("닉네임이 변경되었습니다.") : alert("닉네임이 중복되었습니다.");
                 window.location.reload(); // 닉네임 변경 후 페이지 새로고침
             } catch (error) {
                 console.log("Failed to update nickname", error);
@@ -32,6 +32,11 @@ function Mypage() {
         }
     };
     useEffect(() => {
+        if (!JWTToken) { // 예외처리
+            alert("로그인이 필요한 서비스입니다.");
+            window.location.href = "/login";
+            return;
+        }
         const getMyPageData = async () => {
             try {
                 const response = await axios.get('https://api1.lunaweb.dev/api/v1/member/info', {
