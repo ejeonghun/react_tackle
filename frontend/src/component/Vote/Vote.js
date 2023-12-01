@@ -96,7 +96,7 @@ font-size: 1.1rem;
             
           });
           setVotingStatus(response.data.data.voting);
-          setPostVoteStatus(response.data.data.status === "ING" ? true : false); // ing 이면 true , end 이면 false
+          setPostVoteStatus(response.data.data.status === "ING" ? false : true); // ing 이면 true , end 이면 false
           setPost(response.data.data); // 게시글 정보를 받아와서 state를 설정한다.
           const voteItemsContent = response.data.data.voteItemsContent; // 선택지 내용 배열을 가져온다.
           const voteItemIdMap = response.data.data.voteItemIdMap; // 선택지의 itemId와 득표수를 가져옵니다.
@@ -109,7 +109,8 @@ font-size: 1.1rem;
               itemId: itemId,
               voteCount: voteItemIdMap[itemId],
             }));
-          
+            
+
             setOptions(voteItems);
             
           } else {
@@ -256,7 +257,7 @@ font-size: 1.1rem;
     };
     
     const bettingOptions = [
-      { value: 0, label:`${PostVoteStatus ? '베팅 금액' :'투표 마감'}`},  // 만약 투표가 마감되면 disabled 처리가 되고 "투표 마감" 문구 출력
+      { value: 0, label:`${!PostVoteStatus ? '베팅 금액' :'투표 마감'}`},  // 만약 투표가 마감되면 disabled 처리가 되고 "투표 마감" 문구 출력
       { value: 1000, label: "1000P" },
       { value: 5000, label: "5000P" },
       { value: 10000, label: "10000P" }
@@ -294,17 +295,27 @@ font-size: 1.1rem;
             <div 
               className={`bar-fill option${index + 1}`} // 선택지 애니메이션 삭제 시 해당 option 클래스 삭제 밑의 backgroundColor 주석 해제
               style={{ 
-                width: `${TotalVoteCount > 0 ? (option.voteCount / TotalVoteCount) * 100 : 0}%`,
+                width: (VotingStatus || PostVoteStatus) ? `${TotalVoteCount > 0 ? (option.voteCount / TotalVoteCount) * 100 : 0}%` : '0%',
                 // backgroundColor: colors[index % colors.length]
               }}
             />
           </div>
-          <span>{option.voteCount} votes ({TotalVoteCount > 0 ? Math.round((option.voteCount / TotalVoteCount) * 100) : 0}%)</span>
+          {(VotingStatus || PostVoteStatus) ?
+          (
+            <>
+            <span>{option.voteCount} votes
+            ({TotalVoteCount > 0 ? Math.round((option.voteCount / TotalVoteCount) * 100) : 0}%)
+            </span>
+            </>
+            ) : (
+              <span>0 votes
+                0%
+              </span>
+            )}
         </div>
       ))}
       <hr/>
       {/* 포인트 배팅 */}
-
       <div className='MyPoint'>
         <h4 className='Betting_text'>배팅</h4>
         <h5 className='MyPoint_text'>{formattedPoint ? `내 포인트 : ${formattedPoint}P` : "로그인을 해주세요."}</h5>
@@ -319,10 +330,10 @@ font-size: 1.1rem;
       </select> */}
       <Select
         options={bettingOptions}
-        placeholder={PostVoteStatus ? "베팅 금액" : "투표 마감"}
+        placeholder={!PostVoteStatus ? "베팅 금액" : "투표 마감"}
         value={bettingOptions.find(option => option.value === selectedValue)}
         onChange={handleSelectChange}
-        isDisabled={!PostVoteStatus} // 투표 상태가 마감된 경우 선택을 비활성화
+        isDisabled={PostVoteStatus} // 투표 상태가 마감된 경우 선택을 비활성화
       />
       <p className='select_betting'>{SelectedValueText}</p>
       </div>

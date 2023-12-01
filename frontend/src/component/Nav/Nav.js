@@ -39,10 +39,10 @@ function Boardlist() {
                 </Link>
                 <Link 
                     className="NavMenu" 
-                    to="/participationboard"
-                    style={{ borderBottom: location.pathname === "/participationboard" ? "1px solid rgba(251, 3, 3, 1)" : "" }}
+                    to="/support"
+                    style={{ borderBottom: location.pathname === "/support" ? "1px solid rgba(251, 3, 3, 1)" : "" }}
                  >
-                     <b>참여 게시판</b>
+                     <b>고객센터</b>
                  </Link>   
     </div>
 </div>
