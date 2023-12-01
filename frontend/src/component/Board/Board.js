@@ -87,10 +87,10 @@ function Board({BoardName}) {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-around', position: 'relative'}}>
                   <div style={{width:'50%', textAlign:'center', backgroundColor:'rgba(246, 165, 165, 1)',boxShadow :'0px 4px 4px rgba(0, 0, 0, 0.25)' ,borderRadius: '25px',position: 'relative', left:'1%'}}>
-                    <h5>{post.voteItemsContent}</h5>
+                    <h5>{post.voteItemsContent[0]}</h5>
                   </div>
                   <div style={{width:'50%', textAlign:'center', backgroundColor:'rgba(128, 165, 235, 1)',boxShadow :'0px 4px 4px rgba(0, 0, 0, 0.25)' ,borderRadius: '25px',position: 'relative', left:'-1%'}}>
-                    <h5>{post.voteItemsContent}</h5>
+                    <h5>{post.voteItemsContent[1]}</h5>
                   </div>
                 </div>
                 <div className="writer" style={{display:'flex', justifyContent:'space-between'}}>
