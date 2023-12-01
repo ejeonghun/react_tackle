@@ -3,7 +3,35 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Vote.css';
 import Loading from '../Loading/Loading';
+import { getCategoryName } from '../Category/CategoryList.jsx';
+import styled from 'styled-components';
+import ReactSelect from "react-select";
 
+const Select = styled(ReactSelect)`
+width: 20vh;
+margin-left: 2rem;
+margin-right: 2rem;
+font-size: 1.1rem;
+
+@media (max-width: 820px) {
+    font-size: 0.7rem;
+    margin-left: 0.09rem;
+    margin-right: 0.09rem;
+}
+
+.react-select__control {
+    transition: all .3s;
+}
+
+.react-select__control:hover {
+    border-color: blue;
+}
+
+.react-select__control--is-focused {
+    border-color: blue;
+    box-shadow: 0 0 3px blue;
+}
+`;
 
 // const [votes, setVotes] = useState(Array(options.length).fill(0)); // 각 선택지의 투표 수를 담는 배열
   function VotePage() {
@@ -23,18 +51,31 @@ import Loading from '../Loading/Loading';
     const [boardImg, setBoardImg] = useState(''); // 게시글 이미지 가져오기
     const JWTToken = sessionStorage.getItem("accessToken"); // JWT 토큰 가져오기
     const [TotalVoteCount, setTotalVoteCount] = useState(0); // 총 투표 수 가져오기
+    const [Category, setCategory] = useState(''); // 카테고리 state 지정
+    const [PostVoteStatus, setPostVoteStatus] = useState(false); // 투표 기한? 'END':'ING' state 지정
+    const [PointData, setPointData] = useState(0); // 포인트 데이터 가져오기
 
-      // 배팅 select 값이 변경될 때 호출되는 함수
-      const handleSelectChange = (event) => {
-        const selectedOption = event.target.value;
-        if (selectedOption === '포인트 배팅') {
-          setSelectedValue(selectedOption);
-          setSelectedValueText('');
+      // 배팅 select 값이 변경될 때 호출되는 함수 기존 HTML Select 코드임
+      // const handleSelectChange = (event) => {
+      //   const selectedOption = event.target.value;
+      //   if (selectedOption === '포인트 배팅') {
+      //     setSelectedValue(selectedOption);
+      //     setSelectedValueText('');
+      //   } else {
+      //   setSelectedValue(selectedOption);
+      //   setSelectedValueText('Betting : '+ selectedOption + 'P');
+      // }
+      // };
+
+      const handleSelectChange = (selectedOption) => {
+        if (PostVoteStatus) { // 투표 상태가 진행 중인 경우만 선택 가능
+          setSelectedValue(selectedOption.value);
+          setSelectedValueText('Betting : '+ selectedOption.value + 'P');
         } else {
-        setSelectedValue(selectedOption);
-        setSelectedValueText('Betting : '+ selectedOption + 'P');
-      }
+          alert("투표가 이미 마감되었습니다.");
+        }
       };
+      
 
     // API의 JSON 파일에 만약 이미지 요소가 있으면 화면상에 랜더링을 하고 없으면 하지 않는다.
 
@@ -54,26 +95,30 @@ import Loading from '../Loading/Loading';
           },
             
           });
+          setVotingStatus(response.data.data.voting);
+          setPostVoteStatus(response.data.data.status === "ING" ? true : false); // ing 이면 true , end 이면 false
           setPost(response.data.data); // 게시글 정보를 받아와서 state를 설정한다.
           const voteItemsContent = response.data.data.voteItemsContent; // 선택지 내용 배열을 가져온다.
           const voteItemIdMap = response.data.data.voteItemIdMap; // 선택지의 itemId와 득표수를 가져옵니다.
-          const voteingStatus = response.data.data.voting; // 해당 유저의 투표 여부를 가져옵니다.
-          if (voteingStatus === true) {
+          setCategory(getCategoryName(response.data.data.categoryId)); // 카테고리 번호를 카테고리 이름으로 변경합니다.
+          
+          console.log(VotingStatus, PostVoteStatus);
+          if ((VotingStatus === true) || (PostVoteStatus === false)) { // 만약 투표를 했거나, 투표가 마감된 경우에는 선택지 결과값 출력
             const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({
               content: voteItemsContent[index],
               itemId: itemId,
               voteCount: voteItemIdMap[itemId],
             }));
+          
             setOptions(voteItems);
             
           } else {
-            const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({
+            const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({ // 만약 투표를 하지 않았거나, 투표가 마감되지 않은 경우 총 투표수만 출력
               content: voteItemsContent[index],
               itemId: itemId,
               voteCount: 0 // 투표가 완료되지 않은 경우 투표 수를 0 으로 표시한다.
             }));
             setOptions(voteItems);
-            
           }
           
           // 투표 여부와 관계없이 투표 카운트의 합계를 계산하여 상태를 갱신합니다.
@@ -83,7 +128,7 @@ import Loading from '../Loading/Loading';
           if (response.data.data.votingImgUrl != null) { // JSON 파일에 이미지가 있는 경우
             setBoardImg(response.data.data.votingImgUrl);
           }
-          setVotingStatus(response.data.data.voting);
+          
         }
         getData();
       
@@ -93,8 +138,30 @@ import Loading from '../Loading/Loading';
           setCommentsList(response.data);
         }
         getComments();
-      }, [id, KakaoId]);
-    
+
+
+        const getMyPageData = async () => {
+          try {
+              const Point_response = await axios.get('https://api1.lunaweb.dev/api/v1/member/info', {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${JWTToken}`
+                  }
+              });
+              setPointData(Point_response.data);
+          } catch (error) {
+              console.log("Failed to fetch data", error);
+              alert("세션이 만료되었습니다, 다시 로그인해주세요.")
+              window.location.href = "/logout";
+          }
+      };
+      if (JWTToken) { // JWT 토큰이 존재하는 경우에만 getMyPageData 함수를 호출합니다.
+        getMyPageData();
+      }
+      }, [id, KakaoId, JWTToken]);
+
+
+    const formattedPoint = PointData && PointData.point ? PointData.point.toLocaleString() : '';
 
       // const totalVotes = options.reduce((total, option) => total + option.voteCount, 0); // 총 투표 수를 구하는 함수
       // const totalVotes = TotalVoteCount; // 총 투표 수를 구하는 함수
@@ -108,6 +175,9 @@ import Loading from '../Loading/Loading';
         alert("로그인이 필요합니다."); // 카카오 로그인이 되어있지 않은 경우
         return; // DB에 vote_result 의 idx 값에 null이 들어가면 해당 게시물을 불러오는 info API가 오류가 발생합니다.
         // 이 점 유의
+      } else if (!PostVoteStatus) { // 투표 상태가 마감된 경우
+          alert("마감된 투표입니다.");
+          return;
       }
       
       if (selectedValue === 0) { // 예외 처리
@@ -179,13 +249,19 @@ import Loading from '../Loading/Loading';
           setCommentsList(commentsResponse.data);
           // 댓글 입력란 초기화
           setComment("");
-        } else {
-          alert('댓글 작성에 실패했습니다.');
+        } else { // 만약 실패하면 실패 메세지 출력
+          alert(response.data.message);
         }
       }
     };
     
-
+    const bettingOptions = [
+      { value: 0, label:`${PostVoteStatus ? '베팅 금액' :'투표 마감'}`},  // 만약 투표가 마감되면 disabled 처리가 되고 "투표 마감" 문구 출력
+      { value: 1000, label: "1000P" },
+      { value: 5000, label: "5000P" },
+      { value: 10000, label: "10000P" }
+  ];
+                  
 
 
     if (!post) return <div><Loading/></div>;
@@ -193,13 +269,18 @@ import Loading from '../Loading/Loading';
   
     return (
       <div className="vote-container">
-        <h1 className="title">{post.title}</h1>
+
+        <div className="title">
+          <p>[{Category}]</p>
+          <h1>{post.title}</h1>
+          </div>
         <p className="content">{post.content}</p>
         {/* boardImg의 값이 null 아니라면 이미지를 표시한다. */}
         {boardImg && <img src={boardImg} alt="게시글 이미지" className="board-img" />}
         {boardImg && <br/>}
         <div className='bottom_info'>
-        <p className="v_nickname">작성자 : {post.idx}</p>
+        {/* <p className="v_nickname">작성자 : {post.idx}</p> */}
+        <p className="v_nickname">작성자 : {post.nickname ? post.nickname : post.idx}</p> {/* 닉네임이 없는 경우 idx를 표시한다. */}
         <p className='totalVote'>총 <strong>{TotalVoteCount}</strong>표</p>
         <p className="bettingAmount">총 배팅금액 : <strong>{post.bettingAmount}P</strong></p>
         </div>
@@ -211,10 +292,10 @@ import Loading from '../Loading/Loading';
           <button style={{ backgroundColor: colors[index % colors.length] }} onClick={() => handleVote(index)} className='vote_button'>{option.content}</button>
           <div className="bar">
             <div 
-              className="bar-fill" 
+              className={`bar-fill option${index + 1}`} // 선택지 애니메이션 삭제 시 해당 option 클래스 삭제 밑의 backgroundColor 주석 해제
               style={{ 
                 width: `${TotalVoteCount > 0 ? (option.voteCount / TotalVoteCount) * 100 : 0}%`,
-                backgroundColor: colors[index % colors.length]
+                // backgroundColor: colors[index % colors.length]
               }}
             />
           </div>
@@ -223,14 +304,26 @@ import Loading from '../Loading/Loading';
       ))}
       <hr/>
       {/* 포인트 배팅 */}
+
+      <div className='MyPoint'>
+        <h4 className='Betting_text'>배팅</h4>
+        <h5 className='MyPoint_text'>{formattedPoint ? `내 포인트 : ${formattedPoint}P` : "로그인을 해주세요."}</h5>
+        </div>
       <div className='point_bet'>
       {/*포인트 배팅은 1000P, 5000P, 10000P 으로 제한한다.*/}
-      <select className='bet_select' value={selectedValue} onChange={handleSelectChange}>
+      {/* <select className='bet_select' value={selectedValue} onChange={handleSelectChange}>
         <option value={0}>포인트 배팅</option>
         <option value={1000}>1000P</option>
         <option value={5000}>5000P</option>
         <option value={10000}>10000P</option>
-      </select>
+      </select> */}
+      <Select
+        options={bettingOptions}
+        placeholder={PostVoteStatus ? "베팅 금액" : "투표 마감"}
+        value={bettingOptions.find(option => option.value === selectedValue)}
+        onChange={handleSelectChange}
+        isDisabled={!PostVoteStatus} // 투표 상태가 마감된 경우 선택을 비활성화
+      />
       <p className='select_betting'>{SelectedValueText}</p>
       </div>
       <hr/>
@@ -250,12 +343,13 @@ import Loading from '../Loading/Loading';
       {/* 댓글 목록 */}
       {commentsList.length > 0 && (
       <>
-        <h4>댓글 목록</h4>
+        <h4 className="left-align">댓글 목록</h4>
         {commentsList.map((comment, index) => (
           comment && (
             <div style={{display:'flex'}} className='comment-item'>
-              <p>{comment.idx} : </p>
+              <p>{comment.nickname ? comment.nickname : comment.idx} : </p> {/* 닉네임이 없는 경우 idx를 표시한다. */}
               <p key={index}>{comment.comment}</p>
+              <p className='comment_date'>{comment.createdMinutesAgo}</p>
             </div>
           )
         ))}

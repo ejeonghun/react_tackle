@@ -8,10 +8,35 @@ import './Write.css';
 import styled from 'styled-components';
 
 const Select = styled(ReactSelect)`
-width: 100%;
+width: 50%;
 margin-left: 2rem;
 margin-right: 2rem;
 font-size: 1.1rem;
+
+@media (max-width: 820px) {
+    font-size: 0.7rem;
+    margin-left: 0.09rem;
+    margin-right: 0.09rem;
+}
+
+.react-select__control {
+    transition: all .3s;
+}
+
+.react-select__control:hover {
+    border-color: blue;
+}
+
+.react-select__control--is-focused {
+    border-color: blue;
+    box-shadow: 0 0 3px blue;
+}
+`;
+const Select2 = styled(ReactSelect)`
+width: 50%;
+margin-left: 0;
+margin-right: 0;
+font-size: 14px;
 
 @media (max-width: 820px) {
     font-size: 0.7rem;
@@ -110,6 +135,36 @@ function Write() {
     
     // 이미지 업로드 API 부분
     // 예외처리 필요 , localhost 환경에서 작동을 안함, 도메인에 올려서 사용해야함, 내부ip/test 에서는 작동
+    // const handleImageUpload = async (event) => {
+    //     setUploadStatus("ing"); // 이미지 업로드 상태를 ing로 변경
+    //     const file = event.target.files[0];
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onloadend = async () => {
+    //       const base64Image = reader.result.split(',')[1];
+    //       const formData = new FormData();
+    //       formData.append('image', base64Image);
+    
+    //       try {
+    //         // const response = await axios.post('https://api.imgur.com/3/image', formData, {
+    //         const response = await axios.post('https://api.imgur.com/3/image', formData, {
+    //           headers: {
+    //             'Authorization': 'Client-ID 1f3d2eb034dd021'
+    //           }
+    //         });
+            
+    //         setImage(response.data.data.link); // 업로드된 이미지의 URL을 state에 저장
+    //         setUploadStatus("end"); // 이미지 업로드 상태 "완료"로 설정
+    //         console.log(setImage);
+    //       } catch (error) {
+    //         console.error(error);
+    //         setUploadStatus("fail"); // 이미지 업로드 상태 "실패"로 설정
+    //       }
+    //     };
+    //   };
+
+    // 이미지 업로드 API 부분 
+    // Cloudflare Workers 프록시 서버 사용, 배포 시 주석 처리 및 위의 코드 주석 해제
     const handleImageUpload = async (event) => {
         setUploadStatus("ing"); // 이미지 업로드 상태를 ing로 변경
         const file = event.target.files[0];
@@ -119,15 +174,11 @@ function Write() {
           const base64Image = reader.result.split(',')[1];
           const formData = new FormData();
           formData.append('image', base64Image);
-    
+      
           try {
-            // const response = await axios.post('https://api.imgur.com/3/image', formData, {
-            const response = await axios.post('https://api.imgur.com/3/image', formData, {
-              headers: {
-                'Authorization': 'Client-ID 1f3d2eb034dd021'
-              }
-            });
-            
+            // Cloudflare Worker의 URL로 요청을 전송
+            const response = await axios.post('https://imgur.wjdgns4019.workers.dev/', formData);
+      
             setImage(response.data.data.link); // 업로드된 이미지의 URL을 state에 저장
             setUploadStatus("end"); // 이미지 업로드 상태 "완료"로 설정
             console.log(setImage);
@@ -137,13 +188,7 @@ function Write() {
           }
         };
       };
-
-    // 이미지 업로드 API 부분 
-    // Cloudflare Workers 프록시 서버 사용, 배포 시 주석 처리 및 위의 코드 주석 해제
-
-    
-
-
+      
 
     // 핸들러 부분 
     const toggleSelectOption = () => {
@@ -208,11 +253,6 @@ function Write() {
 			    <form className='Form'>
                     <div className='DropdownContainer'>
                     <Select
-                    options={categoryOptions}
-                    placeholder="카테고리"
-                    onChange={(option) => setCategorySelect(option.value)}
-                    />
-                    <Select
                     options={bettingAmountOptions}
                     placeholder="베팅 금액"
                     onChange={(option) => setBettingAmountSelect(option.value)}
@@ -222,16 +262,22 @@ function Write() {
                     placeholder="마감 기한"
                     onChange={(option) => setDeadlineSelect(option.value)}
                     />
-
                   </div>
-				<label>
-                    <br/>
-					<input className="TitleInput" type="text" name="title" placeholder="제목" value={title} 
-                    onChange={(e) => setTitle(e.target.value)}/>
-                    {/* 내용이 바뀔때마다 state에 값을 넣어줌 */}
-                    {/* 불필요한 랜더링이 발생할 수 있으므로 추 후 변경 요망 */}
-				</label>
-                
+                <div className='CategoryContainer'>
+                    <Select2
+                    options={categoryOptions}
+                    placeholder="카테고리"
+                    onChange={(option) => setCategorySelect(option.value)}
+                    />
+                    <input
+                        className="TitleInput"
+                        type="text"
+                        name="title"
+                        placeholder="제목"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </div>
 				<br/>
 				<label>
 					<textarea className="ContentTextarea" name="content" placeholder="내용을 입력하세요." value={content}
@@ -258,19 +304,19 @@ function Write() {
                 </div>
                 <div className='FunctionContainer'>
                     <div className='ButtonContainer'>
-                        <p style={{float:'right'}}>선택지 추가 / 삭제</p>
+                        {/* <p style={{float:'right'}}>선택지 추가 / 삭제</p> */}
                         <button type="button" className="ToggleButton button-1" onClick={toggleSelectOption}>
                             {isAddOption ? '➕' : '➖'}
                         </button>
-                    </div>
-                    <label className="ImgLabel">
-                    {uploadStatus === "ing" ? <Spinner /> : <img src={Upload_img} alt='Upload' style={{width:'40px', height:'40px'}}/>}
-                    {uploadStatus === "ing" ? <p>업로드 중 ...</p> : <p>이미지 업로드</p>}
-                    {uploadStatus === "ing" ? null : <input type='file' accept="image/*" onChange={handleImageUpload}/>}
+                    <label className="ToggleButton button-1">
+                    {uploadStatus === "ing" ? <Spinner /> : <img src={Upload_img} alt='Upload'/>}
+                    {/* {uploadStatus === "ing" ? <p>업로드 중 ...</p> : <p>이미지 업로드</p>} */}
+                    {uploadStatus === "ing" ? null : <input type='file' accept="image/*" onChange={handleImageUpload} hidden/>}
                     {/* {uploadStatus === "ing" ? <Spinner /> : image && <img src={image} alt='Uploaded' />} */}
                 </label>
                 </div>
                 <input type="submit" className='button-2' onClick={Post_Submit} value="작성" />
+                </div>
 			</form>
 	    </div>	
      );

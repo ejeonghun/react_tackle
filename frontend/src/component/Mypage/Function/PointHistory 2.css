@@ -92,3 +92,22 @@
     padding: 10px;
     /* 텍스트 그림자 애니메이션 추가 */
 }
+
+.point_tableDiv {
+    height: 50vh;
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 20px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 20px;
+  }

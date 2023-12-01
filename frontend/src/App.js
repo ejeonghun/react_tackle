@@ -18,7 +18,7 @@ import Category from './component/Category/Category.js';
 import CategoryBoard from './component/CategoryBoard/CategoryBoard.js';
 import Support from './component/Support/Support';
 import Vote from './component/Vote/Vote';
-import PointHistory from './component/PointHistory/PointHistory.js';
+import PointHistory from './component/Mypage/Function/PointHistory.js';
 import GiftShop from './component/GiftShop/GiftShop';
 import KakaoCallbackBackend from './component/KakaoLogin/KakaoCallbackBackend.tsx';
 import MyVotePage from './component/Mypage/Function/MyVote.jsx';
@@ -26,6 +26,8 @@ import Test from './component/test/test.js';
 import AdminPage from './component/AdminPage/AdminPage.jsx'
 import MyReplie from './component/Mypage/Function/MyReplie.jsx';
 import AdminMember from './component/AdminPage/AdminMember.jsx';
+import MyCreatedPost from './component/Mypage/Function/MyCreatedPost.jsx';
+import PayService from './component/PayService/PayService.js';
 
 
     // 메인 페이지 구성
@@ -41,7 +43,7 @@ import AdminMember from './component/AdminPage/AdminMember.jsx';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
     <AuthProvider>
       <div className="App">
         <MainLayout />
@@ -50,6 +52,7 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 function MainLayout() {
   const location = useLocation();
@@ -76,14 +79,15 @@ function MainLayout() {
         <Route path="/support" element={<Support />} />
         <Route path="/mypage/charge" element={<Charge />} />
         <Route path="/mypage/point" element={<Point />} />
-        <Route path="/PointHistory" element={<PointHistory />} />
+        <Route path="/mypage/pointhistory" element={<PointHistory />} />
         <Route path="/vote/:id" element={<Vote />} />
         <Route path='giftshop' element={<GiftShop/>} />
         <Route path='/mypage/myvote' element={<MyVotePage/>} />
         <Route path='/test' element={<Test/>} />
         <Route path='/admin' element={<AdminPage/>} />
-        <Route path='/mypage/myreplie' element={<MyReplie/>} />
+        <Route path='/mypage/mycomment' element={<MyReplie/>} />
         <Route path='/admin/member' element={<AdminMember/>} />
+        <Route path='/mypage/wrote' element={<MyCreatedPost/>} />
         {/* 여기에서 vote/? 의 값에 따라서 API로 부터 JSON형식으로 데이터를 받아 데이터를 처리하는 로직을 작성해야함. */}
       </Routes>
       

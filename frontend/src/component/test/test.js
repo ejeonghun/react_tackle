@@ -31,6 +31,7 @@ const ImageUpload = () => {
     <div>
       <input type='file' onChange={handleImageUpload} />
       {image && <img src={image} alt='Uploaded' />}
+      <div className="title"></div>
     </div>
   );
 };
