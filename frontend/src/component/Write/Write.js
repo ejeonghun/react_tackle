@@ -8,7 +8,7 @@ import './Write.css';
 import styled from 'styled-components';
 
 const Select = styled(ReactSelect)`
-width: 100%;
+width: 50%;
 margin-left: 2rem;
 margin-right: 2rem;
 font-size: 1.1rem;
@@ -33,7 +33,7 @@ font-size: 1.1rem;
 }
 `;
 const Select2 = styled(ReactSelect)`
-width: 22%;
+width: 50%;
 margin-left: 0;
 margin-right: 0;
 font-size: 14px;
@@ -252,11 +252,6 @@ function Write() {
 		<div className='Container'>
 			    <form className='Form'>
                     <div className='DropdownContainer'>
-                    {/* <Select
-                    options={categoryOptions}
-                    placeholder="카테고리"
-                    onChange={(option) => setCategorySelect(option.value)}
-                    /> */}
                     <Select
                     options={bettingAmountOptions}
                     placeholder="베팅 금액"
@@ -268,7 +263,7 @@ function Write() {
                     onChange={(option) => setDeadlineSelect(option.value)}
                     />
                   </div>
-                <div className='CategoryTitleContainer'>
+                <div className='CategoryContainer'>
                     <Select2
                     options={categoryOptions}
                     placeholder="카테고리"
@@ -313,10 +308,10 @@ function Write() {
                         <button type="button" className="ToggleButton button-1" onClick={toggleSelectOption}>
                             {isAddOption ? '➕' : '➖'}
                         </button>
-                    <label className="ImgLabel">
-                    {uploadStatus === "ing" ? <Spinner /> : <img src={Upload_img} alt='Upload' style={{width:'20px', height:'20px'}}/>}
-                    {uploadStatus === "ing" ? <p>업로드 중 ...</p> : <p>이미지 업로드</p>}
-                    {uploadStatus === "ing" ? null : <input type='file' accept="image/*" onChange={handleImageUpload}/>}
+                    <label className="ToggleButton button-1">
+                    {uploadStatus === "ing" ? <Spinner /> : <img src={Upload_img} alt='Upload'/>}
+                    {/* {uploadStatus === "ing" ? <p>업로드 중 ...</p> : <p>이미지 업로드</p>} */}
+                    {uploadStatus === "ing" ? null : <input type='file' accept="image/*" onChange={handleImageUpload} hidden/>}
                     {/* {uploadStatus === "ing" ? <Spinner /> : image && <img src={image} alt='Uploaded' />} */}
                 </label>
                 </div>
