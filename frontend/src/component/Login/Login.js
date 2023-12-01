@@ -7,6 +7,7 @@ function Login() {
     agree1: false,
     agree2: false,
     agree3: false,
+    agree4: false,
   });
 
   // "전체 동의" 체크박스 상태
@@ -28,6 +29,8 @@ function Login() {
       agree1: checked,
       agree2: checked,
       agree3: checked,
+      agree4: checked,
+
     });
   };
 
@@ -60,12 +63,18 @@ function Login() {
             <input type="checkbox" name="agree3" checked={agreements.agree3} onChange={handleAgreementChange} />
             <label htmlFor="agree3">개인정보의 취급위탁 동의(필수)</label>
           </li>
+          <li>
+            <input type="checkbox" name="agree4" checked={agreements.agree3} onChange={handleAgreementChange} />
+            <label htmlFor="agree3">마케팅 수신 동의(필수)</label>
+          </li>
         </ul>
         <div className="check">
           <input type="checkbox" id="selectAll" checked={selectAll} onChange={handleSelectAllChange} />
           <label htmlFor="selectAll">전체 동의</label>
         </div>
+        
         </div>
+        <br></br>
         {Object.values(agreements).every((agreement) => agreement) && <SocialKakao className="kakao-login-button" />}
     </div>
   )

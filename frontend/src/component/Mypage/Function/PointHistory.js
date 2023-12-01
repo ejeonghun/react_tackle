@@ -66,7 +66,7 @@ function PointHistory() {
     <div className="container" style={{width:'100%'}}>
     <div className='point_top'>
       {/* <h2 className="info"></h2> */}
-      <h1 className="now_point">현재 포인트: <strong>{formattedPoint}P</strong></h1> {/* 현재 포인트 출력 */}
+      <h2 className="now_point">현재 포인트: <strong>{formattedPoint}P</strong></h2> {/* 현재 포인트 출력 */}
       <div className='btn_div'> {/* btn div */}
       {/* 포인트 충전, 환전 버튼 */}
       {/* 충전 버튼 클릭 시 /charge 로 Link */}
