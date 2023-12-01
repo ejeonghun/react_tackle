@@ -1,0 +1,52 @@
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+  /* 작동 안될시 public 폴더에 있는 ttf 파일 import */
+}
+/* @font-face {
+  font-family: "YouTube Sans KR";
+  src: url("https://fonts.googleapis.com/css2?family=YouTube+Sans:wght@400;500;600;700;800&display=swap") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+} */
+
+/* @font-face {
+  font-family: "YouTube Sans KR";
+  src: url("../public/youtube.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+} */
+
+* {
+  /* font-family: "YouTube Sans KR"; */
+  font-family: 'San Francisco';
+
+}
+
+.App {
+  text-align: center;
+}
+
+
+@media screen and (min-width: 1280px) {
+  #root {
+    /* background-color: rgba(151, 151, 151, 0.877); */
+     /* 만약 데스크탑 전체화면 접속시 레이아웃 유지를 위해 너비를 고정 시키고 나머지 부분에 색상을 넣음*/
+  }
+  .write_btn {
+    width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+  .App {
+    text-align: center;
+    width:1280px;
+    margin: 0 auto;
+    background-color: #f7f7f7;
+    min-height: 100vh;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+}

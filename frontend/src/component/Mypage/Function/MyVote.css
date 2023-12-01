@@ -1,0 +1,62 @@
+.myVotePage {
+  padding: 1em;
+  background-color: white;
+}
+
+.myVoteList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2em;
+}
+
+.myVoteItem {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 1.5em;
+  background: #ffffff;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.voteInfo {
+  margin-bottom: 1.5em;
+}
+
+.voteDate {
+  font-size: 0.9em;
+  color: #888;
+}
+
+.myVoteGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust the minmax and other values as needed */
+  gap: 20px; /* Adjust the gap size as needed */
+}
+
+.myVoteTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.myVoteTable thead {
+  background-color: #f9f9f9;
+}
+
+.myVoteTable th, .myVoteTable td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.myVoteTable tr:hover {
+  background-color: #f0f0f0;
+}
+
+.list_btn {
+  width: 150px;
+  height: 36px;
+  border-radius: 5px;
+  border: 1px solid #888;
+  margin-bottom: 10px;
+  background-color: #c1d1df;
+  cursor: pointer;
+}

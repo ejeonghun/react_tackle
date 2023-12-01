@@ -1,0 +1,29 @@
+.MyPost {
+    padding: 1em;
+    background-color: white;
+  }
+  
+  .myPostTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .myPostTable thead {
+    background-color: #f9f9f9;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .myPostTable th, .myPostTable td {
+      padding: 10px;
+    }
+  
+    .myPostTable th {
+      font-size: 14px;
+    }
+  }
+  
+
+  .myPostTable tr:hover {
+    background-color: #f0f0f0;
+  }
+  

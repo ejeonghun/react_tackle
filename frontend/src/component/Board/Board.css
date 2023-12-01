@@ -1,0 +1,8 @@
+.category_title {
+    display: flex;
+}
+
+.category {
+    margin-right: 5px;
+    color: darkred;
+}
