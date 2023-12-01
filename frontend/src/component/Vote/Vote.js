@@ -68,7 +68,7 @@ font-size: 1.1rem;
       // };
 
       const handleSelectChange = (selectedOption) => {
-        if (PostVoteStatus) { // 투표 상태가 진행 중인 경우만 선택 가능
+        if (!PostVoteStatus) { // 투표 상태가 진행 중인 경우만 선택 가능
           setSelectedValue(selectedOption.value);
           setSelectedValueText('Betting : '+ selectedOption.value + 'P');
         } else {
@@ -103,24 +103,14 @@ font-size: 1.1rem;
           setCategory(getCategoryName(response.data.data.categoryId)); // 카테고리 번호를 카테고리 이름으로 변경합니다.
           
           console.log(VotingStatus, PostVoteStatus);
-          if ((VotingStatus === true) || (PostVoteStatus === false)) { // 만약 투표를 했거나, 투표가 마감된 경우에는 선택지 결과값 출력
+        
             const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({
               content: voteItemsContent[index],
               itemId: itemId,
               voteCount: voteItemIdMap[itemId],
             }));
-            
-
+        
             setOptions(voteItems);
-            
-          } else {
-            const voteItems = Object.keys(voteItemIdMap).map((itemId, index) => ({ // 만약 투표를 하지 않았거나, 투표가 마감되지 않은 경우 총 투표수만 출력
-              content: voteItemsContent[index],
-              itemId: itemId,
-              voteCount: 0 // 투표가 완료되지 않은 경우 투표 수를 0 으로 표시한다.
-            }));
-            setOptions(voteItems);
-          }
           
           // 투표 여부와 관계없이 투표 카운트의 합계를 계산하여 상태를 갱신합니다.
           setTotalVoteCount(Object.values(voteItemIdMap).reduce((total, count) => total + count, 0));
@@ -158,8 +148,7 @@ font-size: 1.1rem;
       };
       if (JWTToken) { // JWT 토큰이 존재하는 경우에만 getMyPageData 함수를 호출합니다.
         getMyPageData();
-      }
-      }, [id, KakaoId, JWTToken]);
+      }}, [id, KakaoId, JWTToken]);
 
 
     const formattedPoint = PointData && PointData.point ? PointData.point.toLocaleString() : '';
@@ -176,7 +165,7 @@ font-size: 1.1rem;
         alert("로그인이 필요합니다."); // 카카오 로그인이 되어있지 않은 경우
         return; // DB에 vote_result 의 idx 값에 null이 들어가면 해당 게시물을 불러오는 info API가 오류가 발생합니다.
         // 이 점 유의
-      } else if (!PostVoteStatus) { // 투표 상태가 마감된 경우
+      } else if (PostVoteStatus) { // 투표 상태가 마감된 경우
           alert("마감된 투표입니다.");
           return;
       }
@@ -275,17 +264,16 @@ font-size: 1.1rem;
           <p>[{Category}]</p>
           <h1>{post.title}</h1>
           </div>
-          <div className='bottom_info'>
+        <p className="content">{post.content}</p>
+        {/* boardImg의 값이 null 아니라면 이미지를 표시한다. */}
+        {boardImg && <img src={boardImg} alt="게시글 이미지" className="board-img" />}
+        {boardImg && <br/>}
+        <div className='bottom_info'>
         {/* <p className="v_nickname">작성자 : {post.idx}</p> */}
         <p className="v_nickname">작성자 : {post.nickname ? post.nickname : post.idx}</p> {/* 닉네임이 없는 경우 idx를 표시한다. */}
         <p className='totalVote'>총 <strong>{TotalVoteCount}</strong>표</p>
         <p className="bettingAmount">총 배팅금액 : <strong>{post.bettingAmount}P</strong></p>
         </div>
-        <p className="content">{post.content}</p>
-        {/* boardImg의 값이 null 아니라면 이미지를 표시한다. */}
-        {boardImg && <img src={boardImg} alt="게시글 이미지" className="board-img" />}
-        {boardImg && <br/>}
-        
         {/* 총 베팅금액 추후 API 수정 시 수정 */}
         <h4 className='hr'>투표</h4>
         <div className='hr_bottom'></div>
@@ -371,6 +359,6 @@ font-size: 1.1rem;
       
     </div>
 );
-  }
+          }
 
 export default VotePage;
