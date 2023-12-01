@@ -3,7 +3,6 @@ import {useState} from 'react';
 import './App.css';
 import Login from './component/Login/Login.js';
 import Nav, { Boardlist } from './component/Nav/Nav.js';
-import VSBoard from './component/VSBoard/VSBoard.js';
 import Participationboard from './component/Participationboard/Participation.js';
 
 import KakaoCallback from './component/KakaoLogin/KakaoCallback.tsx';
@@ -66,7 +65,6 @@ function MainLayout() {
       
       <Routes>
         <Route path="/" element={<Main />} /> {/* 메인 페이지 변경 */}
-        <Route path="/VSboard" element={<VSBoard />} />
         <Route path="/participationboard" element={<Participationboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />

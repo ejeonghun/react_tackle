@@ -37,12 +37,12 @@ function PointHistory() {
                   'Authorization': `Bearer ${JWTToken}`
               }
           });
+          response2.data.data.sort((a, b) => b.pointId - a.pointId); // 여기서 데이터를 정렬합니다.
           setPointHistory(response2.data.data);
       } catch (error) {
           console.log("Failed to fetch data", error);
-          alert("세션이 만료되었습니다, 다시 로그인해주세요.")
-          window.location.href = "/logout";
-      }
+
+      } 
   };
   getMyPointHistoryData();
 }, [JWTToken]);

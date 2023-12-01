@@ -97,7 +97,7 @@ function Board({BoardName}) {
                 <h5 style={{textAlign:'left', margin:'0', marginBlock:'0', marginBottom: '5px', display:'inline-block', borderBottom:'1px solid #dbc1c1'}}>{post.status === 'END' ? '투표종료' : '투표중'}</h5>
                 <h5 style={{textAlign:'right', margin:'0', marginBlock:'0', marginBottom: '5px', display:'inline-block'}}>누적 금액 : {post.bettingAmount}P</h5>
                 </div>
-                              <div style={{ display: 'flex', justifyContent: 'space-around', position: 'relative', flexDirection: 'row', alignItems: 'center' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-around', position: 'relative', flexDirection: 'row', alignItems: 'center' }}>
                 <div style={{ width: '50%', height: '30px', textAlign: 'center', backgroundColor: 'rgba(246, 165, 165, 1)', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', borderRadius: '25px', position: 'relative', left: '1%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   {post.voteItemsContent[0]}
                 </div>

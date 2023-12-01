@@ -32,10 +32,10 @@ function Boardlist() {
                 </Link>
                 <Link 
                     className="NavMenu" 
-                    to="/VSboard"
-                    style={{ borderBottom: location.pathname === "/VSboard" ? "1px solid rgba(251, 3, 3, 1)" : "" }}
+                    to="/category"
+                    style={{ borderBottom: location.pathname === "/category" ? "1px solid rgba(251, 3, 3, 1)" : "" }}
                 >
-                    <b>찬반 게시판</b>
+                    <b>카테고리</b>
                 </Link>
                 <Link 
                     className="NavMenu" 
