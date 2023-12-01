@@ -1,27 +1,32 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React, {useState, useContext, useEffect, useRef} from 'react';
 import NonLoginProfileImage from '../img/tmp_profile_img.jpg'; // 프로필 이미지 추가
 import './Nav.css';
 // import LottieAnimation from '../Lottie/Lottie';
 import AuthContext from '../AuthContext/AuthContext';
 import Hamburger from '../Hambuger/Hamburger';  // 햄버거 메뉴 추가
-
+import Search from '../Search/Search';
 
 function Boardlist() {
     const location = useLocation();
-    const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인 
+    const { isLoggedIn } = useContext(AuthContext); // 로그인 여부 확인
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
     
     return ( 
     <div className='boardlist'>
     <div className='search'>
-    <input type='text' placeholder='검색어를 입력하세요' />
-        </div>
+      <input type="text" class="searchTerm" placeholder="검색어 입력" onChange={e => setSearchTerm(e.target.value)}/>
+      <button type="submit" class="searchButton" onClick={() => navigate(`/search/${searchTerm}`)}>
+        <img src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png'></img>
+     </button>
+    </div>
     <div className="nav">
         {/* 각 Link 컴포넌트에 대해 현재 위치와 매칭되면 borderBottom 스타일 적용 */}
                 <Link 
                     className="NavMenu" 
-                    to="/Hotboard"
-                    style={{ borderBottom: location.pathname === "/Hotboard" ? "1px solid rgba(251, 3, 3, 1)" : "" }}
+                    to="/category/Hotboard"
+                    style={{ borderBottom: location.pathname === "/category/Hotboard" ? "1px solid rgba(251, 3, 3, 1)" : "" }}
                 >
                     <b>HOT 게시판</b>
                 </Link>
