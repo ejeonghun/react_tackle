@@ -1,7 +1,6 @@
 .myVotePage {
-  padding: 2em;
-  background-color: #f5f5f5;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 1em;
+  background-color: white;
 }
 
 .myVoteList {

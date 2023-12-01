@@ -275,16 +275,17 @@ font-size: 1.1rem;
           <p>[{Category}]</p>
           <h1>{post.title}</h1>
           </div>
-        <p className="content">{post.content}</p>
-        {/* boardImg의 값이 null 아니라면 이미지를 표시한다. */}
-        {boardImg && <img src={boardImg} alt="게시글 이미지" className="board-img" />}
-        {boardImg && <br/>}
-        <div className='bottom_info'>
+          <div className='bottom_info'>
         {/* <p className="v_nickname">작성자 : {post.idx}</p> */}
         <p className="v_nickname">작성자 : {post.nickname ? post.nickname : post.idx}</p> {/* 닉네임이 없는 경우 idx를 표시한다. */}
         <p className='totalVote'>총 <strong>{TotalVoteCount}</strong>표</p>
         <p className="bettingAmount">총 배팅금액 : <strong>{post.bettingAmount}P</strong></p>
         </div>
+        <p className="content">{post.content}</p>
+        {/* boardImg의 값이 null 아니라면 이미지를 표시한다. */}
+        {boardImg && <img src={boardImg} alt="게시글 이미지" className="board-img" />}
+        {boardImg && <br/>}
+        
         {/* 총 베팅금액 추후 API 수정 시 수정 */}
         <h4 className='hr'>투표</h4>
         <div className='hr_bottom'></div>

@@ -130,14 +130,14 @@ const styles = {
     },
 
     supportContainer: {
-        width: '60%',
+        width: '80%',
         margin: 'auto',
         paddingTop: '30px',
     },
     supportItem: {
         borderBottom: '1px solid #ddd',
         padding: '10px',
-        marginBottom: '10px',
+        marginBottom: '40px',
         textAlign: 'left',
         paddingTop: '15px',
     },
@@ -152,7 +152,7 @@ const styles = {
     },
     answer: {
         fontSize: '17px',
-        marginTop: '15px',
+        marginTop: '40px',
         display: 'flex',
         marginBottom: '-5px',
     },
