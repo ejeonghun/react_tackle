@@ -1,0 +1,276 @@
+.title {
+  display: inline-flex;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #333;
+  /* display: inline-block; */
+  align-items: center;
+  gap: 15px;
+  }
+
+.title h1 {
+  margin: 0;
+  margin-block: 0.3em;
+}
+
+.comment_date {
+  margin-left: auto;
+}
+  
+  .content {
+    text-align:center; 
+    font-size:18px; 
+    color:#666;
+    margin-bottom:20px;
+  }
+  
+  .option-container {
+     background-color:#f9f9f9;
+     border-radius:5px;
+     padding:10px;
+     margin-bottom:10px;
+  
+     display:flex;
+     align-items:center;
+  }
+  .vote_button{
+    flex-grow :1 ;
+    background-color :#4CAF50 ;
+    color : white ;
+    border-radius:5 px ;
+    border: none ;
+    padding:10px;
+    transition: background-color .3s ease; /* 배경색 변경 시 애니메이션 추가 */
+    width:100px;
+  }
+  .vote_button {
+    background: linear-gradient(270deg, #d31616, #315a31, #4f4f9e);
+    background-size: 300% 300%;
+    animation: gradient 3s ease-in-out infinite;
+    transition: transform 0.3s ease-in-out;
+    z-index: 9999;
+  }
+  
+  .vote_button:hover {
+    transform: scale(1.1);
+  }
+  
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .bar{
+    height: 20px;
+    background-color: #ddd; /* bar의 배경색 */
+    width: 100%; /* bar의 너비 */
+  }
+
+  .bar-fill{
+      height: 20px; /* bar의 높이 */
+      background-color:#4CAF50 ; /* 투표 수에 따른 채워지는 색상 */
+      width: 0; /* 초기 상태에서는 비어있다고 가정 */
+      /* transition: width .3s ease; 너비 변경 시 애니메이션 추가 */
+      position: relative;
+      overflow: visible;
+  }
+
+  .bar-fill {
+    animation: fill 5s ease-out;
+  }
+  
+  @keyframes fill {
+    0% { width: 0; }
+  }
+  
+
+  
+  .hr{
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+    margin-left: 10px;
+  }
+
+  .hr_bottom {
+    border-bottom: #333 1px solid;
+  }
+  
+  .vote-container form {
+    display: block;
+    width: 100%;
+  }
+  
+  .vote-container textarea {
+    display: inline-block;
+    width:60%;
+    height:30px;
+    margin-right:10px; /* textarea와 button 사이의 간격 */
+  }
+  
+  .vote-container button[type=submit]{
+    display: inline-block;
+     background-color:#333;
+     color:white;
+     border:none;
+     padding:10px;
+     cursor:pointer;  
+     margin: 0 auto;
+  }
+  
+/* Vote.css */
+
+.comment-list {
+  margin-top: 20px;
+}
+
+.comment-list h4 {
+  margin-bottom: 10px;
+  text-align: left; /* 추가된 스타일 */
+
+}
+
+.comment-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.bet_select {
+  display: inline-block;
+  width:130px; 
+  border-radius:5px;
+  height: 22px;
+}
+ 
+.select_betting {
+  display: inline-block;
+  /* padding-left:30px; */
+}
+
+.bettingAmount {
+  font-size: 14px;
+  width: 150px;
+  height: 22px;
+  border-radius:5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.v_nickname {
+  font-size: 14px;
+  width: 150px;
+  height: 22px;
+  border-radius:5px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+}
+
+.board-img {
+  width:50vh;
+  height: auto;
+}
+
+.bottom_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.totalVote {
+  font-size: 14px;
+  width: 150px;
+  height: 22px;
+  border-radius:5px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+}
+
+.category_name {
+  font-size: 14px;
+  width: 150px;
+  height: 22px;
+  border-radius:5px;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.point_bet {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.MyPoint_text { /* 현재 내 포인트 */
+  margin:0px;
+  margin-block: 0px;
+  margin-bottom: 8px;
+  margin-top: 2px;
+  margin-right: 10px;
+}
+
+.MyPoint {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Betting_text {
+  display: inline-flex;
+  margin:0px;
+  margin-block: 0px;
+  margin-left: 10px;
+}
+
+
+@keyframes colorChange1 {
+  0% { background-color: red; }
+  50% { background-color: blue; }
+  100% { background-color: red; }
+}
+
+@keyframes colorChange2 {
+  0% { background-color: blue; }
+  50% { background-color: green; }
+  100% { background-color: blue; }
+}
+
+@keyframes colorChange3 {
+  0% { background-color: green; }
+  50% { background-color: purple; }
+  100% { background-color: green; }
+}
+
+@keyframes colorChange4 {
+  0% { background-color: purple; }
+  50% { background-color: red; }
+  100% { background-color: purple; }
+}
+
+.option1 {
+  animation: colorChange1 3s infinite;
+}
+
+.option2 {
+  animation: colorChange2 3s infinite;
+}
+
+.option3 {
+  animation: colorChange3 3s infinite;
+}
+
+.option4 {
+  animation: colorChange4 3s infinite;
+}
+
+.left-align {
+  text-align: left;
+  padding-left: 10px; /* 원하는 만큼의 여백을 추가 */
+}
+
+
+

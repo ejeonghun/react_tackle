@@ -1,0 +1,113 @@
+.container {
+    text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+}
+
+.point_th {
+    margin-top: 5px;
+    width:33%;
+}
+
+.point_table {
+    width:100%;
+    border-collapse: separate;
+    border-spacing: 0.5rem;
+    border: 1px solid #ddd;
+    font-size: 18px;
+}
+
+.point_data {
+    margin-top: 100px;
+}
+
+.btn_div {
+    margin: 0 auto;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.point_data {
+    margin-top: 100px;
+}
+
+.point_btn {
+    width:15vh;
+    height:100%;
+    background-color: #494949;
+    color:white;
+    border:none;
+    padding:10px;
+    cursor:pointer;  
+    margin: 0 auto;
+    margin: 0px 10% 0px 10%; 
+    margin-top:10%;
+    border-radius: 15px;
+    max-width: 25vh;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+}
+
+@media screen and (min-width: 1000px) {
+    .point_btn {
+        margin-top:3%;
+    }
+}
+
+    
+.point_btn:hover {
+    background-color: #1b497acc;
+}
+
+.point_top {
+    background-color: rgba(250, 199, 199, 1);
+    padding-bottom: 1%;
+    
+}
+
+.info {
+    margin: 0 auto;
+    margin-top:20px;
+    margin-bottom:20px;
+    width: 80%;
+    height: 100%;
+    background-color: rgba(250, 199, 199, 1);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.now_point {
+    position: relative;
+    top: 15px;
+    font-size:30px;
+    margin: 0 auto;
+    margin-top:20px;
+    margin-bottom:20px;
+    width: 80%;
+    height: 100%;
+    background-color: rgba(250, 199, 199, 1);
+    border-radius: 15px;
+    padding: 10px;
+    /* 텍스트 그림자 애니메이션 추가 */
+}
+
+.point_tableDiv {
+    height: 50vh;
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 20px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 20px;
+  }

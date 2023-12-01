@@ -1,0 +1,25 @@
+.MyPost {
+    padding: 2em;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .myPostTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .myPostTable thead {
+    background-color: #f9f9f9;
+  }
+  
+  .myPostTable th, .myPostTable td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .myPostTable tr:hover {
+    background-color: #f0f0f0;
+  }
+  
