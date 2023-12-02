@@ -3,11 +3,10 @@ import { Link, useParams } from 'react-router-dom';
 import Write_Btn from "../Write_btn/Write_btn"
 import axios from 'axios';
 import Loading from '../Loading/Loading';
-
 import { getCategoryId } from "../Category/CategoryList.jsx";
 
 function Search() {
-    const { SearchParam } = useParams(); // 검색 키 값을 가지고 옴
+  const { SearchParam } = useParams(); // 검색 키 값을 가지고 옴
   const [loading, setLoading] = useState(true);
   const [searchResults, setSearchResults] = useState([]);
   const [visibleData, setVisibleData] = useState(null); // 보여주는 데이터를 저장하는 스테이트

@@ -45,8 +45,8 @@
     text-align: center;
     width:1280px;
     margin: 0 auto;
-    background-color: #f7f7f7;
+    /* background-color: #f7f7f7; */ /* 반응형 웹 테스트  */
     min-height: 100vh;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */ /* 반응형 웹 테스트  */
   }
 }
