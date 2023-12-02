@@ -3,7 +3,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import Write_Btn from "../Write_btn/Write_btn"
 import axios from 'axios';
 import Loading from '../Loading/Loading';
-import './Board.css'
+
 import { getCategoryId } from "../Category/CategoryList.jsx";
 
 function Board({BoardName}) {

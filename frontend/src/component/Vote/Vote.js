@@ -196,16 +196,9 @@ font-size: 1.1rem;
         });
         
         if (response.data.message) { // 메세지가 있는 경우
-          if (response.success === "true") { // 투표 성공
+          if (response.data.success === true) { // 투표 성공
             alert("투표가 완료 되었습니다.");
-            const response = await axios({ 
-              method: 'post',
-              url: `https://api1.lunaweb.dev/api/v1/board/info`,
-              headers: { 'Content-Type': 'application/json' },
-              data: { "postId": id, "id": KakaoId }
-            });
-            setPost(response.data.data);
-            // 투표가 완료되면 다시 api 호출을 하여 리랜더링 한다.
+            window.location.reload();
           } else {
             alert(response.data.message); // api의 오류 코드를 alert로 띄웁니다.
           }
