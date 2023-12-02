@@ -3,9 +3,6 @@ import {useState} from 'react';
 import './App.css';
 import Login from './component/Login/Login.js';
 import Nav, { Boardlist } from './component/Nav/Nav.js';
-import VSBoard from './component/VSBoard/VSBoard.js';
-import Participationboard from './component/Participationboard/Participation.js';
-import Hotboard from './component/Hotboard/Hotboard.js';
 import KakaoCallback from './component/KakaoLogin/KakaoCallback.tsx';
 import Main from './component/Main/Main.js';
 import Mypage from './component/Mypage/Mypage.js';
@@ -28,6 +25,7 @@ import MyReplie from './component/Mypage/Function/MyReplie.jsx';
 import AdminMember from './component/AdminPage/AdminMember.jsx';
 import MyCreatedPost from './component/Mypage/Function/MyCreatedPost.jsx';
 import PayService from './component/PayService/PayService.js';
+import Search from './component/Search/Search.jsx';
 
 
     // 메인 페이지 구성
@@ -65,9 +63,6 @@ function MainLayout() {
       
       <Routes>
         <Route path="/" element={<Main />} /> {/* 메인 페이지 변경 */}
-        <Route path="/Hotboard" element={<Hotboard />} />
-        <Route path="/VSboard" element={<VSBoard />} />
-        <Route path="/participationboard" element={<Participationboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/oauth_kakao" element={<KakaoCallback />} />
@@ -88,6 +83,7 @@ function MainLayout() {
         <Route path='/mypage/mycomment' element={<MyReplie/>} />
         <Route path='/admin/member' element={<AdminMember/>} />
         <Route path='/mypage/wrote' element={<MyCreatedPost/>} />
+        <Route path='/search/:SearchParam' element={<Search/>} />
         {/* 여기에서 vote/? 의 값에 따라서 API로 부터 JSON형식으로 데이터를 받아 데이터를 처리하는 로직을 작성해야함. */}
       </Routes>
       

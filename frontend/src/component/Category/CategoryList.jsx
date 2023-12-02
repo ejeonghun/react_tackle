@@ -2,6 +2,7 @@ import React from "react";
 
 // 카테고리 리스트
 const categories = [
+{ index:0, key: 'Hotboard', name: '인기글'},
 { index:1, key: 'daily-love', name: '일상/연애'},
 { index:2, key: 'game', name: '게임'},
 { index:3, key: 'sports', name: '스포츠'},

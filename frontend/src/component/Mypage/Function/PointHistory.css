@@ -2,17 +2,20 @@
     text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
 }
 
-.point_th {
-    margin-top: 5px;
-    width:33%;
+.point_th,
+.point_data {
+  padding: 20px; /* Adjust the padding as needed */
+  font-size: larger;
 }
 
 .point_table {
     width:100%;
+    border: #666;
     border-collapse: separate;
-    border-spacing: 0.5rem;
-    border: 1px solid #ddd;
-    font-size: 18px;
+    border-spacing: 0rem;
+    font-size: 15px;
+    margin: 0; /* Remove or adjust as needed */
+
 }
 
 .point_data {
@@ -20,41 +23,35 @@
 }
 
 .btn_div {
-    margin: 0 auto;
-    margin-top:20px;
-    margin-bottom:20px;
-}
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 40px auto; /* Adjusted margin */
+  }
 
 .point_data {
-    margin-top: 100px;
+    margin-top: 10px;
 }
 
 .point_btn {
-    width:15vh;
-    height:100%;
-    background-color: #494949;
-    color:white;
-    border:none;
-    padding:10px;
-    cursor:pointer;  
-    margin: 0 auto;
-    margin: 0px 10% 0px 10%; 
-    margin-top:10%;
+    width: 13vh;
+    background-color: rgb(152, 179, 228);
+    color: black;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
     border-radius: 15px;
     max-width: 25vh;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 18px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-}
-
-@media screen and (min-width: 1000px) {
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  @media screen and (min-width: 1000px) {
     .point_btn {
-        margin-top:3%;
+      margin-top: 3%;
     }
-}
+  }
 
     
 .point_btn:hover {
@@ -81,8 +78,8 @@
 .now_point {
     position: relative;
     top: 15px;
-    font-size:30px;
-    margin: 0 auto;
+    font-size:20px;
+    margin: auto;
     margin-top:20px;
     margin-bottom:20px;
     width: 80%;
@@ -96,6 +93,7 @@
 .point_tableDiv {
     height: 50vh;
     overflow-y: auto;
+    margin: 0;
 }
 
 ::-webkit-scrollbar {

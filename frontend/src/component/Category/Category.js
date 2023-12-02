@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFire } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faGamepad } from '@fortawesome/free-solid-svg-icons';
 import { faSoccerBall } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +16,7 @@ const CategoryContainer = styled.div`
     gap: 20px; // 그리드 아이템 사이에 간격 추가
     justify-content: space-between;
     flex-wrap: wrap; // 필요시 줄바꿈 처리
-    padding-top:100px;
+    padding-top:40px;
     justify-items: center;
 `;
 
@@ -34,10 +35,12 @@ const IconContainer = styled.div`
 
 const CategoryName = styled.h2`
    text-align:center;
+   font-size: 17px;
 `;
 
 function Categories() {
     const categories = [
+        { key: 'Hotboard', name: '인기글', icon: faFire, color:'red'},
         { key: 'daily-love', name: '일상/연애', icon: faHeart, color:'red' },
         { key: 'game', name: '게임', icon: faGamepad, color:'cyan' },
         { key: 'sports', name: '스포츠', icon :faSoccerBall, color:'green' },

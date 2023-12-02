@@ -14,6 +14,7 @@ function Board({BoardName}) {
   const { categoryKey } = useParams(); // 카테고리 키 값을 가지고 옴
 
   const categories = {
+    0: "인기글",
     1: "일상/연애",
     2: "게임",
     3: "스포츠",
@@ -28,13 +29,23 @@ function Board({BoardName}) {
   } else {
     boardName = '';
   }
-  const [data, setData] = useState(null); // data라는 상태를 만듭니다.
-  const location = useLocation(); // 현재 path 위치를 가져옵니다.
 
       useEffect(() => {
         setLoading(true); // api 호출 전에 true로 변경하여 로딩화면 띄우기
         if (window.location.pathname !== '/') { // 카테고리 이면 카테고리 값을 파라미터에 넣어서 API 호출
-          async function getData() {
+          if (window.location.pathname === '/category/Hotboard') { // 인기글은 정렬을 하지않음 -> 백앤드에서 총 투표수가 높은 순으로 순서대로 값을 반환해줌
+            async function getData() {
+              const response = await axios.get(`https://api1.lunaweb.dev/api/v1/board/list?categoryId=${getCategoryId(categoryKey)}`);
+                setAllData(response.data); 
+                setVisibleData(response.data.slice(0, visibleCount)); // 처음에는 4개만 보여줌
+                if (response.data.length === 0) { // 데이터가 없으면 예외처리
+                  setVisibleData('null data'); // 데이터가 없으면 null을 설정
+                }
+              }
+                
+                getData().then(() => setLoading(false)); // setLoading을 getData가 완료된 후에 호출합니다.
+          } else {
+          async function getData() { // 해당 카테고리의 전체 게시물을 가져옴
             const response = await axios.get(`https://api1.lunaweb.dev/api/v1/board/list?categoryId=${getCategoryId(categoryKey)}`);
             response.data.sort((a, b) => b.postId - a.postId); // 여기서 데이터를 정렬합니다.
               setAllData(response.data); 
@@ -45,8 +56,9 @@ function Board({BoardName}) {
             }
               
               getData().then(() => setLoading(false)); // setLoading을 getData가 완료된 후에 호출합니다.
-          } else {
-            async function getData() { // 카테고리가 아니면 전체 게시글을 가져옵니다.
+          } 
+        }else {
+            async function getData() { // 카테고리가 아닌 전체 게시글을 가져옵니다.
               const response = await axios.get('https://api1.lunaweb.dev/api/v1/board/list');
               response.data.sort((a, b) => b.postId - a.postId); // 여기서 데이터를 정렬합니다.
                 setAllData(response.data); 
@@ -78,30 +90,33 @@ function Board({BoardName}) {
         ) : (
             {/* 각각의 게시글을 순회합니다. */}
             ,visibleData.map((post) => (
-            <div className='Main_Content' key={post.postId} style={{width:'100%'}}>
+              <div className='Main_Content' key={post.postId} style={{width:'100%'}}>
               <Link to={`/vote/${post.postId}`}> 
                 <div className="category_title"><h5 className="category">[{categories[post.categoryId]}]</h5><h4 className="board_title">{post.title}</h4></div>
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <h5 style={{textAlign:'left', margin:'0', marginBlock:'0', marginBottom: '5px', display:'inline-block', borderBottom:'1px solid #dbc1c1'}}>{post.status === 'END' ? '투표종료' : '투표중'}</h5>
                 <h5 style={{textAlign:'right', margin:'0', marginBlock:'0', marginBottom: '5px', display:'inline-block'}}>누적 금액 : {post.bettingAmount}P</h5>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-around', position: 'relative'}}>
-                  <div style={{width:'50%', textAlign:'center', backgroundColor:'rgba(246, 165, 165, 1)',boxShadow :'0px 4px 4px rgba(0, 0, 0, 0.25)' ,borderRadius: '25px',position: 'relative', left:'1%'}}>
-                    <h5>{post.voteItemsContent[0]}</h5>
-                  </div>
-                  <div style={{width:'50%', textAlign:'center', backgroundColor:'rgba(128, 165, 235, 1)',boxShadow :'0px 4px 4px rgba(0, 0, 0, 0.25)' ,borderRadius: '25px',position: 'relative', left:'-1%'}}>
-                    <h5>{post.voteItemsContent[1]}</h5>
-                  </div>
+              <div style={{ display: 'flex', justifyContent: 'space-around', position: 'relative', flexDirection: 'row', alignItems: 'center' }}>
+                <div style={{ width: '50%', height: '30px', textAlign: 'center', backgroundColor: 'rgba(246, 165, 165, 1)', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', borderRadius: '25px', position: 'relative', left: '1%', display: 'flex', flexDirection: 'column', justifyContent: 'center' ,fontWeight: 'bold'}}>
+                  {post.voteItemsContent[0]}
                 </div>
+                <div style={{ width: '50%', height: '30px', textAlign: 'center', backgroundColor: 'rgba(128, 165, 235, 1)', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', borderRadius: '25px', position: 'relative', left: '-1%', display: 'flex', flexDirection: 'column', justifyContent: 'center' ,fontWeight: 'bold'}}>
+                  {post.voteItemsContent[1]}
+                </div>
+              </div>
+
+              {/* 빨강 파랑 수평수직조절 */}
                 <div className="writer" style={{display:'flex', justifyContent:'space-between'}}>
                   <h5>Date : {new Date(post.createdAt).toLocaleDateString()}</h5> {/* 작성일을 yy/mm/dd 형식으로 포맷팅 */}
-                  <h5>Total : {post.votingDeadLine}명</h5>
+                  <h5>Total : {post.votingAmount ? post.votingAmount : "0"}명</h5>
                   <h5>Writer : {post.nickname ? post.nickname : post.idx}</h5>  {/* 닉네임이 없는 경우 idx를 표시한다. */}
                 </div>
               </Link>
             </div>
           )))
           }
+
           
           <button onClick={handleLoadMore} className="button-2" style={{marginBottom:'10px'}}><img src={require("./arrow_down.png")} alt="더보기" style={{width:'14px'}}></img></button> {/* "더보기" 버튼 */}
           </div>

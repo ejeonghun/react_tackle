@@ -34,12 +34,12 @@ function MyCreatedPostTable() {
   <table className="myPostTable">
     <thead>
       <tr>
-        <th>게시글 제목</th>
-        <th>게시글 내용</th>
+        <th>제목</th>
+        <th>내용</th>
         <th>상태</th>
         <th>총 배팅금액</th>
         <th>게시글 작성일</th>
-        <th>투표 종료 일시</th>
+        <th>종료 일시</th>
         <th>게시글 이동</th>
       </tr>
     </thead>

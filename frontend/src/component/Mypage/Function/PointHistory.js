@@ -37,12 +37,12 @@ function PointHistory() {
                   'Authorization': `Bearer ${JWTToken}`
               }
           });
+          response2.data.data.sort((a, b) => b.pointId - a.pointId); // 여기서 데이터를 정렬합니다.
           setPointHistory(response2.data.data);
       } catch (error) {
           console.log("Failed to fetch data", error);
-          alert("세션이 만료되었습니다, 다시 로그인해주세요.")
-          window.location.href = "/logout";
-      }
+
+      } 
   };
   getMyPointHistoryData();
 }, [JWTToken]);
@@ -66,7 +66,7 @@ function PointHistory() {
     <div className="container" style={{width:'100%'}}>
     <div className='point_top'>
       {/* <h2 className="info"></h2> */}
-      <h1 className="now_point">현재 포인트: <strong>{formattedPoint}P</strong></h1> {/* 현재 포인트 출력 */}
+      <h2 className="now_point">현재 포인트: <strong>{formattedPoint}P</strong></h2> {/* 현재 포인트 출력 */}
       <div className='btn_div'> {/* btn div */}
       {/* 포인트 충전, 환전 버튼 */}
       {/* 충전 버튼 클릭 시 /charge 로 Link */}
