@@ -54,6 +54,7 @@ font-size: 1.1rem;
     const [Category, setCategory] = useState(''); // 카테고리 state 지정
     const [PostVoteStatus, setPostVoteStatus] = useState(false); // 투표 기한? 'END':'ING' state 지정
     const [PointData, setPointData] = useState(0); // 포인트 데이터 가져오기
+    const [barwidth, setbarWidth] = useState('0%');
 
       // 배팅 select 값이 변경될 때 호출되는 함수 기존 HTML Select 코드임
       // const handleSelectChange = (event) => {
@@ -196,16 +197,9 @@ font-size: 1.1rem;
         });
         
         if (response.data.message) { // 메세지가 있는 경우
-          if (response.success === "true") { // 투표 성공
+          if (response.data.success === true) { // 투표 성공
             alert("투표가 완료 되었습니다.");
-            const response = await axios({ 
-              method: 'post',
-              url: `https://api1.lunaweb.dev/api/v1/board/info`,
-              headers: { 'Content-Type': 'application/json' },
-              data: { "postId": id, "id": KakaoId }
-            });
-            setPost(response.data.data);
-            // 투표가 완료되면 다시 api 호출을 하여 리랜더링 한다.
+            window.location.reload();
           } else {
             alert(response.data.message); // api의 오류 코드를 alert로 띄웁니다.
           }
@@ -285,7 +279,7 @@ font-size: 1.1rem;
               className={`bar-fill option${index + 1}`} // 선택지 애니메이션 삭제 시 해당 option 클래스 삭제 밑의 backgroundColor 주석 해제
               style={{ 
                 width: (VotingStatus || PostVoteStatus) ? `${TotalVoteCount > 0 ? (option.voteCount / TotalVoteCount) * 100 : 0}%` : '0%',
-                // backgroundColor: colors[index % colors.length]
+                transition: "width 3s ease-in-out",
               }}
             />
           </div>
@@ -359,6 +353,6 @@ font-size: 1.1rem;
       
     </div>
 );
-          }
+}
 
 export default VotePage;

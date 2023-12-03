@@ -74,18 +74,11 @@
       height: 20px; /* bar의 높이 */
       background-color:#4CAF50 ; /* 투표 수에 따른 채워지는 색상 */
       width: 0; /* 초기 상태에서는 비어있다고 가정 */
-      /* transition: width .3s ease; 너비 변경 시 애니메이션 추가 */
+      transition: width .3s ease; /*너비 변경 시 애니메이션 추가*/
       position: relative;
       overflow: visible;
   }
-
-  .bar-fill {
-    animation: fill 5s ease-out;
-  }
   
-  @keyframes fill {
-    0% { width: 0; }
-  }
   
 
   
