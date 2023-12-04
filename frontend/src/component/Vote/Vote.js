@@ -88,13 +88,16 @@ font-size: 1.1rem;
       useEffect(() => {
         // 게시글을 불러오는 API
         async function getData() {
+          const headers = JWTToken
+    ? {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${JWTToken}`
+      }
+    : {};
           const response = await axios({ // POST 요청으로 처리한다.
             method: 'get',
             url: `https://api1.lunaweb.dev/api/v1/board/info?postId=${id}`,
-            headers: { 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${JWTToken}`
-          },
-            
+            headers: headers,
           });
           setVotingStatus(response.data.data.voting);
           setPostVoteStatus(response.data.data.status === "ING" ? false : true); // ing 이면 true , end 이면 false
