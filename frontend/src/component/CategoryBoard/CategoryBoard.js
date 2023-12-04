@@ -16,6 +16,8 @@ function getCategoryName(categoryKey) {
             return '정치/경제';
         case 'culture-art':
             return'문화/예술';
+        case 'Hotboard':
+            return '인기글';
         default:
             return '';
     }

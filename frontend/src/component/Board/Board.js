@@ -36,7 +36,7 @@ function Board({BoardName}) {
           if (window.location.pathname === '/category/Hotboard') { // 인기글은 정렬을 하지않음 -> 백앤드에서 총 투표수가 높은 순으로 순서대로 값을 반환해줌
             async function getData() {
               const response = await axios.get(`https://api1.lunaweb.dev/api/v1/board/list?categoryId=${getCategoryId(categoryKey)}`);
-                setAllData(response.data); 
+                setAllData(response.data);
                 setVisibleData(response.data.slice(0, visibleCount)); // 처음에는 4개만 보여줌
                 if (response.data.length === 0) { // 데이터가 없으면 예외처리
                   setVisibleData('null data'); // 데이터가 없으면 null을 설정
