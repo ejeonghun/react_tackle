@@ -76,7 +76,7 @@ function Search() {
                 <hr/>
                 <div className="writer" style={{display:'flex', justifyContent:'space-between'}}>
                   <h5>Date : {new Date(post.createdAt).toLocaleDateString()}</h5> {/* 작성일을 yy/mm/dd 형식으로 포맷팅 */}
-                  <h5>Total : {post.votingDeadLine}명</h5>
+                  <h5>Total : {post.votingAmount}명</h5>
                   <h5>Writer : {post.nickname ? post.nickname : post.idx}</h5>  {/* 닉네임이 없는 경우 idx를 표시한다. */}
                 </div>
               </Link>
