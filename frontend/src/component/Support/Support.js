@@ -89,12 +89,12 @@ function Support() {
                         <FaTimes style={styles.closeButton} size={20} onClick={handleCloseClick} />
                         <form id="contact-form" style={styles.contactForm}>
                             <input type="hidden" name="contact_number" />
-                            <label>이름</label>
-                            <input type="text" name="user_name" />
-                            <label>이메일</label>
-                            <input type="email" name="user_email" />
-                            <label>문의 내용</label>
-                            <textarea name="message"></textarea>
+                            <label>이름</label><br></br>
+                            <input type="text" name="user_name" /><br></br>
+                            <label>이메일</label><br></br>
+                            <input type="email" name="user_email" /><br></br>
+                            <label>문의 내용</label><br></br>
+                            <textarea name="message"></textarea><br></br>
                             <input type="submit" value="전송" />
                         </form>
                     </div>
@@ -118,7 +118,7 @@ const styles = {
     },
     modalWindow: {
         backgroundColor: '#fff',
-        padding: '20px',
+        padding: '25px',
         borderRadius: '10px',
         position: 'relative',
     },
@@ -174,6 +174,39 @@ const styles = {
     headsetIcon: {
         marginRight: '1px',
     },
+      contactForm: {
+        display: 'flex',
+        flexDirection: 'column',
+        padding : '50px'
+      },
+      label: {
+        marginBottom: '8px',
+      },
+      input: {
+        padding: '120px',
+        marginBottom: '16px',
+        border: '1px solid #ccc',
+        borderRadius: '4px',
+        fontSize: '14px',
+      },
+      textarea: {
+        padding: '8px',
+        marginBottom: '16px',
+        border: '1px solid #ccc',
+        borderRadius: '4px',
+        fontSize: '14px',
+        resize: 'vertical',
+      },
+      submitButton: {
+        padding: '10px',
+        backgroundColor: 'pink',
+        color: 'white',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        fontSize: '16px',
+      },
+    
 };
 
 export default Support;

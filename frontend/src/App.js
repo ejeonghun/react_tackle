@@ -1,9 +1,8 @@
-import { BrowserRouter, Routes, Route, useLocation, useNavigate} from 'react-router-dom';
-import {useState} from 'react';
+import { BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
 import './App.css';
 import Login from './component/Login/Login.js';
 import Nav, { Boardlist } from './component/Nav/Nav.js';
-import KakaoCallback from './component/KakaoLogin/KakaoCallback.tsx';
+import KakaoCallback from './component/KakaoLogin/KakaoCallbackFrontend.tsx';
 import Main from './component/Main/Main.js';
 import Mypage from './component/Mypage/Mypage.js';
 import Charge from './component/Mypage/Function/Charge.js'
@@ -24,7 +23,6 @@ import AdminPage from './component/AdminPage/AdminPage.jsx'
 import MyReplie from './component/Mypage/Function/MyReplie.jsx';
 import AdminMember from './component/AdminPage/AdminMember.jsx';
 import MyCreatedPost from './component/Mypage/Function/MyCreatedPost.jsx';
-import PayService from './component/PayService/PayService.js';
 import Search from './component/Search/Search.jsx';
 
 
@@ -61,7 +59,7 @@ function MainLayout() {
       <Nav /> {/* 네비게이션 바 */}
       {!hiddenPaths.includes(location.pathname) && <Boardlist />} {/* 게시판 목록 */}
       
-      <Routes>
+      <Routes> {/* 라우팅 처리 */}
         <Route path="/" element={<Main />} /> {/* 메인 페이지 변경 */}
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
@@ -84,7 +82,6 @@ function MainLayout() {
         <Route path='/admin/member' element={<AdminMember/>} />
         <Route path='/mypage/wrote' element={<MyCreatedPost/>} />
         <Route path='/search/:SearchParam' element={<Search/>} />
-        {/* 여기에서 vote/? 의 값에 따라서 API로 부터 JSON형식으로 데이터를 받아 데이터를 처리하는 로직을 작성해야함. */}
       </Routes>
       
 

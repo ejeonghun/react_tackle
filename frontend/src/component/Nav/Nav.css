@@ -159,10 +159,9 @@
 .search button {
     border: none;
     border-radius : 0px 5px 5px 0px;
-    height:30px;
+    height:31px;
     width: 30px;
     padding:5px;
-    background-color: #948c8c;
     padding-top: 1px;
 }
 

@@ -26,10 +26,10 @@ const KakaoCallbackBackend = () => {
                 setIsLoggedIn(true); // 로그인이 완료되면 AuthContext의 isLoggedIn 상태를 true로 변경합니다.
                 setNickname(nicknameFromKakao); // 카카오에서 받은 닉네임으로 nickname 상태 업데이트
                 setProfileImage(profileImageFromKakao); // 카카오에서 받은 프로필 이미지로 profileImage 상태 업데이트
-                sessionStorage.setItem('accessToken', accessToken);   
+                sessionStorage.setItem('accessToken', accessToken);  // 세션 스토리지에 JWT 토큰 저장
                 sessionStorage.setItem('nickname', nicknameFromKakao); // 세션 스토리지에 닉네임 저장
                 sessionStorage.setItem('profileImage', profileImageFromKakao); // 세션 스토리지에 프로필 이미지 URL 저장
-                sessionStorage.setItem('KakaoId',KakaoId);
+                sessionStorage.setItem('KakaoId',KakaoId); // 세션 스토리지에 KakaoId 저장 
                 alert(`로그인 성공!`); 
                 navigate('/');  
             } else {
