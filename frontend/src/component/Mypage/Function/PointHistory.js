@@ -91,7 +91,7 @@ function PointHistory() {
               <td className='point_data'>{ReasonMean(PointHistory.pointAccumulationReason)}</td>
               {/* 금액 부분은 span 태그로 감싸고 금액이 '-'로 시작하면 즉 출금이면 빨간색으로 그렇지 않으면 즉 입금이면 파란색으로 표시 */}
               <td style={{ color: String(PointHistory.pointChangeAmount).startsWith('-') ? 'red' : 'blue' }} className='point_data'>
-              {PointHistory.pointChangeAmount > 0 ? `+${PointHistory.pointChangeAmount}` : PointHistory.pointChangeAmount}
+              {PointHistory.pointChangeAmount > 0 ? `+${PointHistory.pointChangeAmount}` : `${PointHistory.pointChangeAmount}`}
             </td>
             </tr>
           ))}
