@@ -118,7 +118,7 @@ const styles = {
     },
     modalWindow: {
         backgroundColor: '#fff',
-        padding: '20px',
+        padding: '25px',
         borderRadius: '10px',
         position: 'relative',
     },
@@ -174,6 +174,39 @@ const styles = {
     headsetIcon: {
         marginRight: '1px',
     },
+      contactForm: {
+        display: 'flex',
+        flexDirection: 'column',
+        padding : '20px'
+      },
+      label: {
+        marginBottom: '8px',
+      },
+      input: {
+        padding: '120px',
+        marginBottom: '16px',
+        border: '1px solid #ccc',
+        borderRadius: '4px',
+        fontSize: '14px',
+      },
+      textarea: {
+        padding: '8px',
+        marginBottom: '16px',
+        border: '1px solid #ccc',
+        borderRadius: '4px',
+        fontSize: '14px',
+        resize: 'vertical',
+      },
+      submitButton: {
+        padding: '10px',
+        backgroundColor: '#007bff',
+        color: 'white',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        fontSize: '16px',
+      },
+    
 };
 
 export default Support;

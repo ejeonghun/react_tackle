@@ -26,6 +26,7 @@
     height: 100px; /* 이미지 높이 설정 */
     border-radius: 50%; /* 이미지를 원형으로 만듦 */
     margin-right: 2em; /* 오른쪽 마진 설정 */
+    margin-bottom: 100px;
 }
 
 .Mypage_title_point {
@@ -43,7 +44,8 @@
 
 /* 정보 텍스트 스타일링 */
 .mypage_text {
-    margin-bottom: 2em; /* 아래쪽 마진 설정 */
+    margin-top: 2em;
+    margin-bottom: 1.2em; /* 아래쪽 마진 설정 */
     color: #666; /* 텍스트 색상 설정 */
     font-size: 1.3em; /* 폰트 크기 설정 */
 }
@@ -89,5 +91,6 @@
     margin-top: 30px;
 }
 .icon_group span {
-    font-size: 25px; /* 텍스트 크기 조정 */
+    font-size: 20px; /* 텍스트 크기 조정 */
 }
+

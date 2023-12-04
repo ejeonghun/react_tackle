@@ -89,7 +89,7 @@ function Mypage() {
                     </div>
                 </div>
                 <div className="Mypage_info">
-                    <h4 className="mypage_text">마이페이지</h4>
+                    <h3 className="mypage_text">마이페이지</h3>
                     <Link to="charge" className="icon_group">
                         <img src="./img/money.png" alt="충전" className="icon_img" />
                         <span>충전하기</span>
