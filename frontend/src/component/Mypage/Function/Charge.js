@@ -13,14 +13,11 @@ import { useLocation } from 'react-router-dom';
 Modal.setAppElement('#root');
 
 function ChargesPage() {
-    const name = sessionStorage.getItem('nickname');
-    const Img_URL = `${process.env.REACT_APP_IMG_URI}/payment_icon_yellow_medium.png`
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const { isLoggedIn, nickname } = useContext(AuthContext);
     const [chargeAmount, setChargeAmount] = useState(null); // 초기값을 null로 설정
 
-    const {Api_req_success, setApi_req_success} = useState(false);
 
     const location = useLocation();
     const urlParams = new URLSearchParams(location.search);
@@ -44,7 +41,7 @@ function ChargesPage() {
           })
           .then((response) => {
             console.log(response);
-            setChargeAmount(response.data.response.amount);
+            setChargeAmount(response.data.data.response.amount);
             setModalIsOpen(true);
           })
           .catch((error) => {

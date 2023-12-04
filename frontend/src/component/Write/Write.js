@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import AuthContext from '../AuthContext/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -74,9 +74,6 @@ const Spinner = styled.div`
 `;
 
 function Write() {
-
-
-    const [selectCount, setSelectCount] = useState(2); // 초기 선택지는 2개
     const KakaoId = sessionStorage.getItem("KakaoId"); // 게시글 작성 기능을 위한 카카오 ID 가져오기
     const [categorySelect, setCategorySelect] = useState(""); // "카테고리"에 대한 선택된 값
     const [bettingAmountSelect, setBettingAmountSelect] = useState(""); // "베팅 금액"에 대한 선택된 값
@@ -91,7 +88,7 @@ function Write() {
 
     // API 부분
     // POST 값에 보낼 내용들에 state 대입
-    const Post_Submit = (event) => {
+    const Post_Submit = (event) => { // 게시글 작성 API 호출 
         event.preventDefault(); // 새로고침 방지
     
         const requestData = {
@@ -190,7 +187,7 @@ function Write() {
       };
       
 
-    // 핸들러 부분 
+    // 선택지 추가 핸들러 부분 
     const toggleSelectOption = () => {
         if (isAddOption) {
             if (selectOptions.length < 3) {
