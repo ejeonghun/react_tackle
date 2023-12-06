@@ -35,8 +35,9 @@ function Board({BoardName}) {
         if (window.location.pathname !== '/') { // 카테고리 이면 카테고리 값을 파라미터에 넣어서 API 호출
           if (window.location.pathname === '/category/Hotboard') { // 인기글은 정렬을 하지않음 -> 백앤드에서 총 투표수가 높은 순으로 순서대로 값을 반환해줌
             async function getData() {
-              const response = await axios.get(`https://api1.lunaweb.dev/api/v1/board/list?categoryId=${getCategoryId(categoryKey)}`);
+              const response = await axios.get(`https://api1.lunaweb.dev/api/v1/board/list?categoryId=${getCategoryId(categoryKey)}`); // URL의 쿼리스트링에서 카테고리 값(ex:daily-love)을 가져와서 id값으로 변환
                 setAllData(response.data);
+                // 페이지네이션 처리 구문
                 setVisibleData(response.data.slice(0, visibleCount)); // 처음에는 4개만 보여줌
                 if (response.data.length === 0) { // 데이터가 없으면 예외처리
                   setVisibleData('null data'); // 데이터가 없으면 null을 설정
@@ -71,6 +72,7 @@ function Board({BoardName}) {
         }, [categoryKey]); // categoryKey가 변경될 때마다 API를 다시 요청합니다.
       
           // "더보기" 버튼을 눌렀을 때 호출되는 함수
+          // 페이지네이션 더보기 구문
         const handleLoadMore = () => {
           setVisibleCount(prevCount => prevCount + 4); // 보여주는 데이터의 개수를 4개 증가
           setVisibleData(allData.slice(0, visibleCount + 4)); // 증가된 개수만큼 데이터를 보여줌
@@ -99,10 +101,10 @@ function Board({BoardName}) {
                 </div>
               <div style={{ display: 'flex', justifyContent: 'space-around', position: 'relative', flexDirection: 'row', alignItems: 'center' }}>
                 <div style={{ width: '50%', height: '30px', textAlign: 'center', backgroundColor: 'rgba(246, 165, 165, 1)', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', borderRadius: '25px', position: 'relative', left: '1%', display: 'flex', flexDirection: 'column', justifyContent: 'center' ,fontWeight: 'bold'}}>
-                  {post.voteItemsContent[0]}
+                  {post.voteItemsContent[0]} {/* 선택지 1 */}
                 </div>
                 <div style={{ width: '50%', height: '30px', textAlign: 'center', backgroundColor: 'rgba(128, 165, 235, 1)', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', borderRadius: '25px', position: 'relative', left: '-1%', display: 'flex', flexDirection: 'column', justifyContent: 'center' ,fontWeight: 'bold'}}>
-                  {post.voteItemsContent[1]}
+                  {post.voteItemsContent[1]} {/* 선택지 2 */}
                 </div>
               </div>
 
