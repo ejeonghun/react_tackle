@@ -38,7 +38,7 @@
 ## ERD
 ![image](https://github.com/ejeonghun/react_tackle/assets/41509711/f8a00279-16e4-4544-bcb7-f889ed9b5c4b)
 
-
+### [피그마](https://www.figma.com/design/fccLtdHokR6Mwlg7dmudrE/%EC%8A%A4%ED%86%A0%EB%A6%AC%EB%B3%B4%EB%93%9C?node-id=0-1&t=B8CgGhYnmEIBIDSX-1)
 ### [백앤드 API 문서](https://api1.lunaweb.dev/swagger-ui/index.html#/)
 ### [백엔드 Repo](https://github.com/ejeonghun/tackle-backend)
 ### [프로젝트 문서](https://lunadev.notion.site/5e57a74437ab46a38be14a4da3fbf21f?pvs=4)
