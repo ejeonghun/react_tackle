@@ -13,6 +13,7 @@
 갈등의 시대를 살고 있는 현재 대한민국에서 다양한 주제와 의견에 대한 게시글과 투표를 통해 다양한 시각과 의견 공유에 목적을 둠
 
 ## Stack
+<p align="center">
 <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white" width:240px>
 <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
 <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
@@ -22,7 +23,7 @@
 <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
 <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black">
 <img src="https://img.shields.io/badge/kakaoAPI-FFCD00?style=for-the-badge&logo=kakao&logoColor=black">
-
+</p>
 ## 프로젝트 일정
 2023.09.18 ~ 2023.12.04
 ---
