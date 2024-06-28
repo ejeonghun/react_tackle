@@ -24,8 +24,10 @@
 <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black">
 <img src="https://img.shields.io/badge/kakaoAPI-FFCD00?style=for-the-badge&logo=kakao&logoColor=black">
 </p>
+
 ## 프로젝트 일정
 2023.09.18 ~ 2023.12.04
+
 ---
 
 ## 팀원
