@@ -1,9 +1,7 @@
 # Tackle
-![TACKLE](https://github.com/ejeonghun/react_tackle/assets/41509711/90459730-a1db-4cfa-940d-c5eb4f2df712)
+![295834542-90459730-a1db-4cfa-940d-c5eb4f2df712](https://github.com/user-attachments/assets/279c4460-bfde-4fee-bc71-80f2ca014c2c)
 
-## [웹앱 시연 동영상](https://www.youtube.com/watch?v=sgl_X3ZzNFE)
 
-### [WEB APP](https://app.lunaweb.dev)
 
 ## 프로젝트 개요
 
@@ -38,6 +36,10 @@
 - FrontEnd : 이우석, 정성윤, 이정훈
 - Backend : 이시영, 이승열, 이정훈
 - Docker Deploy : 이정훈
+
+## [웹앱 시연 동영상](https://www.youtube.com/watch?v=sgl_X3ZzNFE)
+
+### [WEB APP](https://app.lunaweb.dev)
 
 ## ERD
 ![image](https://github.com/ejeonghun/react_tackle/assets/41509711/f8a00279-16e4-4544-bcb7-f889ed9b5c4b)
