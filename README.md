@@ -1,4 +1,4 @@
-# Tackle 투표 서비스
+# Tackle
 ![TACKLE](https://github.com/ejeonghun/react_tackle/assets/41509711/90459730-a1db-4cfa-940d-c5eb4f2df712)
 
 ## [웹앱 시연 동영상](https://www.youtube.com/watch?v=sgl_X3ZzNFE)
